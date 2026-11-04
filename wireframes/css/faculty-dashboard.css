@@ -1,0 +1,505 @@
+/* Set the page colors. [SD] */
+:root {
+  --background: #f7f7f7;
+  --surface: #ffffff;
+  --sidebar: #f0f0f0;
+  --border: #d0d0d0;
+  --text: #252525;
+  --muted: #606060;
+  --dark: #303030;
+}
+
+/* Keep padding and borders inside each element's size. [SD] */
+* {
+  box-sizing: border-box;
+}
+
+/* Set the page font, colors, and line spacing. [SD] */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--background);
+  line-height: 1.5;
+}
+
+/* Use the same font for buttons, inputs, and dropdowns. [SD] */
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* Show a hand pointer over buttons and dropdowns. [SD] */
+button,
+select {
+  cursor: pointer;
+}
+
+/* Show an outline when using the keyboard to select controls. [SD] */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #555;
+  outline-offset: 3px;
+}
+
+/* Place the portal name and account controls in the top bar. [SD] */
+.topbar {
+  min-height: 76px;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Line up the branding and account items. [SD] */
+.brand,
+.account {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Make the portal name larger and bold. [SD] */
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Style the temporary AB symbol. [SD] */
+.brand-mark {
+  padding: 7px 9px;
+  color: white;
+  background: var(--dark);
+  border-radius: 5px;
+  font-size: 17px;
+}
+
+/* Place the sidebar beside the main content. [SD] */
+.layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: calc(100vh - 122px);
+}
+
+/* Set the sidebar background and spacing. [SD] */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 14px;
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+}
+
+/* Style the heading above the menu. [SD] */
+.nav-label {
+  margin: 0 12px 18px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Add space between menu items. [SD] */
+.sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+
+/* Style menu links and buttons. [SD] */
+.nav-item {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+/* Change the menu item's color when hovered over. [SD] */
+.nav-item:hover {
+  background: #e5e5e5;
+}
+
+/* Highlight the current menu item. [SD] */
+.nav-item.active {
+  background: #dedede;
+  box-shadow: inset 4px 0 var(--dark);
+  font-weight: bold;
+}
+
+/* Place account information at the bottom of the sidebar. [SD] */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 28px 12px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Add space around the main content. [SD] */
+main {
+  min-width: 0;
+  padding: 28px 32px;
+}
+
+/* Place the page heading beside the semester selector. [SD] */
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+/* Style the main heading. [SD] */
+h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+/* Style section headings. [SD] */
+h2 {
+  margin: 0;
+  font-size: 21px;
+}
+
+/* Style the text below the main heading. [SD] */
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Set the semester field's minimum width. [SD] */
+.semester-field {
+  min-width: 190px;
+}
+
+/* Place the semester label above its dropdown. [SD] */
+.semester-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Style dropdowns and text inputs. [SD] */
+select,
+input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+  color: var(--text);
+}
+
+/* Make dropdowns fill their field's width. [SD] */
+select {
+  width: 100%;
+}
+
+/* Arrange summary boxes in four columns. [SD] */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* Add spacing, a background, and a border to summary boxes. [SD] */
+.summary-card {
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+/* Style the label in each summary box. [SD] */
+.summary-card p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Make summary numbers larger. [SD] */
+.summary-card strong {
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+/* Add a background, border, and bottom spacing to content boxes. [SD] */
+.panel {
+  margin-bottom: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+/* Line up each box's heading and controls. [SD] */
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 22px;
+}
+
+/* Style the text below the box heading. [SD] */
+.panel-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Set the search field width without exceeding its container. [SD] */
+.search {
+  width: 280px;
+  max-width: 100%;
+}
+
+/* Let wide tables scroll sideways. [SD] */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Make tables fill the available width. [SD] */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Set the assessment table's minimum width. [SD] */
+.assessment-table {
+  min-width: 830px;
+}
+
+/* Set the review table's minimum width. [SD] */
+.review-table {
+  min-width: 720px;
+}
+
+/* Set spacing and alignment inside table cells. [SD] */
+th,
+td {
+  padding: 16px 22px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Style table headings. [SD] */
+th {
+  background: #efefef;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Add lines between table rows. [SD] */
+tbody tr + tr {
+  border-top: 1px solid var(--border);
+}
+
+/* Set the table text size. [SD] */
+td {
+  font-size: 14px;
+}
+
+/* Show the task name in bold. [SD] */
+.task-name {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Show extra details below the task name. [SD] */
+.task-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Keep text on one line. [SD] */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Show the task status in a badge. [SD] */
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  background: #f3f3f3;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Give submitted status badges a darker background. [SD] */
+.status.submitted {
+  background: #e4e4e4;
+}
+
+/* Set the default button appearance. [SD] */
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Change the button color when hovered over. [SD] */
+.button:hover {
+  background: #ededed;
+}
+
+/* Make the main action button dark. [SD] */
+.button.primary {
+  border-color: var(--dark);
+  background: var(--dark);
+  color: white;
+}
+
+/* Change the main button color when hovered over. [SD] */
+.button.primary:hover {
+  background: #484848;
+}
+
+/* Style the message shown when there are no results. [SD] */
+.empty-message {
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Hide elements marked as hidden. [SD] */
+[hidden] {
+  display: none !important;
+}
+
+/* Style the page footer. [SD] */
+footer {
+  padding: 12px 28px;
+  border-top: 1px solid var(--border);
+  background: white;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Style the popup explaining a planned feature. [SD] */
+dialog {
+  width: min(460px, calc(100% - 32px));
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* Darken the page behind the popup. [SD] */
+dialog::backdrop {
+  background: rgb(0 0 0 / 35%);
+}
+
+/* Add space around the popup text. [SD] */
+dialog p {
+  margin: 16px 0 24px;
+}
+
+/* Adjust the layout for screens up to 1050px wide. [SD] */
+@media (max-width: 1050px) {
+  /* Make the sidebar narrower. [SD] */
+  .layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+
+  /* Reduce space around the main content. [SD] */
+  main {
+    padding: 24px;
+  }
+
+  /* Arrange summary boxes in two columns. [SD] */
+  .summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Let headings and controls wrap onto another line. [SD] */
+  .page-heading,
+  .panel-heading {
+    flex-wrap: wrap;
+  }
+}
+
+/* Adjust the layout for phone-sized screens. [SD] */
+@media (max-width: 650px) {
+  /* Let top-bar items wrap and reduce spacing. [SD] */
+  .topbar {
+    padding: 14px 18px;
+    flex-wrap: wrap;
+  }
+
+  /* Make the portal name smaller. [SD] */
+  .brand {
+    font-size: 18px;
+  }
+
+  /* Place the sidebar above the main content. [SD] */
+  .layout {
+    display: block;
+  }
+
+  /* Move the sidebar border to the bottom. [SD] */
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 12px;
+  }
+
+  /* Arrange menu items in two columns. [SD] */
+  .sidebar nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Hide extra sidebar text to save space. [SD] */
+  .nav-label,
+  .sidebar-footer {
+    display: none;
+  }
+
+  /* Reduce space around the main content. [SD] */
+  main {
+    padding: 22px 16px;
+  }
+
+  /* Make the main heading smaller. [SD] */
+  h1 {
+    font-size: 26px;
+  }
+
+  /* Reduce space between summary boxes. [SD] */
+  .summary {
+    gap: 12px;
+  }
+
+  /* Reduce space inside summary boxes. [SD] */
+  .summary-card {
+    padding: 15px;
+  }
+}

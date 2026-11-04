@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set the text encoding and adjust the page to the screen width. [SD] -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Set the browser tab title. [SD] -->
+  <title>Evaluator Dashboard — ABET Assessment Portal</title>
+
+  <!-- Load the evaluator dashboard styles. [SD] -->
+  <link rel="stylesheet" href="css/evaluator-dashboard.css">
+</head>
+
+<body>
+  <!-- Show the portal name and account controls. [SD] -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- Hide the decorative AB symbol from screen readers. [SD] -->
+      <span class="brand-mark" aria-hidden="true">AB</span>
+      <span>ABET Assessment Portal</span>
+    </div>
+
+    <div class="account">
+      <strong>ABET Evaluator</strong>
+
+      <!-- Explain sign-out without ending a real session. [SD] -->
+      <button
+        class="button"
+        type="button"
+        data-preview="In the completed portal, this action will end your portal session.">
+        Sign out
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Show the evaluator menu. [SD] -->
+    <aside class="sidebar">
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav aria-label="Evaluator navigation">
+        <!-- Mark Reports as the current page. [SD] -->
+        <a class="nav-item active" href="#reports" aria-current="page">
+          Reports
+        </a>
+
+        <!-- Explain the planned access to read-only Self-Study materials. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="Open the Self-Study materials made available to you by an authorized administrator. These materials are read-only.">
+          Self-Study Materials
+        </button>
+
+        <!-- Explain the planned improvement-action view. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="Read authorized improvement actions, the findings supporting them, and any linked later results and recorded conclusions.">
+          Improvement Actions
+        </button>
+      </nav>
+
+      <!-- Show the example account's role. [SD] -->
+      <div class="sidebar-footer">
+        Signed in as ABET Evaluator
+      </div>
+    </aside>
+
+    <!-- Show example reports and their supporting materials. [SD] -->
+    <main id="reports">
+      <div class="page-heading">
+        <div>
+          <h1>Authorized reports</h1>
+          <p class="subtitle">
+            Review the reports and supporting materials made available to you.
+          </p>
+        </div>
+
+        <!-- Label the proposed access as read-only. [SD] -->
+        <span class="read-only">Read-only</span>
+      </div>
+
+      <!-- Filter the example reports by program, semester, and outcome. [SD] -->
+      <div class="filters">
+        <div class="field">
+          <label for="program">Program</label>
+          <select id="program">
+            <option value="program-a">Program A</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="semester">Semester</label>
+          <select id="semester">
+            <option value="all">All semesters</option>
+            <option value="fall-2026">Fall 2026</option>
+            <option value="spring-2026">Spring 2026</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="outcome">Student outcome</label>
+          <select id="outcome">
+            <option value="all">All available outcomes</option>
+            <option value="1">Outcome 1</option>
+            <option value="2">Outcome 2</option>
+            <option value="3">Outcome 3</option>
+          </select>
+        </div>
+
+        <!-- Reset the filters and search field. [SD] -->
+        <button class="button" id="clear-filters" type="button">
+          Clear filters
+        </button>
+      </div>
+
+      <!-- List the example assessment reports. [SD] -->
+      <section class="panel" aria-labelledby="report-heading">
+        <div class="panel-heading">
+          <div>
+            <h2 id="report-heading">Available assessment reports</h2>
+
+            <!-- Announce changes to the report count to screen readers. [SD] -->
+            <p id="report-count" aria-live="polite">3 reports available</p>
+          </div>
+
+          <!-- Search the example report information. [SD] -->
+          <input
+            class="search"
+            id="report-search"
+            type="search"
+            placeholder="Search available reports"
+            aria-label="Search available reports">
+        </div>
+
+        <div class="table-container">
+          <table aria-labelledby="report-heading">
+            <!-- Name the table columns. [SD] -->
+            <thead>
+              <tr>
+                <th scope="col">Report / Course</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Version</th>
+                <th scope="col">Submitted</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <!-- Store report filter values in each example row. [SD] -->
+            <tbody id="report-rows">
+              <!-- Select the Final project report when the page opens. [SD] -->
+              <tr
+                class="selected"
+                data-report="report-a"
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-outcome="1">
+
+                <td>
+                  <span class="report-name">Final project</span>
+                  <span class="report-detail">
+                    Course A · Outcome 1 · PI 1.1
+                  </span>
+                </td>
+                <td class="nowrap">Fall 2026</td>
+                <td>2</td>
+                <td class="nowrap">Oct 24, 2026</td>
+                <td>
+                  <button
+                    class="button primary"
+                    type="button"
+                    data-open-report="report-a">
+                    Open report
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example report for Outcome 2 in Fall 2026. [SD] -->
+              <tr
+                data-report="report-b"
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-outcome="2">
+
+                <td>
+                  <span class="report-name">Design project</span>
+                  <span class="report-detail">
+                    Course B · Outcome 2 · PI 2.1
+                  </span>
+                </td>
+                <td class="nowrap">Fall 2026</td>
+                <td>1</td>
+                <td class="nowrap">Oct 22, 2026</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-open-report="report-b">
+                    Open report
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example report for Outcome 3 in Spring 2026. [SD] -->
+              <tr
+                data-report="report-c"
+                data-program="program-a"
+                data-semester="spring-2026"
+                data-outcome="3">
+
+                <td>
+                  <span class="report-name">Laboratory report</span>
+                  <span class="report-detail">
+                    Course C · Outcome 3 · PI 3.1
+                  </span>
+                </td>
+                <td class="nowrap">Spring 2026</td>
+                <td>1</td>
+                <td class="nowrap">Apr 30, 2026</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-open-report="report-c">
+                    Open report
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Show this message when no reports match. [SD] -->
+          <p class="empty-message" id="no-reports" hidden>
+            No available reports match your search or filters.
+          </p>
+        </div>
+      </section>
+
+      <!-- Show the selected report's name, version, and example materials. [SD] -->
+      <section
+        class="panel"
+        id="selected-report"
+        aria-labelledby="selected-heading">
+
+        <div class="panel-heading">
+          <div>
+            <h2 id="selected-heading">
+              Selected report: Final project · Version 2
+            </h2>
+            <p id="selected-context">
+              Program A · Course A · Fall 2026
+            </p>
+          </div>
+
+          <!-- Explain evidence viewing without opening real files. [SD] -->
+          <button class="button" id="view-evidence" type="button">
+            View evidence
+          </button>
+        </div>
+
+        <!-- These are example availability labels, not editable checkboxes. [SD] -->
+        <ul class="materials" aria-label="Available report materials">
+          <li>
+            <span class="material-name">
+              <span class="available-icon" aria-hidden="true">✓</span>
+              Rubric Report
+            </span>
+            <span class="availability">Available</span>
+          </li>
+
+          <li>
+            <span class="material-name">
+              <span class="available-icon" aria-hidden="true">✓</span>
+              PI Report
+            </span>
+            <span class="availability">Available</span>
+          </li>
+
+          <li>
+            <span class="material-name">
+              <span class="available-icon" aria-hidden="true">✓</span>
+              Assignment instructions
+            </span>
+            <span class="availability">Available</span>
+          </li>
+
+          <li>
+            <span class="material-name">
+              <span class="available-icon" aria-hidden="true">✓</span>
+              Selected student work
+            </span>
+            <span class="availability">Available</span>
+          </li>
+
+          <li>
+            <span class="material-name">
+              <span class="available-icon" aria-hidden="true">✓</span>
+              Instructor feedback
+            </span>
+            <span class="availability">Available</span>
+          </li>
+        </ul>
+
+        <!-- Explain which version the materials belong to. [SD] -->
+        <p class="panel-note">
+          Materials belong to the selected submitted version.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <!-- Identify the page as a wireframe with example information. [SD] -->
+  <footer>
+    Proposed wireframe · Illustrative reports and dates · ABET Evaluator
+  </footer>
+
+  <!-- Show explanations of planned actions; no real PDFs are attached. [SD] -->
+  <dialog id="preview-dialog" aria-labelledby="preview-heading">
+    <h2 id="preview-heading">Planned action</h2>
+    <p id="preview-description"></p>
+
+    <!-- Close the popup when the form is submitted. [SD] -->
+    <form method="dialog">
+      <button class="button primary">Close</button>
+    </form>
+  </dialog>
+
+  <script>
+    // Store fictional report details for this wireframe. [SD]
+    const reports = {
+      "report-a": {
+        name: "Final project",
+        version: "2",
+        course: "Course A",
+        semester: "Fall 2026"
+      },
+      "report-b": {
+        name: "Design project",
+        version: "1",
+        course: "Course B",
+        semester: "Fall 2026"
+      },
+      "report-c": {
+        name: "Laboratory report",
+        version: "1",
+        course: "Course C",
+        semester: "Spring 2026"
+      }
+    };
+
+    // Find the report filters and search field. [SD]
+    const programSelect = document.getElementById("program");
+    const semesterSelect = document.getElementById("semester");
+    const outcomeSelect = document.getElementById("outcome");
+    const searchInput = document.getElementById("report-search");
+
+    // Find the report rows, count, and empty-result message. [SD]
+    const reportRows = [...document.querySelectorAll("#report-rows tr")];
+    const reportCount = document.getElementById("report-count");
+    const noReports = document.getElementById("no-reports");
+
+    // Find the selected report's details panel. [SD]
+    const selectedPanel = document.getElementById("selected-report");
+    const selectedHeading = document.getElementById("selected-heading");
+    const selectedContext = document.getElementById("selected-context");
+
+    // Find the popup and its message area. [SD]
+    const previewDialog = document.getElementById("preview-dialog");
+    const previewDescription = document.getElementById("preview-description");
+
+    // Remember which report is selected. [SD]
+    let selectedReportId = "report-a";
+
+    // Put an explanation in the popup and open it. [SD]
+    function showPreview(message) {
+      previewDescription.textContent = message;
+      previewDialog.showModal();
+    }
+
+    // Update the selected report's heading and version details. [SD]
+    function selectReport(reportId) {
+      selectedReportId = reportId;
+      const report = reports[reportId];
+
+      selectedPanel.hidden = false;
+
+      selectedHeading.textContent =
+        `Selected report: ${report.name} · Version ${report.version}`;
+
+      selectedContext.textContent =
+        `Program A · ${report.course} · ${report.semester}`;
+
+      // Highlight the selected row and its Open report button. [SD]
+      reportRows.forEach((row) => {
+        const selected = row.dataset.report === reportId;
+        row.classList.toggle("selected", selected);
+
+        row.querySelector("[data-open-report]")
+          .classList.toggle("primary", selected);
+      });
+    }
+
+    // Filter the example reports. Real access checks belong on the server. [SD]
+    function updateReports() {
+      // Remove extra spaces and ignore differences in letter case. [SD]
+      const searchText = searchInput.value.trim().toLowerCase();
+      const visibleRows = [];
+
+      reportRows.forEach((row) => {
+        // Check the selected program. [SD]
+        const matchesProgram =
+          row.dataset.program === programSelect.value;
+
+        // Match one semester or allow all semesters. [SD]
+        const matchesSemester =
+          semesterSelect.value === "all"
+          || row.dataset.semester === semesterSelect.value;
+
+        // Match one outcome or allow all outcomes. [SD]
+        const matchesOutcome =
+          outcomeSelect.value === "all"
+          || row.dataset.outcome === outcomeSelect.value;
+
+        // Search the text displayed in the report row. [SD]
+        const matchesSearch =
+          row.textContent.toLowerCase().includes(searchText);
+
+        // Show the row only when every condition matches. [SD]
+        const visible =
+          matchesProgram
+          && matchesSemester
+          && matchesOutcome
+          && matchesSearch;
+
+        row.hidden = !visible;
+
+        if (visible) visibleRows.push(row);
+      });
+
+      // Update the count and empty-result message. [SD]
+      const numberShown = visibleRows.length;
+
+      reportCount.textContent =
+        `${numberShown} of ${reportRows.length} available reports shown`;
+
+      noReports.hidden = numberShown !== 0;
+
+      // Hide the details panel when no reports match. [SD]
+      if (numberShown === 0) {
+        selectedReportId = null;
+        selectedPanel.hidden = true;
+        return;
+      }
+
+      // Check whether the selected report is still visible. [SD]
+      const selectionStillVisible = visibleRows.some(
+        (row) => row.dataset.report === selectedReportId
+      );
+
+      // Otherwise, select the first matching report. [SD]
+      if (!selectionStillVisible) {
+        selectReport(visibleRows[0].dataset.report);
+      }
+    }
+
+    // Refresh the report list when a filter or search value changes. [SD]
+    programSelect.addEventListener("change", updateReports);
+    semesterSelect.addEventListener("change", updateReports);
+    outcomeSelect.addEventListener("change", updateReports);
+    searchInput.addEventListener("input", updateReports);
+
+    // Reset the filters and search field to their starting values. [SD]
+    document.getElementById("clear-filters").addEventListener("click", () => {
+      programSelect.value = "program-a";
+      semesterSelect.value = "all";
+      outcomeSelect.value = "all";
+      searchInput.value = "";
+      updateReports();
+    });
+
+    // Select a report and explain how opening it would work. [SD]
+    document.querySelectorAll("[data-open-report]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const reportId = button.dataset.openReport;
+        selectReport(reportId);
+
+        const report = reports[reportId];
+
+        showPreview(
+          `Open ${report.name}, submitted version ${report.version}, ` +
+          `for read-only review. This wireframe contains sample information; ` +
+          `an actual report PDF is not attached.`
+        );
+      });
+    });
+
+    // Explain evidence viewing for the selected report version. [SD]
+    document.getElementById("view-evidence").addEventListener("click", () => {
+      if (!selectedReportId) return;
+
+      const report = reports[selectedReportId];
+
+      showPreview(
+        `View the authorized student work and instructor feedback associated ` +
+        `with ${report.name}, submitted version ${report.version}. ` +
+        `No real student files are included in this wireframe.`
+      );
+    });
+
+    // Show explanations for menu actions and sign-out. [SD]
+    document.querySelectorAll("[data-preview]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showPreview(button.dataset.preview);
+      });
+    });
+
+    // Fill in the selected report and initial report list. [SD]
+    selectReport(selectedReportId);
+    updateReports();
+  </script>
+</body>
+</html>

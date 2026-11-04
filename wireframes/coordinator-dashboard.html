@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set the text encoding and adjust the page to the screen width. [SD] -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Set the browser tab title. [SD] -->
+  <title>Coordinator Dashboard — ABET Assessment Portal</title>
+
+  <!-- Load the coordinator dashboard styles. [SD] -->
+  <link rel="stylesheet" href="css/coordinator-dashboard.css">
+</head>
+
+<body>
+  <!-- Show the portal name and account controls. [SD] -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- Hide the decorative AB symbol from screen readers. [SD] -->
+      <span class="brand-mark" aria-hidden="true">AB</span>
+      <span>ABET Assessment Portal</span>
+    </div>
+
+    <div class="account">
+      <strong>ABET Coordinator</strong>
+
+      <!-- Explain sign-out without ending a real session. [SD] -->
+      <button
+        class="button"
+        type="button"
+        data-preview="In the completed portal, this action will end your portal session.">
+        Sign out
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Show the coordinator menu. [SD] -->
+    <aside class="sidebar">
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav aria-label="Coordinator navigation">
+        <!-- Mark Overview as the current page. [SD] -->
+        <a class="nav-item active" href="#dashboard" aria-current="page">
+          Overview
+        </a>
+
+        <!-- Explain the planned schedule and task features. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="View and manage assessment schedules, assigned faculty, task instructions, evidence requirements, and deadlines.">
+          Schedules &amp; Tasks
+        </button>
+
+        <!-- Jump to the assessment progress table. [SD] -->
+        <a class="nav-item" href="#assessment-progress">
+          Assessment Progress
+        </a>
+
+        <!-- Explain reviews of specific submitted versions. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="View review assignments and completion. Each assignment refers to a specific submitted report version.">
+          Peer Reviews
+        </button>
+
+        <!-- Explain the planned outcome and PI management features. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="View and manage permitted student-outcome and performance-indicator definitions and their mappings.">
+          Outcomes &amp; PIs
+        </button>
+
+        <!-- Explain the planned report archive. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="Find historical reports and open their supporting evidence within your assigned permissions.">
+          Report Archive
+        </button>
+      </nav>
+
+      <!-- Link to the faculty wireframe and show the example role. [SD] -->
+      <div class="sidebar-bottom">
+        <a class="button" href="faculty-dashboard.html">
+          Faculty workspace
+        </a>
+        <p>Signed in as ABET Coordinator</p>
+      </div>
+    </aside>
+
+    <!-- Show the coordinator dashboard content. [SD] -->
+    <main id="dashboard">
+      <h1>Coordinator dashboard</h1>
+      <p class="subtitle">
+        Organize assessment work and monitor progress for your program.
+      </p>
+
+      <!-- Select a program and semester or preview planned actions. [SD] -->
+      <div class="toolbar">
+        <div class="field">
+          <label for="program">Program</label>
+          <select id="program">
+            <option value="program-a">Program A</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="semester">Semester</label>
+          <select id="semester">
+            <option value="fall-2026">Fall 2026</option>
+            <option value="spring-2026">Spring 2026</option>
+          </select>
+        </div>
+
+        <!-- These buttons explain features without changing data. [SD] -->
+        <div class="toolbar-actions">
+          <button
+            class="button"
+            type="button"
+            data-preview="Create, copy, or update an assessment schedule for a permitted program and semester.">
+            Manage schedule
+          </button>
+
+          <button
+            class="button primary"
+            type="button"
+            data-preview="Assign an assessment task to faculty and specify its instructions, required evidence, and deadline.">
+            Assign assessment
+          </button>
+        </div>
+      </div>
+
+      <!-- Count example tasks for the selected program and semester. [SD] -->
+      <section class="summary" aria-label="Assessment summary">
+        <div class="summary-card">
+          <p>Assigned tasks</p>
+          <strong id="assigned-total">4</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Current drafts</p>
+          <strong id="draft-total">2</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Tasks with submissions</p>
+          <strong id="submitted-total">3</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Completed peer reviews</p>
+          <strong id="review-total">2</strong>
+        </div>
+      </section>
+
+      <!-- Show preparation, submission, and review status separately. [SD] -->
+      <section
+        class="panel"
+        id="assessment-progress"
+        aria-labelledby="progress-heading">
+
+        <div class="panel-heading">
+          <div>
+            <h2 id="progress-heading">Assessment progress</h2>
+
+            <!-- Announce changes to the task count to screen readers. [SD] -->
+            <p id="task-count" aria-live="polite">
+              4 assigned tasks in the selected semester
+            </p>
+          </div>
+
+          <!-- Search the example tasks and assigned faculty. [SD] -->
+          <input
+            class="search"
+            id="task-search"
+            type="search"
+            placeholder="Search tasks or faculty"
+            aria-label="Search tasks or assigned faculty">
+        </div>
+
+        <div class="table-container">
+          <table class="progress-table" aria-labelledby="progress-heading">
+            <!-- Name the table columns. [SD] -->
+            <thead>
+              <tr>
+                <th scope="col">Task / Course / PI</th>
+                <th scope="col">Faculty</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Preparation</th>
+                <th scope="col">Submitted version</th>
+                <th scope="col">Peer review</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <!-- Store example task information in the rows. [SD] -->
+            <tbody id="task-rows">
+              <!-- Example task with a draft and no submission. [SD] -->
+              <tr
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-draft="true"
+                data-submitted="false"
+                data-reviewed="false">
+
+                <td>
+                  <span class="task-name">Design project</span>
+                  <span class="task-detail">Course A · PI 1.1</span>
+                </td>
+                <td class="nowrap">Faculty A</td>
+                <td class="nowrap">Nov 12</td>
+                <td><span class="status">Draft</span></td>
+                <td>None</td>
+                <td>Not assigned</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="View the Design project task, assigned faculty, instructions, required evidence, deadline, and current progress.">
+                    View task
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example submission that has not been assigned a reviewer. [SD] -->
+              <tr
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-draft="false"
+                data-submitted="true"
+                data-reviewed="false">
+
+                <td>
+                  <span class="task-name">Programming task</span>
+                  <span class="task-detail">Course B · PI 2.1</span>
+                </td>
+                <td class="nowrap">Faculty B</td>
+                <td class="nowrap">Nov 14</td>
+                <td>No open draft</td>
+                <td>Version 1</td>
+                <td>Not assigned</td>
+                <td>
+                  <button
+                    class="button primary"
+                    type="button"
+                    data-preview="Assign an eligible peer reviewer to submitted version 1 of the Programming task report.">
+                    Assign reviewer
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example revision draft with a completed review of version 1. [SD] -->
+              <tr
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-draft="true"
+                data-submitted="true"
+                data-reviewed="true">
+
+                <td>
+                  <span class="task-name">Testing exercise</span>
+                  <span class="task-detail">Course C · PI 3.1</span>
+                </td>
+                <td class="nowrap">Faculty C</td>
+                <td class="nowrap">Nov 16</td>
+                <td><span class="status">Revision draft</span></td>
+                <td>Version 1</td>
+                <td class="nowrap">Complete for v1</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="View the Testing exercise revision draft status and preserved submission. The completed review applies to version 1, not to a future revised submission.">
+                    View task
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example submitted report with a completed review of version 2. [SD] -->
+              <tr
+                data-program="program-a"
+                data-semester="fall-2026"
+                data-draft="false"
+                data-submitted="true"
+                data-reviewed="true">
+
+                <td>
+                  <span class="task-name">Final project</span>
+                  <span class="task-detail">Course D · PI 1.2</span>
+                </td>
+                <td class="nowrap">Faculty D</td>
+                <td class="nowrap">Nov 20</td>
+                <td>No open draft</td>
+                <td>Version 2</td>
+                <td class="nowrap">Complete for v2</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Open submitted version 2 of the Final project report and its associated evidence and review information.">
+                    View report
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- JavaScript shows a message here when no tasks are visible. [SD] -->
+          <p class="empty-message" id="no-tasks" hidden></p>
+        </div>
+      </section>
+
+      <!-- Show scheduled PIs that still need submitted records. [SD] -->
+      <section class="panel" aria-labelledby="coverage-heading">
+        <div class="panel-heading">
+          <div>
+            <h2 id="coverage-heading">
+              Scheduled PIs without submitted records
+            </h2>
+            <p>
+              Drafts are shown separately and do not count as submitted records.
+            </p>
+          </div>
+
+          <button
+            class="button"
+            type="button"
+            data-preview="Compare scheduled student outcomes and performance indicators with submitted assessment records. Display drafts separately when identifying gaps.">
+            View coverage
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="coverage-table" aria-labelledby="coverage-heading">
+            <thead>
+              <tr>
+                <th scope="col">Performance indicator</th>
+                <th scope="col">Course</th>
+                <th scope="col">Current record</th>
+              </tr>
+            </thead>
+
+            <!-- Include examples of a draft-only record and a missing report. [SD] -->
+            <tbody id="coverage-rows">
+              <tr data-program="program-a" data-semester="fall-2026">
+                <td><strong>PI 1.1</strong></td>
+                <td>Course A</td>
+                <td><span class="status">Draft only</span></td>
+              </tr>
+
+              <tr data-program="program-a" data-semester="fall-2026">
+                <td><strong>PI 4.1</strong></td>
+                <td>Course E</td>
+                <td><span class="status">No report</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Show this message when no coverage examples match the filters. [SD] -->
+          <p class="empty-message" id="no-coverage" hidden>
+            No coverage examples are included for this semester in the wireframe.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Identify the page as a wireframe with example information. [SD] -->
+  <footer>
+    Proposed wireframe · Illustrative tasks, people and dates · ABET Coordinator
+  </footer>
+
+  <!-- Explain planned actions without changing reports or assignments. [SD] -->
+  <dialog id="preview-dialog" aria-labelledby="preview-heading">
+    <h2 id="preview-heading">Planned action</h2>
+    <p id="preview-description"></p>
+
+    <!-- Close the popup when the form is submitted. [SD] -->
+    <form method="dialog">
+      <button class="button primary">Close</button>
+    </form>
+  </dialog>
+
+  <script>
+    // Find the program, semester, and search controls. [SD]
+    const programSelect = document.getElementById("program");
+    const semesterSelect = document.getElementById("semester");
+    const searchInput = document.getElementById("task-search");
+
+    // Collect the example task and coverage rows. [SD]
+    const taskRows = [...document.querySelectorAll("#task-rows tr")];
+    const coverageRows = [...document.querySelectorAll("#coverage-rows tr")];
+
+    // Find the task count and empty-result messages. [SD]
+    const taskCount = document.getElementById("task-count");
+    const noTasks = document.getElementById("no-tasks");
+    const noCoverage = document.getElementById("no-coverage");
+
+    // Check whether a row matches the selected program and semester. [SD]
+    function matchesScope(row) {
+      return row.dataset.program === programSelect.value
+        && row.dataset.semester === semesterSelect.value;
+    }
+
+    // Update task rows, summary counts, and coverage examples. [SD]
+    function updateDashboard() {
+      // Remove extra spaces and ignore differences in letter case. [SD]
+      const searchText = searchInput.value.trim().toLowerCase();
+
+      // Collect tasks for the selected program and semester. [SD]
+      const scopedTasks = taskRows.filter(matchesScope);
+      let visibleTasks = 0;
+
+      // Show only tasks matching the filters and search text. [SD]
+      taskRows.forEach((row) => {
+        const matchesSearch =
+          row.textContent.toLowerCase().includes(searchText);
+
+        const visible = matchesScope(row) && matchesSearch;
+        row.hidden = !visible;
+
+        if (visible) visibleTasks++;
+      });
+
+      // Count all tasks in the selected scope, regardless of the search. [SD]
+      document.getElementById("assigned-total").textContent =
+        scopedTasks.length;
+
+      // Count tasks that have an open draft. [SD]
+      document.getElementById("draft-total").textContent =
+        scopedTasks.filter((row) => row.dataset.draft === "true").length;
+
+      // Count tasks that have a submitted version. [SD]
+      document.getElementById("submitted-total").textContent =
+        scopedTasks.filter((row) => row.dataset.submitted === "true").length;
+
+      // Count tasks marked as reviewed in the example data. [SD]
+      document.getElementById("review-total").textContent =
+        scopedTasks.filter((row) => row.dataset.reviewed === "true").length;
+
+      // Show how many tasks are in the scope or current search results. [SD]
+      taskCount.textContent = searchText
+        ? `${visibleTasks} of ${scopedTasks.length} assigned tasks shown`
+        : `${scopedTasks.length} assigned tasks in the selected semester`;
+
+      // Explain whether the scope is empty or the search has no matches. [SD]
+      noTasks.hidden = visibleTasks !== 0;
+      noTasks.textContent = scopedTasks.length === 0
+        ? "No sample tasks are included for this semester in the wireframe."
+        : "No tasks match your search.";
+
+      // Filter coverage by program and semester, without using the task search. [SD]
+      let visibleCoverage = 0;
+
+      coverageRows.forEach((row) => {
+        const visible = matchesScope(row);
+        row.hidden = !visible;
+
+        if (visible) visibleCoverage++;
+      });
+
+      // Show the empty message when no coverage rows are visible. [SD]
+      noCoverage.hidden = visibleCoverage !== 0;
+    }
+
+    // Refresh the dashboard when a filter or search value changes. [SD]
+    programSelect.addEventListener("change", updateDashboard);
+    semesterSelect.addEventListener("change", updateDashboard);
+    searchInput.addEventListener("input", updateDashboard);
+
+    // Find the popup and its message area. [SD]
+    const previewDialog = document.getElementById("preview-dialog");
+    const previewDescription = document.getElementById("preview-description");
+
+    // Show each button's explanation without changing example data. [SD]
+    document.querySelectorAll("[data-preview]").forEach((button) => {
+      button.addEventListener("click", () => {
+        previewDescription.textContent = button.dataset.preview;
+        previewDialog.showModal();
+      });
+    });
+
+    // Fill in the dashboard when the page first opens. [SD]
+    updateDashboard();
+  </script>
+</body>
+</html>
