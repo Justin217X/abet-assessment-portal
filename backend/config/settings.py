@@ -38,12 +38,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Stores courses, semesters, and course sections. [SD]
+    'academics.apps.AcademicsConfig',
+
+    # Django's build-in tools for administration, users, sessions, and web pages. [SD]
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 ]
 
 MIDDLEWARE = [

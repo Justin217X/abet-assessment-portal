@@ -83,3 +83,32 @@ Open http://127.0.0.1:8000/. Stop the server with Ctrl+C.
 The Django welcome page and PostgreSQL connection work. The React frontend, university sign-in, and Canvas integration have not been added.
 
 Use fictional data for local development. macOS instructions still need to be tested.
+
+## Run tests
+
+Create a separate local test account while connected to PostgreSQL as `postgres`:
+
+```sql
+CREATE ROLE abet_test LOGIN CREATEDB;
+```
+
+Set its password:
+
+```text
+\password abet_test
+```
+
+Add these values to your private `.env` file:
+
+```dotenv
+TEST_DB_USER=abet_test
+TEST_DB_PASSWORD='your_test_account_password'
+```
+
+Run from the repository folder:
+
+```powershell
+.\.venv\Scripts\python.exe backend\manage.py test academics --settings=config.test_settings
+```
+
+Django creates a temporary test database and removes it afterward.
