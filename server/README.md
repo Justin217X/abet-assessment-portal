@@ -10,7 +10,7 @@ Create a virtual environment and install the packages:
 
 ```powershell
 py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r backend\requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r server\requirements.txt
 ```
 
 ## Create a local database
@@ -66,14 +66,14 @@ Do not commit `.env` or share its contents.
 Create Django’s database tables and check the setup:
 
 ```powershell
-.\.venv\Scripts\python.exe backend\manage.py migrate
-.\.venv\Scripts\python.exe backend\manage.py check
+.\.venv\Scripts\python.exe server\manage.py migrate
+.\.venv\Scripts\python.exe server\manage.py check
 ```
 
 Start the server:
 
 ```powershell
-.\.venv\Scripts\python.exe backend\manage.py runserver
+.\.venv\Scripts\python.exe server\manage.py runserver
 ```
 
 Open http://127.0.0.1:8000/. Stop the server with Ctrl+C.
@@ -108,7 +108,7 @@ TEST_DB_PASSWORD='your_test_account_password'
 Run from the repository folder:
 
 ```powershell
-.\.venv\Scripts\python.exe backend\manage.py test academics --settings=config.test_settings
+.\.venv\Scripts\python.exe server\manage.py test academics --settings=config.test_settings
 ```
 
 Django creates a temporary test database and removes it afterward.
