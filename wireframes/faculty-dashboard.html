@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set the text encoding and adjust the page to the screen width. [SD] -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Set the browser tab title. [SD] -->
+  <title>Faculty Dashboard — ABET Assessment Portal</title>
+
+  <!-- Load the faculty dashboard styles. [SD] -->
+  <link rel="stylesheet" href="css/faculty-dashboard.css">
+</head>
+
+<body>
+  <!-- Show the portal name and account controls. [SD] -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- Hide the decorative AB symbol from screen readers. [SD] -->
+      <span class="brand-mark" aria-hidden="true">AB</span>
+      <span>ABET Assessment Portal</span>
+    </div>
+
+    <div class="account">
+      <strong>Faculty</strong>
+
+      <!-- Explain sign-out without ending a real session. [SD] -->
+      <button
+        class="button"
+        type="button"
+        data-preview="In the completed portal, this action will end your portal session.">
+        Sign out
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Show the faculty menu. [SD] -->
+    <aside class="sidebar">
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav aria-label="Faculty navigation">
+        <!-- Mark Dashboard as the current page. [SD] -->
+        <a class="nav-item active" href="#dashboard" aria-current="page">
+          Dashboard
+        </a>
+
+        <!-- Jump to the assigned assessment table. [SD] -->
+        <a class="nav-item" href="#assessments">
+          My Assessments
+        </a>
+
+        <!-- Jump to the peer-review table. [SD] -->
+        <a class="nav-item" href="#peer-reviews">
+          Peer Reviews
+        </a>
+
+        <!-- Explain the planned report archive. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="The report archive will let you find and open historical reports within your assigned permissions.">
+          Report Archive
+        </button>
+      </nav>
+
+      <!-- Show the example account's role. [SD] -->
+      <div class="sidebar-footer">Signed in as Faculty</div>
+    </aside>
+
+    <!-- Show the faculty dashboard content. [SD] -->
+    <main id="dashboard">
+      <div class="page-heading">
+        <div>
+          <h1>Faculty dashboard</h1>
+          <p class="subtitle">
+            View your assigned tasks and continue your assessment reports.
+          </p>
+        </div>
+
+        <!-- Show the example semester. [SD] -->
+        <div class="semester-field">
+          <label for="semester">Semester</label>
+          <select id="semester">
+            <option>Fall 2026</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Show fixed summary counts for the example tasks below. [SD] -->
+      <section class="summary" aria-label="Assessment summary">
+        <div class="summary-card">
+          <p>To start</p>
+          <strong>1</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Drafts</p>
+          <strong>1</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Revision drafts</p>
+          <strong>1</strong>
+        </div>
+
+        <div class="summary-card">
+          <p>Submitted for review</p>
+          <strong>1</strong>
+        </div>
+      </section>
+
+      <!-- List the example assessments assigned to the faculty member. [SD] -->
+      <section class="panel" id="assessments" aria-labelledby="assessment-heading">
+        <div class="panel-heading">
+          <div>
+            <h2 id="assessment-heading">My assessments</h2>
+
+            <!-- Announce changes to the task count to screen readers. [SD] -->
+            <p id="assessment-count" aria-live="polite">
+              4 tasks assigned to you
+            </p>
+          </div>
+
+          <!-- Search the example assessment rows. [SD] -->
+          <input
+            class="search"
+            id="assessment-search"
+            type="search"
+            placeholder="Search assessments"
+            aria-label="Search assigned assessments">
+        </div>
+
+        <div class="table-container">
+          <table class="assessment-table" aria-labelledby="assessment-heading">
+            <!-- Name the assessment table columns. [SD] -->
+            <thead>
+              <tr>
+                <th scope="col">Assessment / Course</th>
+                <th scope="col">PI</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Report status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="assessment-rows">
+              <!-- Example assessment that has not been started. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Programming assignment</span>
+                  <span class="task-detail">Course A · Section 001</span>
+                </td>
+                <td>1.1</td>
+                <td class="nowrap">Nov 12</td>
+                <td><span class="status">Not started</span></td>
+                <td>
+                  <button
+                    class="button primary"
+                    type="button"
+                    data-preview="Start a report draft for the assigned Programming assignment assessment.">
+                    Start report
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example assessment with a saved draft. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Design project</span>
+                  <span class="task-detail">Course B · Section 001</span>
+                </td>
+                <td>2.1</td>
+                <td class="nowrap">Nov 14</td>
+                <td><span class="status">Draft</span></td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Reopen the saved Design project draft and continue preparing the report.">
+                    Resume
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example assessment with a revision draft. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Testing exercise</span>
+                  <span class="task-detail">Course A · Section 002</span>
+                </td>
+                <td>3.1</td>
+                <td class="nowrap">Nov 16</td>
+                <td><span class="status">Revision draft</span></td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Continue the Testing exercise revision draft. Earlier submitted versions remain preserved.">
+                    Revise
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example assessment with a submitted report. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Final project</span>
+                  <span class="task-detail">Course C · Section 001</span>
+                </td>
+                <td>1.2</td>
+                <td class="nowrap">Nov 20</td>
+                <td>
+                  <span class="status submitted">Submitted for review</span>
+                </td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Open the submitted Final project report and its associated materials.">
+                    View report
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Show this message when no assessments match the search. [SD] -->
+          <p class="empty-message" id="no-results" hidden>
+            No assessments match your search.
+          </p>
+        </div>
+      </section>
+
+      <!-- Show peer-review assignments separately from report status. [SD] -->
+      <section class="panel" id="peer-reviews" aria-labelledby="review-heading">
+        <div class="panel-heading">
+          <h2 id="review-heading">Peer reviews</h2>
+          <p>2 assigned</p>
+        </div>
+
+        <div class="table-container">
+          <table class="review-table" aria-labelledby="review-heading">
+            <!-- Name the peer-review table columns. [SD] -->
+            <thead>
+              <tr>
+                <th scope="col">Report / Version</th>
+                <th scope="col">Course</th>
+                <th scope="col">Review status</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- Example pending review of submitted version 2. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Colleague report A</span>
+                  <span class="task-detail">Submitted version 2</span>
+                </td>
+                <td>Course D</td>
+                <td>Pending</td>
+                <td class="nowrap">Nov 18</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Open submitted version 2 of Colleague report A. Review comments will refer to that specific version.">
+                    Open review
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Example review already in progress for submitted version 1. [SD] -->
+              <tr>
+                <td>
+                  <span class="task-name">Colleague report B</span>
+                  <span class="task-detail">Submitted version 1</span>
+                </td>
+                <td>Course E</td>
+                <td>In progress</td>
+                <td class="nowrap">Nov 20</td>
+                <td>
+                  <button
+                    class="button"
+                    type="button"
+                    data-preview="Continue reviewing submitted version 1 of Colleague report B. Review comments remain associated with that version.">
+                    Open review
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Identify the page as a wireframe with example information. [SD] -->
+  <footer>
+    Proposed wireframe · Illustrative tasks and dates · Faculty Dashboard
+  </footer>
+
+  <!-- Explain planned actions without changing real reports or accounts. [SD] -->
+  <dialog id="preview-dialog" aria-labelledby="preview-heading">
+    <h2 id="preview-heading">Planned action</h2>
+    <p id="preview-description"></p>
+
+    <!-- Close the popup when the form is submitted. [SD] -->
+    <form method="dialog">
+      <button class="button primary">Close</button>
+    </form>
+  </dialog>
+
+  <script>
+    // Find the assessment search field, rows, count, and empty message. [SD]
+    const searchInput = document.getElementById("assessment-search");
+    const rows = [...document.querySelectorAll("#assessment-rows tr")];
+    const count = document.getElementById("assessment-count");
+    const noResults = document.getElementById("no-results");
+
+    // Update the assessment list as the user types. [SD]
+    searchInput.addEventListener("input", () => {
+      // Remove extra spaces and ignore differences in letter case. [SD]
+      const searchText = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      // Hide rows that do not match the search. [SD]
+      rows.forEach((row) => {
+        const matches = row.textContent.toLowerCase().includes(searchText);
+        row.hidden = !matches;
+        if (matches) visibleCount++;
+      });
+
+      // Show how many tasks match the search. [SD]
+      count.textContent = searchText
+        ? `${visibleCount} of ${rows.length} tasks shown`
+        : `${rows.length} tasks assigned to you`;
+
+      // Show the empty message when no tasks match. [SD]
+      noResults.hidden = visibleCount !== 0;
+    });
+
+    // Find the popup and its message area. [SD]
+    const previewDialog = document.getElementById("preview-dialog");
+    const previewDescription = document.getElementById("preview-description");
+
+    // Show the explanation stored on each example action button. [SD]
+    document.querySelectorAll("[data-preview]").forEach((button) => {
+      button.addEventListener("click", () => {
+        previewDescription.textContent = button.dataset.preview;
+        previewDialog.showModal();
+      });
+    });
+  </script>
+</body>
+</html>

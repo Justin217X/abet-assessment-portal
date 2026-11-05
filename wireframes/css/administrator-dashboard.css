@@ -1,0 +1,487 @@
+/* Set the page colors. [SD] */
+:root {
+  --background: #f7f7f7;
+  --surface: #ffffff;
+  --sidebar: #f0f0f0;
+  --border: #d0d0d0;
+  --text: #252525;
+  --muted: #606060;
+  --dark: #303030;
+}
+
+/* Keep padding and borders inside each element's size. [SD] */
+* {
+  box-sizing: border-box;
+}
+
+/* Set the page font, colors, and line spacing. [SD] */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--background);
+  line-height: 1.5;
+}
+
+/* Use the same font for buttons and inputs. [SD] */
+button,
+input {
+  font: inherit;
+}
+
+/* Show a hand pointer over buttons. [SD] */
+button {
+  cursor: pointer;
+}
+
+/* Show an outline when using the keyboard to select controls. [SD] */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #555;
+  outline-offset: 3px;
+}
+
+/* Place the portal name and account controls in the top bar. [SD] */
+.topbar {
+  min-height: 76px;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Line up the branding and account items. [SD] */
+.brand,
+.account {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Make the portal name larger and bold. [SD] */
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Style the temporary AB symbol. [SD] */
+.brand-mark {
+  padding: 7px 9px;
+  border-radius: 5px;
+  background: var(--dark);
+  color: white;
+  font-size: 17px;
+}
+
+/* Place the sidebar beside the main content. [SD] */
+.layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: calc(100vh - 122px);
+}
+
+/* Set the sidebar background and spacing. [SD] */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 14px;
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+}
+
+/* Style the heading above the menu. [SD] */
+.nav-label {
+  margin: 0 12px 18px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Add space between menu items. [SD] */
+.sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+
+/* Style menu links and buttons. [SD] */
+.nav-item {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+/* Change the menu item's color when hovered over. [SD] */
+.nav-item:hover {
+  background: #e5e5e5;
+}
+
+/* Highlight the current menu item. [SD] */
+.nav-item.active {
+  background: #dedede;
+  box-shadow: inset 4px 0 var(--dark);
+  font-weight: bold;
+}
+
+/* Place account information at the bottom of the sidebar. [SD] */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 28px 12px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Add space around the main content. [SD] */
+main {
+  min-width: 0;
+  padding: 28px 32px;
+}
+
+/* Style the main heading. [SD] */
+h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+/* Style section headings. [SD] */
+h2 {
+  margin: 0;
+  font-size: 21px;
+}
+
+/* Style smaller headings. [SD] */
+h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+/* Style the text below the main heading. [SD] */
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Place the search field and button in a row. [SD] */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0;
+}
+
+/* Set the search field's size and appearance. [SD] */
+.search-form input {
+  width: min(100%, 620px);
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+  color: var(--text);
+}
+
+/* Place the user list beside the user details. [SD] */
+.user-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: start;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+/* Add a background and border to content boxes. [SD] */
+.panel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+/* Line up each box's heading and controls. [SD] */
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+}
+
+/* Style the text below the box heading. [SD] */
+.panel-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Add space inside content boxes. [SD] */
+.panel-body {
+  padding: 0 22px 22px;
+}
+
+/* Style labels above user details. [SD] */
+.field-label {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Show the user's role in a badge. [SD] */
+.role-badge {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  background: #ededed;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Space out role buttons and let them wrap. [SD] */
+.role-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+
+/* Style the permission list. [SD] */
+.permission-list {
+  margin: 0 0 20px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+/* Add space between permissions. [SD] */
+.permission-list li {
+  margin-bottom: 8px;
+}
+
+/* Style the note below the permissions. [SD] */
+.permission-note {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Let wide tables scroll sideways. [SD] */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Make tables fill the available width. [SD] */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Set the user table's minimum width. [SD] */
+.users-table {
+  min-width: 490px;
+}
+
+/* Set the access table's minimum width. [SD] */
+.access-table {
+  min-width: 700px;
+}
+
+/* Set spacing and alignment inside table cells. [SD] */
+th,
+td {
+  padding: 17px 18px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Style table headings. [SD] */
+th {
+  background: #efefef;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Set the table text size. [SD] */
+td {
+  font-size: 13px;
+}
+
+/* Add lines between table rows. [SD] */
+tbody tr + tr {
+  border-top: 1px solid var(--border);
+}
+
+/* Highlight the selected row. [SD] */
+tr.selected {
+  background: #ededed;
+}
+
+/* Show the record name in bold. [SD] */
+.record-name {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Show extra details below the record name. [SD] */
+.record-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Set the default button appearance. [SD] */
+.button {
+  display: inline-block;
+  padding: 9px 14px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Change the button color when hovered over. [SD] */
+.button:hover {
+  background: #ededed;
+}
+
+/* Make the main action button dark. [SD] */
+.button.primary {
+  border-color: var(--dark);
+  background: var(--dark);
+  color: white;
+}
+
+/* Change the main button color when hovered over. [SD] */
+.button.primary:hover {
+  background: #484848;
+}
+
+/* Style the message shown when there are no results. [SD] */
+.empty-message {
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Hide elements marked as hidden. [SD] */
+[hidden] {
+  display: none !important;
+}
+
+/* Style the page footer. [SD] */
+footer {
+  margin-top: 0;
+  padding: 12px 28px;
+  border-top: 1px solid var(--border);
+  background: white;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Style the popup explaining a planned feature. [SD] */
+dialog {
+  width: min(480px, calc(100% - 32px));
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* Darken the page behind the popup. [SD] */
+dialog::backdrop {
+  background: rgb(0 0 0 / 35%);
+}
+
+/* Add space around the popup text. [SD] */
+dialog p {
+  margin: 16px 0 24px;
+}
+
+/* Stack the user list and details on narrower screens. [SD] */
+@media (max-width: 1200px) {
+  .user-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduce sidebar width and spacing on smaller screens. [SD] */
+@media (max-width: 1050px) {
+  .layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+
+  main {
+    padding: 24px;
+  }
+
+  /* Let box headings and controls wrap onto another line. [SD] */
+  .panel-heading {
+    flex-wrap: wrap;
+  }
+}
+
+/* Adjust the layout for phone-sized screens. [SD] */
+@media (max-width: 650px) {
+  /* Let top-bar items wrap and reduce spacing. [SD] */
+  .topbar {
+    padding: 14px 18px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  /* Place the sidebar above the main content. [SD] */
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Arrange menu items in two columns. [SD] */
+  .sidebar nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Hide extra sidebar text to save space. [SD] */
+  .nav-label,
+  .sidebar-footer {
+    display: none;
+  }
+
+  main {
+    padding: 22px 16px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  /* Let search controls wrap onto another line. [SD] */
+  .search-form {
+    flex-wrap: wrap;
+  }
+}

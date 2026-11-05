@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set the text encoding and adjust the page to the screen width. [SD] -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Set the browser tab title. [SD] -->
+  <title>Administrator Dashboard — ABET Assessment Portal</title>
+
+  <!-- Load the administrator dashboard styles. [SD] -->
+  <link rel="stylesheet" href="css/administrator-dashboard.css">
+</head>
+
+<body>
+  <!-- Show the portal name and account controls. [SD] -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- Hide the decorative AB symbol from screen readers. [SD] -->
+      <span class="brand-mark" aria-hidden="true">AB</span>
+      <span>ABET Assessment Portal</span>
+    </div>
+
+    <div class="account">
+      <strong>System Administrator</strong>
+
+      <!-- Explain sign-out without ending a real session. [SD] -->
+      <button
+        class="button"
+        type="button"
+        data-preview="In the completed portal, this action will end your portal session.">
+        Sign out
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Show the administrator menu. [SD] -->
+    <aside class="sidebar">
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav aria-label="Administrator navigation">
+        <!-- Mark Users & Access as the current page. [SD] -->
+        <a class="nav-item active" href="#users-access" aria-current="page">
+          Users &amp; Access
+        </a>
+
+        <!-- Explain the planned application settings feature. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="View designated application settings and their current non-secret values. Permitted changes will be validated before saving.">
+          Application Settings
+        </button>
+
+        <!-- Explain the planned application error viewer. [SD] -->
+        <button
+          class="nav-item"
+          type="button"
+          data-preview="Filter recorded application errors by date or failed operation. Open an error to inspect its time, affected operation, and diagnostic description.">
+          Application Errors
+        </button>
+      </nav>
+
+      <!-- Show the example account's role. [SD] -->
+      <div class="sidebar-footer">
+        Signed in as System Administrator
+      </div>
+    </aside>
+
+    <!-- Show user roles, permissions, and record access. [SD] -->
+    <main id="users-access">
+      <h1>Users and access</h1>
+      <p class="subtitle">
+        Review assigned roles and control access to portal functions and records.
+      </p>
+
+      <!-- Search the fictional users by name or role. [SD] -->
+      <form class="search-form" id="user-search-form" role="search">
+        <input
+          id="user-search"
+          type="search"
+          placeholder="Find a portal user by name or role"
+          aria-label="Find a portal user by name or role">
+
+        <button class="button primary" type="submit">
+          Search
+        </button>
+
+        <button class="button" id="clear-search" type="button">
+          Clear
+        </button>
+      </form>
+
+      <div class="user-layout">
+        <!-- List the fictional portal users. [SD] -->
+        <section class="panel" aria-labelledby="users-heading">
+          <div class="panel-heading">
+            <h2 id="users-heading">Portal users</h2>
+
+            <!-- Announce changes to the result count to screen readers. [SD] -->
+            <p id="user-count" aria-live="polite">4 example users</p>
+          </div>
+
+          <div class="table-container">
+            <table class="users-table" aria-labelledby="users-heading">
+              <!-- Name the table columns. [SD] -->
+              <thead>
+                <tr>
+                  <th scope="col">User</th>
+                  <th scope="col">Assigned role</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+
+              <!-- Connect each row and button to its fictional user. [SD] -->
+              <tbody id="user-rows">
+                <tr data-user="faculty-a">
+                  <td>Faculty A</td>
+                  <td>Faculty</td>
+                  <td>
+                    <button
+                      class="button"
+                      type="button"
+                      data-select-user="faculty-a"
+                      aria-pressed="false">
+                      View access
+                    </button>
+                  </td>
+                </tr>
+
+                <tr data-user="coordinator-a">
+                  <td>Coordinator A</td>
+                  <td>ABET Coordinator</td>
+                  <td>
+                    <button
+                      class="button"
+                      type="button"
+                      data-select-user="coordinator-a"
+                      aria-pressed="false">
+                      View access
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Select Evaluator A when the page first opens. [SD] -->
+                <tr class="selected" data-user="evaluator-a">
+                  <td>Evaluator A</td>
+                  <td>ABET Evaluator</td>
+                  <td>
+                    <button
+                      class="button primary"
+                      type="button"
+                      data-select-user="evaluator-a"
+                      aria-pressed="true">
+                      View access
+                    </button>
+                  </td>
+                </tr>
+
+                <tr data-user="administrator-a">
+                  <td>Administrator A</td>
+                  <td>System Administrator</td>
+                  <td>
+                    <button
+                      class="button"
+                      type="button"
+                      data-select-user="administrator-a"
+                      aria-pressed="false">
+                      View access
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Show this message when the search has no matches. [SD] -->
+            <p class="empty-message" id="no-users" hidden>
+              No users match your search.
+            </p>
+          </div>
+        </section>
+
+        <!-- Show the selected user's role and example permissions. [SD] -->
+        <section
+          class="panel"
+          id="selected-user-panel"
+          aria-labelledby="selected-user-heading">
+
+          <div class="panel-heading">
+            <h2 id="selected-user-heading">
+              Selected user: Evaluator A
+            </h2>
+          </div>
+
+          <div class="panel-body">
+            <p class="field-label">Assigned role</p>
+            <span class="role-badge" id="selected-role">
+              ABET Evaluator
+            </span>
+
+            <!-- Explain role changes without changing the example data. [SD] -->
+            <div class="role-actions">
+              <button
+                class="button"
+                type="button"
+                data-user-action="assign-role">
+                Assign role
+              </button>
+
+              <button
+                class="button"
+                type="button"
+                data-user-action="remove-role">
+                Remove selected role
+              </button>
+            </div>
+
+            <!-- JavaScript fills in the permissions and note. [SD] -->
+            <h3>Effective permissions</h3>
+            <ul class="permission-list" id="permission-list"></ul>
+            <p class="permission-note" id="permission-note"></p>
+
+            <button
+              class="button"
+              type="button"
+              data-user-action="edit-functions">
+              Edit function permissions
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Show record access separately from the user's role. [SD] -->
+      <section
+        class="panel"
+        id="record-access-panel"
+        aria-labelledby="record-access-heading">
+
+        <div class="panel-heading">
+          <div>
+            <h2 id="record-access-heading">
+              Record access for Evaluator A
+            </h2>
+            <p>
+              An assigned role does not automatically grant access to every report.
+            </p>
+          </div>
+
+          <button
+            class="button primary"
+            type="button"
+            data-user-action="edit-records">
+            Edit record access
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="access-table" aria-labelledby="record-access-heading">
+            <thead>
+              <tr>
+                <th scope="col">Authorized material</th>
+                <th scope="col">Program</th>
+                <th scope="col">Access</th>
+              </tr>
+            </thead>
+
+            <!-- JavaScript adds the selected user's example records here. [SD] -->
+            <tbody id="record-access-rows"></tbody>
+          </table>
+
+          <!-- Show this message when the user has no listed record grants. [SD] -->
+          <p class="empty-message" id="no-records" hidden>
+            No individual report or material grants are listed for this sample user.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Identify the page as a wireframe with example information. [SD] -->
+  <footer>
+    Proposed wireframe · Illustrative users and permissions · System Administrator
+  </footer>
+
+  <!-- Show explanations of planned actions without making real changes. [SD] -->
+  <dialog id="preview-dialog" aria-labelledby="preview-heading">
+    <h2 id="preview-heading">Planned action</h2>
+    <p id="preview-description"></p>
+
+    <!-- Close the popup when the form is submitted. [SD] -->
+    <form method="dialog">
+      <button class="button primary">Close</button>
+    </form>
+  </dialog>
+
+  <script>
+    /*
+      Use fictional users for this wireframe. [SD]
+      This code does not sign users in or enforce permissions.
+      The completed portal must check permissions on the server.
+    */
+    const users = {
+      "faculty-a": {
+        name: "Faculty A",
+        role: "Faculty",
+        permissions: [
+          "Prepare assigned assessment reports.",
+          "Review report versions assigned for peer review.",
+          "View reports and evidence within assigned permissions."
+        ],
+        note:
+          "Access depends on assigned tasks, review assignments, and permitted records.",
+        records: [
+          {
+            name: "Design project — Draft",
+            detail: "Course B · Fall 2026",
+            program: "Program A",
+            access: "Edit assigned draft"
+          },
+          {
+            name: "Colleague report A — Version 2",
+            detail: "Course D · Fall 2026",
+            program: "Program A",
+            access: "Perform assigned peer review"
+          }
+        ]
+      },
+
+      "coordinator-a": {
+        name: "Coordinator A",
+        role: "ABET Coordinator",
+        permissions: [
+          "Manage assessment schedules and assigned tasks.",
+          "Assign peer reviewers and monitor completion.",
+          "View permitted program reports and supporting evidence.",
+          "Perform Faculty tasks within assigned permissions."
+        ],
+        note:
+          "Coordinator access remains limited to assigned programs, functions, and records.",
+        records: [
+          {
+            name: "Final project — Submitted version 2",
+            detail: "Course A · Fall 2026",
+            program: "Program A",
+            access: "View report and review progress"
+          }
+        ]
+      },
+
+      "evaluator-a": {
+        name: "Evaluator A",
+        role: "ABET Evaluator",
+        permissions: [
+          "Read authorized reports and supporting evidence.",
+          "Read available Self-Study materials.",
+          "Read authorized improvement actions and linked results."
+        ],
+        note:
+          "No report editing or peer-review submission.",
+        records: [
+          {
+            name: "Final project — Submitted version 2",
+            detail: "Course A · Fall 2026",
+            program: "Program A",
+            access: "View report and evidence"
+          },
+          {
+            name: "Self-Study materials — 2026",
+            detail: "Materials made available for review",
+            program: "Program A",
+            access: "View materials"
+          }
+        ]
+      },
+
+      "administrator-a": {
+        name: "Administrator A",
+        role: "System Administrator",
+        permissions: [
+          "Inspect and manage approved user-role assignments.",
+          "Manage permitted functions and record access.",
+          "View and edit designated application settings.",
+          "Inspect recorded application errors."
+        ],
+        note:
+          "Administrative permissions do not automatically provide access to all assessment reports.",
+        records: []
+      }
+    };
+
+    // Find the search controls, user rows, and result messages. [SD]
+    const searchForm = document.getElementById("user-search-form");
+    const searchInput = document.getElementById("user-search");
+    const userRows = [...document.querySelectorAll("#user-rows tr")];
+    const userCount = document.getElementById("user-count");
+    const noUsers = document.getElementById("no-users");
+
+    // Find the selected user's details and permission list. [SD]
+    const selectedPanel = document.getElementById("selected-user-panel");
+    const selectedHeading = document.getElementById("selected-user-heading");
+    const selectedRole = document.getElementById("selected-role");
+    const permissionList = document.getElementById("permission-list");
+    const permissionNote = document.getElementById("permission-note");
+
+    // Find the record-access table and its empty message. [SD]
+    const recordPanel = document.getElementById("record-access-panel");
+    const recordHeading = document.getElementById("record-access-heading");
+    const recordRows = document.getElementById("record-access-rows");
+    const noRecords = document.getElementById("no-records");
+
+    // Find the popup and its message area. [SD]
+    const previewDialog = document.getElementById("preview-dialog");
+    const previewDescription = document.getElementById("preview-description");
+
+    // Remember which example user is selected. [SD]
+    let selectedUserId = "evaluator-a";
+
+    // Put an explanation in the popup and open it. [SD]
+    function showPreview(message) {
+      previewDescription.textContent = message;
+      previewDialog.showModal();
+    }
+
+    // Display the selected user's details. [SD]
+    function selectUser(userId) {
+      selectedUserId = userId;
+      const user = users[userId];
+
+      // Show the details and record-access panels. [SD]
+      selectedPanel.hidden = false;
+      recordPanel.hidden = false;
+
+      // Update the headings, role, and permission note. [SD]
+      selectedHeading.textContent = `Selected user: ${user.name}`;
+      selectedRole.textContent = user.role;
+      permissionNote.textContent = user.note;
+      recordHeading.textContent = `Record access for ${user.name}`;
+
+      // Clear the old permissions before adding the new ones. [SD]
+      permissionList.replaceChildren();
+
+      // Add each permission as plain text in a list item. [SD]
+      user.permissions.forEach((permission) => {
+        const item = document.createElement("li");
+        item.textContent = permission;
+        permissionList.appendChild(item);
+      });
+
+      // Clear the old record-access rows. [SD]
+      recordRows.replaceChildren();
+
+      // Create a table row for each example record. [SD]
+      user.records.forEach((record) => {
+        const row = document.createElement("tr");
+
+        // Add the material's name and details to the first cell. [SD]
+        const materialCell = document.createElement("td");
+
+        const name = document.createElement("span");
+        name.className = "record-name";
+        name.textContent = record.name;
+
+        const detail = document.createElement("span");
+        detail.className = "record-detail";
+        detail.textContent = record.detail;
+
+        materialCell.append(name, detail);
+
+        // Add the program and access description. [SD]
+        const programCell = document.createElement("td");
+        programCell.textContent = record.program;
+
+        const accessCell = document.createElement("td");
+        accessCell.textContent = record.access;
+
+        // Add the completed row to the table. [SD]
+        row.append(materialCell, programCell, accessCell);
+        recordRows.appendChild(row);
+      });
+
+      // Show the empty message only when no records are listed. [SD]
+      noRecords.hidden = user.records.length !== 0;
+
+      // Highlight the selected row and update its button state. [SD]
+      userRows.forEach((row) => {
+        const selected = row.dataset.user === userId;
+        row.classList.toggle("selected", selected);
+
+        const button = row.querySelector("[data-select-user]");
+        button.classList.toggle("primary", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+    }
+
+    // Search the example users by name or role. [SD]
+    function filterUsers() {
+      // Remove extra spaces and ignore differences in letter case. [SD]
+      const searchText = searchInput.value.trim().toLowerCase();
+      const visibleRows = [];
+
+      userRows.forEach((row) => {
+        const user = users[row.dataset.user];
+        const searchableText = `${user.name} ${user.role}`.toLowerCase();
+        const matches = searchableText.includes(searchText);
+
+        // Hide users who do not match the search. [SD]
+        row.hidden = !matches;
+
+        if (matches) visibleRows.push(row);
+      });
+
+      // Update the number of users shown. [SD]
+      userCount.textContent =
+        `${visibleRows.length} of ${userRows.length} example users shown`;
+
+      noUsers.hidden = visibleRows.length !== 0;
+
+      // Hide the details panels when there are no matching users. [SD]
+      if (visibleRows.length === 0) {
+        selectedUserId = null;
+        selectedPanel.hidden = true;
+        recordPanel.hidden = true;
+        return;
+      }
+
+      // Check whether the selected user is still in the results. [SD]
+      const selectionStillVisible = visibleRows.some(
+        (row) => row.dataset.user === selectedUserId
+      );
+
+      // Otherwise, select the first matching user. [SD]
+      if (!selectionStillVisible) {
+        selectUser(visibleRows[0].dataset.user);
+      }
+    }
+
+    // Search without reloading the page when the form is submitted. [SD]
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      filterUsers();
+    });
+
+    // Update the results as the user types. [SD]
+    searchInput.addEventListener("input", filterUsers);
+
+    // Clear the search, show all users, and return focus to the field. [SD]
+    document.getElementById("clear-search").addEventListener("click", () => {
+      searchInput.value = "";
+      filterUsers();
+      searchInput.focus();
+    });
+
+    // Show a user's details when View access is clicked. [SD]
+    document.querySelectorAll("[data-select-user]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectUser(button.dataset.selectUser);
+      });
+    });
+
+    // Explain role and access actions without changing the example data. [SD]
+    document.querySelectorAll("[data-user-action]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!selectedUserId) return;
+
+        const user = users[selectedUserId];
+
+        // Choose the explanation for the clicked action. [SD]
+        const descriptions = {
+          "assign-role":
+            `Select an approved portal role to assign to ${user.name}. ` +
+            `The approved roles are Faculty, ABET Coordinator, ABET Evaluator, ` +
+            `and System Administrator. This wireframe does not change roles.`,
+
+          "remove-role":
+            `Review and remove the ${user.role} role assignment from ` +
+            `${user.name}. This action changes a role assignment, not the ` +
+            `existence of the account. No changes are made in this wireframe.`,
+
+          "edit-functions":
+            `Review the portal functions ${user.name} is permitted to use ` +
+            `and make changes allowed by the system's access rules. ` +
+            `No permission changes are made in this wireframe.`,
+
+          "edit-records":
+            `Review which reports and materials ${user.name} may access, ` +
+            `then update permitted record access. Role assignment and ` +
+            `record access are managed separately. No changes are made here.`
+        };
+
+        showPreview(descriptions[button.dataset.userAction]);
+      });
+    });
+
+    // Show explanations for menu actions and sign-out. [SD]
+    document.querySelectorAll("[data-preview]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showPreview(button.dataset.preview);
+      });
+    });
+
+    // Fill in the selected user's details and initial search results. [SD]
+    selectUser(selectedUserId);
+    filterUsers();
+  </script>
+</body>
+</html>
