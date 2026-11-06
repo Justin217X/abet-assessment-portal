@@ -63,6 +63,19 @@ class CourseSection(models.Model):
     # Keep courses and semesters that are still used by a section.
     course = models.ForeignKey(Course, on_delete=models.PROTECT, related_name='sections')
     semester = models.ForeignKey(Semester, on_delete=models.PROTECT, related_name='sections')
+
+    # Link the section to its Canvas course when available. [SD]
+    canvas_course = models.ForeignKey(
+        'integrations.CanvasCourse',
+        on_delete=models.PROTECT,
+        related_name='sections',
+        null=True,
+        blank=True,
+    )
+
+    # Text preserves leading zeros, such as 001. [SD]
+    section_code = models.CharField(max_length=32)
+
     # Text preserves leading zeros, such as 001.
     section_code = models.CharField(max_length=32)
 
