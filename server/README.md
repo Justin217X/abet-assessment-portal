@@ -112,3 +112,16 @@ Run from the repository folder:
 ```
 
 Django creates a temporary test database and removes it afterward.
+
+## Source records and Canvas courses
+
+SourceRecord stores an item's source system, record type, and original identifier. This prevents duplicate imports while allowing different item types to use the same source ID.
+
+CanvasCourse represents a course space in Canvas. Multiple university course sections can link to it. A section can also exist without a Canvas link.
+
+These models store information only. They do not connect to the live Canvas API.
+
+Run the academic and integration tests from the repository folder:
+
+```powershell
+.\.venv\Scripts\python.exe server\manage.py test academics integrations --settings=config.test_settings
