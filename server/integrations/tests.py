@@ -1,6 +1,8 @@
+import json
+
+from pathlib import Path
 from django.db import IntegrityError, transaction
 from django.test import TestCase
-
 from .models import SourceRecord, CanvasCourse
 
 
@@ -66,3 +68,19 @@ class CanvasCourseTests(TestCase):
                     source_record=source,
                     display_name='Duplicate Example',
                 )
+
+# Check that the fictional Canvas response is ready for import test. [SD]
+class CanvasAssignmentFixturesTests(TestCase):
+    def test_fixture_contains_a_grading_rubtic(self):
+        # Find the JSON file next to this test module. [SD]
+        fixture_path = ( 
+            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json' 
+        )
+
+        with fixture_path.open(encoding='utf-8') as fixture:
+            assignment = json.load(fixture)
+
+            # Check the grading flag, criterion, and rating options. [SD]
+            self.assertIs(assignment['use_rubric_for_grading'], True)
+            self.assertEqual(len(assignment['rubric']), 1)
+            self.assertEqual(len(assignment['rubric'][0]['ratings']), 4)
