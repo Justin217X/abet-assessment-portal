@@ -1,20 +1,70 @@
+/**
+ * App.tsx
+ * Switches between sign-in previews and the four role demos. [SD]
+ */
+
+import { useState } from "react"
+import { PennStateSignInPage } from "./pages/sign-in/PennStateSignInPage"
+import { PortalSignInPage } from "./pages/sign-in/PortalSignInPage"
+import { AdministratorDashboard } from "./dashboards/AdministratorDashboard"
+import { CoordinatorDashboard } from "./dashboards/CoordinatorDashboard"
+import { EvaluatorDashboard } from "./dashboards/EvaluatorDashboard"
+import { FacultyDashboard } from "./dashboards/FacultyDashboard"
+import { SignInPage } from "./pages/sign-in/SignInPage"
+
+type Screen =
+  | "sign-in"
+  | "penn-state"
+  | "portal"
+  | "faculty"
+  | "coordinator"
+  | "evaluator"
+  | "administrator"
+
 function App() {
+  // TODO: Use the signed-in user's assigned access to open a dashboard
+  // and make Sign out end the active portal session. [SD]
+  const [screen, setScreen] = useState<Screen>("sign-in")
+  const backToSignIn = () => setScreen("sign-in")
+
+  if (screen === "penn-state") {
+    return <PennStateSignInPage onBack={backToSignIn} />
+  }
+
+  if (screen === "portal") {
+    return <PortalSignInPage onBack={backToSignIn} />
+  }
+
+  if (screen === "faculty") {
+    return <FacultyDashboard onBackToSignIn={backToSignIn} />
+  }
+
+  if (screen === "coordinator") {
+    return (
+      <CoordinatorDashboard
+        onBackToSignIn={backToSignIn}
+        onOpenFacultyWorkspace={() => setScreen("faculty")}
+      />
+    )
+  }
+
+  if (screen === "evaluator") {
+    return <EvaluatorDashboard onBackToSignIn={backToSignIn} />
+  }
+
+  if (screen === "administrator") {
+    return <AdministratorDashboard onBackToSignIn={backToSignIn} />
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-100 px-6">
-      <div className="w-full max-w-xl rounded-lg bg-white p-8 text-center shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">
-          ABET Assessment Portal
-        </h1>
-
-        <p className="mt-4 text-slate-600">
-          Frontend development environment successfully configured.
-        </p>
-
-        <p className="mt-2 text-sm text-slate-500">
-          React, TypeScript, and Tailwind CSS
-        </p>
-      </div>
-    </main>
+    <SignInPage
+      onOpenPennState={() => setScreen("penn-state")}
+      onOpenPortal={() => setScreen("portal")}
+      onOpenFacultyDemo={() => setScreen("faculty")}
+      onOpenCoordinatorDemo={() => setScreen("coordinator")}
+      onOpenEvaluatorDemo={() => setScreen("evaluator")}
+      onOpenAdministratorDemo={() => setScreen("administrator")}
+    />
   )
 }
 

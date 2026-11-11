@@ -79,8 +79,13 @@ This runs the ESLint checks provided by the project.
 ## Project Structure
 
 - `src/` - React application source code
-- `src/App.tsx` - Root application component
-- `src/main.tsx` - Application entry point
+- `src/main.tsx` - Starts the React application
+- `src/App.tsx` - Root application component. Connects the sign-in previews and role demos.
+- `src/Button.tsx` - Defines the shared button.
+- `src/components/` - Holds shared layout, cards, and tables.
+- `src/dashboards/` - Holds the Faculty, Coordinator, Evaluator, and Adminitrator dashboards.
+- `src/pages/sign-in/` - Holds the main sign-in screen and two sign-in previews.
+- `src/pages/faculty/, src/pages/coordinator/, src/pages/evaluator and src/pages/administrator/` - Hold the pages opened from each dashboard.
 - `src/index.css` - Tailwind CSS import and global styles
 - `public/` - Static assets
 - `index.html` - HTML entry point
@@ -88,10 +93,17 @@ This runs the ESLint checks provided by the project.
 
 ## Current Status
 
-The React, TypeScript, Vite, and Tailwind CSS development environment has been initialized.
+The frontedn opens with two sign-in previews and four role demos. Each dashboard links to its role-specific pages. Tables and report previews show empty states until backend data is available. 
 
-The application currently displays a placeholder page. Dashboard functionality, authentication, Canvas integration, and backend API communication have not been implemented.
+Authentication, Canvas integration, and Django API connections are planned for later development. See the backend setup guide for Django and PostgreSQL. The original HTML wireframes are kept in wireframes/.
 
-The temporary HTML dashboard wireframes are stored separately in the repository's `wireframes/` directory.
+## Team 18: Test UI Locally
+From the repository root run:
 
-The frontend and Django backend are currently run independently during development.
+git fetch origin
+git switch feature/faculty-demo-entry
+cd client
+npm ci
+npm run dev
+
+Open the URL shown in the terminal, usually http://localhost:5173/
