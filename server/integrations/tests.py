@@ -6,13 +6,16 @@ Purpose: Test the integration models and checks that the fictional Canvas respon
 import json
 
 from pathlib import Path
+from types import SimpleNamespace
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.test import SimpleTestCase
 from .models import SourceRecord, CanvasCourse
 from .models import Assignment, AssignmentVersion, ImportRun, SourceRevision
 from .assignment_import import store_canvas_assignment
+from .rubric_preview import build_rubric_preview
 
 
 # Check that source records are not duplicated. [SD]
@@ -208,3 +211,31 @@ class AssignmentVersionTest(TestCase):
 
         first.refresh_from_db()
         self.assertEqual(first.instructions, payload['description'])
+
+class RubricPreviewTests(SimpleTestCase):
+    def test_preview_includes_ratings_from_saved_canvas_response(self):
+        fixture_path = (
+            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json'
+        )
+        with fixture_path.open(encoding='utf-8') as fixture:
+            payload = json.load(fixture)
+
+        # Give the helper a fictional saved version without writing to the database. [SD]
+        version = SimpleNamespace(
+            title='Demo Programming Assignment',
+            source_revision=SimpleNamespace(payload=payload),
+        )
+
+        preview = build_rubric_preview(version)
+
+        self.assertEqual(preview['assignment_title'], 'Demo Programming Assignment')
+        self.assertIs(preview['use_rubric_for_grading'], True)
+        self.assertEqual(len(preview['criteria']), 1)
+
+        criterion = preview['criteria'][0]
+        self.assertEqual(criterion['label'], '6.a: Program Design and Code Quality')
+        self.assertEqual(criterion['points'], 20)
+        self.assertEqual(
+            [(rating['label'], rating['points']) for rating in criterion['ratings']],
+            [('Exemplary', 20), ('Proficient', 15), ('Developing', 10), ('Beginning', 5)],
+        )
