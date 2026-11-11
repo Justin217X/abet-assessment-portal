@@ -1,6 +1,6 @@
 """
 File: views.py
-Purpose: .
+Purpose: Holds web request handlers for the integrations app..
 """
 
 from django.shortcuts import render
