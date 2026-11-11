@@ -1,3 +1,10 @@
+"""
+File: test_settings.py
+Purpose: Uses separate PostgreSQL configuration for automated tests.
+"""
+
+import os
+
 from .settings import *
 
 # Use a separate account and test database for running tests. [SD]
@@ -9,7 +16,7 @@ DATABASES = {
         'PASSWORD': os.environ['TEST_DB_PASSWORD'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],
-        'TEST':{
+        'TEST': {
             'NAME': 'abet_portal_test',
         }
     }

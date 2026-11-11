@@ -1,10 +1,8 @@
 """
-WSGI config for config project.
+File: wsgi.py
+Purpose: Gives a WSGI web server the application it needs to pass request to Django.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
+Reference: https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 """
 
 import os

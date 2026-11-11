@@ -1,0 +1,48 @@
+{
+    "id": 501,
+    "course_id": "101",
+    "name": "Demo Programming Assignment",
+    "description": "<p>Write a small program that validates user input. Explain how you tested it.</p>",
+    "points_possible": 20,
+    "use_rubric_for_grading": true,
+    "rubric_settings": {
+        "points_possible": 20
+    },
+    "rubric": [
+        {
+            "id": "crit1",
+            "description": "6.a: Program Design and Code Quality",
+            "long_description": "Evaluate code organization, readabiliy, and input validation.",
+            "points": 20,
+            "criterion_use_range": false,
+            "ignore_for_scoring": false,
+            "ratings": [
+                {
+                    "id": "rat1",
+                    "description": "Exemplary",
+                    "long_description": "Clear helper functions and thorough input validation.",
+                    "points": 20
+                },
+                {
+                    "id": "rat2",
+                    "description": "Proficient",
+                    "long_description": "Well organized with minor issues in clarity or validation.",
+                    "points": 15
+                },
+                {
+                    "id": "rat3",
+                    "description": "Developing",
+                    "long_description": "Some organization, with limited input validation.",
+                    "points": 10
+                },
+                {
+                    "id": "rat4",
+                    "description": "Beginning",
+                    "long_description": "Hard to follow, with little or no input validation.",
+                    "points": 5
+                }
+            ]
+        }
+
+    ]
+}
