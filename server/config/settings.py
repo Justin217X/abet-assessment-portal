@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # Stores courses, semesters, and course sections. [SD]
     'academics.apps.AcademicsConfig',
 
+    # Track source records and external service connections. [SD]
+    'integrations.apps.IntegrationsConfig',    
+
     # Django's build-in tools for administration, users, sessions, and web pages. [SD]
     'django.contrib.admin',
     'django.contrib.auth',
