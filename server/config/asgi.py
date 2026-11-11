@@ -1,10 +1,8 @@
 """
-ASGI config for config project.
+File: asgi.py
+Purpose: Gives an ASGI web server the application it needs to pass requests to Django.
 
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
+Reference: https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 """
 
 import os

@@ -1,3 +1,8 @@
+"""
+File: test.py
+Purpose: Test the rules for course, semesters, and sections.
+"""
+
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 
@@ -6,9 +11,7 @@ from .models import Course, Semester, CourseSection
 
 from integrations.models import CanvasCourse, SourceRecord
 
-# Create your tests here.
-
-# Check that course code remain unique. [SD]
+# Check that course codes remain unique. [SD]
 class CourseModelTestCase(TestCase):
     def test_duplicate_course_code_is_rejected(self):
         # Create a course with a specific course code. [SD]
@@ -101,7 +104,7 @@ class CourseSectionTests(TestCase):
 
         self.assertEqual(canvas_course.sections.count(), 2)
 
-    # Allow a section to exists beforre its Canvas course is known. [SD]
+    # Check that a section can exist without a Canvas course. [SD]
     def test_section_can_have_no_canvas_course(self):
         course = Course.objects.create(
             course_code='DEMO 101',

@@ -1,3 +1,8 @@
+""" 
+File: models.py
+Purpose: Defines courses, semesters, and course sections.
+"""
+
 import uuid
 
 from django.db import models
@@ -13,11 +18,11 @@ class Course(models.Model):
     # Store the course's full name. [SD]
     title = models.CharField(max_length=255)
 
-    # Store courses in order by course code. [SD]
+    # Store courses by course codes by default. [SD]
     class Meta:
         ordering = ['course_code']
 
-        # Prevent empty course cvodes and titles. [SD]
+        # Prevent empty course codes and titles. [SD]
         constraints = [
             models.CheckConstraint(condition=~models.Q(course_code=''), name='course_code_not_empty'),
             models.CheckConstraint(condition=~models.Q(title=''), name='course_title_not_empty'),
@@ -74,9 +79,6 @@ class CourseSection(models.Model):
     )
 
     # Text preserves leading zeros, such as 001. [SD]
-    section_code = models.CharField(max_length=32)
-
-    # Text preserves leading zeros, such as 001.
     section_code = models.CharField(max_length=32)
 
     # Display sections by course, semester date, and section code. [SD]
