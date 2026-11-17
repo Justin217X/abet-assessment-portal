@@ -1,0 +1,512 @@
+[
+    {
+        "id": 1001,
+        "assignment_id": 501,
+        "user_id": 2001,
+        "score": 5,
+        "grade": "5",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat4",
+                "points": 5,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1002,
+        "assignment_id": 501,
+        "user_id": 2002,
+        "score": 5,
+        "grade": "5",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat4",
+                "points": 5,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1003,
+        "assignment_id": 501,
+        "user_id": 2003,
+        "score": 10,
+        "grade": "10",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat3",
+                "points": 10,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1004,
+        "assignment_id": 501,
+        "user_id": 2004,
+        "score": 10,
+        "grade": "10",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat3",
+                "points": 10,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1005,
+        "assignment_id": 501,
+        "user_id": 2005,
+        "score": 10,
+        "grade": "10",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat3",
+                "points": 10,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1006,
+        "assignment_id": 501,
+        "user_id": 2006,
+        "score": 10,
+        "grade": "10",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat3",
+                "points": 10,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1007,
+        "assignment_id": 501,
+        "user_id": 2007,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1008,
+        "assignment_id": 501,
+        "user_id": 2008,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1009,
+        "assignment_id": 501,
+        "user_id": 2009,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1010,
+        "assignment_id": 501,
+        "user_id": 2010,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1011,
+        "assignment_id": 501,
+        "user_id": 2011,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1012,
+        "assignment_id": 501,
+        "user_id": 2012,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1013,
+        "assignment_id": 501,
+        "user_id": 2013,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1014,
+        "assignment_id": 501,
+        "user_id": 2014,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1015,
+        "assignment_id": 501,
+        "user_id": 2015,
+        "score": 15,
+        "grade": "15",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat2",
+                "points": 15,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1016,
+        "assignment_id": 501,
+        "user_id": 2016,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1017,
+        "assignment_id": 501,
+        "user_id": 2017,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1018,
+        "assignment_id": 501,
+        "user_id": 2018,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1019,
+        "assignment_id": 501,
+        "user_id": 2019,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1020,
+        "assignment_id": 501,
+        "user_id": 2020,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1021,
+        "assignment_id": 501,
+        "user_id": 2021,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1022,
+        "assignment_id": 501,
+        "user_id": 2022,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1023,
+        "assignment_id": 501,
+        "user_id": 2023,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1024,
+        "assignment_id": 501,
+        "user_id": 2024,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1025,
+        "assignment_id": 501,
+        "user_id": 2025,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1026,
+        "assignment_id": 501,
+        "user_id": 2026,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1027,
+        "assignment_id": 501,
+        "user_id": 2027,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1028,
+        "assignment_id": 501,
+        "user_id": 2028,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1029,
+        "assignment_id": 501,
+        "user_id": 2029,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    },
+    {
+        "id": 1030,
+        "assignment_id": 501,
+        "user_id": 2030,
+        "score": 20,
+        "grade": "20",
+        "workflow_state": "graded",
+        "missing": false,
+        "excused": false,
+        "rubric_assessment": {
+            "crit1": {
+                "rating_id": "rat1",
+                "points": 20,
+                "comments": ""
+            }
+        }
+    }
+]
