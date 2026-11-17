@@ -1,0 +1,19 @@
+{
+    "assignment_id": 501,
+    "course_id": 101,
+    "program": {
+        "code": "SE",
+        "name": "Software Engineering"
+    },
+    "semester": "Fall 2026",
+    "section": "001",
+    "instructor": "Demo Instructor",
+    "performance_indicators": [
+        {
+            "code": "6.a",
+            "description": "Program Design and Code Quality",
+            "criterion_ids": ["crit1"]
+        }
+    ],
+    "instructor_comments": "Most students demonstrated proficiency or exemplary performance in program design and code quality. Additional emphasis on input validation may benefit students performing at the beginning and developing levels."
+}
