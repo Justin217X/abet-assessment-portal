@@ -29,12 +29,12 @@ def generate_rubric_pdf(data):
     Generate a Rubric Report from prepared assessment data.
 
     Parameters:
-        data: Course, assignment, rubric, and PI information.
+        data (dict): Course, assignment, rubric, and PI information.
 
     Returns:
         Contents of the generated PDF.
     """
-    
+
     # Store the PDF in memory. [JH]
     buffer = BytesIO()
 
@@ -178,11 +178,11 @@ def generate_rubric_pdf(data):
     table.setStyle(TableStyle([
         (
             'BACKGROUND', (0, 0), (-1, 0),
-            colors.HexColor('#E5E7EB'),
+            colors.HexColor('#E5E7EB'), # Light gray
         ),
         (
             'GRID', (0, 0), (-1, -1),
-            0.5, colors.HexColor('#808080'),
+            0.5, colors.HexColor('#808080'), # Gray
         ),
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
         ('LEFTPADDING', (0, 0), (-1, -1), 8),

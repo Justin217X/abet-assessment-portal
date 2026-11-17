@@ -11,6 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from integrations.rubric_preview import build_rubric_preview
+from reports.pi_calculations import calculate_pi_statistics
 
 
 # Path to the fictional assessment data. [JH]
@@ -53,4 +54,35 @@ def load_demo_rubric_report():
         'criteria': rubric['criteria'],
         'total_points': assignment['rubric_settings']['points_possible'],
         'performance_indicators': context['performance_indicators'],
+    }
+
+
+def load_demo_pi_report():
+    """Prepare fictional data for the PI Report."""
+    assignment = load_fixture('canvas_assignment_with_rubric.json')
+    course = load_fixture('canvas_course.json')
+    context = load_fixture('report_context.json')
+    submissions = load_fixture('canvas_assignment_submissions.json')
+
+    # Select the PI and its associated rubric criterion. [JH]
+    indicator = context['performance_indicators'][0]
+
+    criterion = next(
+        criterion
+        for criterion in assignment['rubric']
+        if criterion['id'] == indicator['criterion_ids'][0]
+    )
+
+    statistics = calculate_pi_statistics(criterion, submissions)
+
+    return {
+        'program': context['program'],
+        'course': course,
+        'semester': context['semester'],
+        'section': context['section'],
+        'instructor': context['instructor'],
+        'assignment_title': assignment['name'],
+        'performance_indicator': indicator,
+        'statistics': statistics,
+        'instructor_comments': context['instructor_comments'],
     }
