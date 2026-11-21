@@ -63,7 +63,7 @@ Do not commit `.env` or share its contents.
 
 ## Run the backend
 
-Create Django’s database tables and check the setup:
+Create Djangoâ€™s database tables and check the setup:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py migrate
@@ -139,3 +139,15 @@ integrations/portal_data.py gives backend code one place to load shared fictiona
 PortalDataFacade().load() returns the selected source and adds today's date for current-date checks. The fixed scenario date stays unchanged. No records are saved by this loader.
 
 This PR adds the provider layer only. Database seeding, saved edits, result calculations, evidence preparation, PDF catalogs, web endpoints, and dashboards are separate work.
+
+## PI statistics calculations
+
+reports/pi_calculations.py calculates counts, percentages, minimum, maximum, median, and mean scores for one rubric criterion. It also calculates average performance level and per-level statistics.
+
+Only graded submissions with a score for that criterion count. Missing, excused, and unscored work is excluded; zero scores count.
+
+The caller must first choose the correct assignment and student group and remove duplicate submissions. The current rubric labels are Beginning, Developing, Proficient, and Exemplary, with matching rating IDs. Other rating scales need separate support.
+
+Run the focused tests: python server/manage.py test reports.test_pi_calculations
+
+This change adds calculations only, not PDF reports, web endpoints, or dashboard pages.
