@@ -146,3 +146,13 @@ Run the command again with the same sample data. It prints the same saved versio
 The command requests assignment 501 through the mock facade and saves it with the existing assignment importer. It uses the assignment and course JSON files in server/demo_data. Each run has a separate completed import-history entry.
 
 This command works only in development mode. It creates an inactive bookkeeping account with no usable password for import history, not a portal sign-in account.
+
+## Read a saved assignment rubric
+
+Use the version ID printed by import_mock_canvas_assignment:
+
+GET /api/demo/assignment-versions/<saved UUID>/rubric/
+
+The development endpoint returns the saved assignment title, grading flag, criteria, ratings, and points. An unknown version returns 404; a saved assignment without a rubric returns an empty criteria list.
+
+The existing fixture preview URL still works. React will be connected to the saved-version endpoint in a separate change. This endpoint is disabled outside development; live authentication and record access checks are not implemented here.
