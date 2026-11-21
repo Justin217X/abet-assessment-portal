@@ -1,1 +1,6 @@
+/**
+ * File: index.css
+ * Purpose: Loads Tailwind and sets the shared page styles.
+ */
+
 @import "tailwindcss";
