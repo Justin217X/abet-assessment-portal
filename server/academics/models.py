@@ -1,75 +1,88 @@
-""" 
-File: models.py
-Purpose: Defines courses, semesters, and course sections.
-"""
+# File: models.py
+# Purpose: Defines courses, semesters, and course sections.
+# Notes:
+# - Keep university course records separate from Canvas course records.
+# - canvas_course links a section to Canvas when that connection is known.
+# - This file defines database records; it does not retrieve external data.
+#
+# !!! TODO: Connect approved course and roster imports through
+# integrations/source_connectors.py and the import code. [SD]
+#
+# !!! After changing model fields or database rules, run makemigrations
+# and review the new migration before applying it. [SD]
 
 import uuid
 
 from django.db import models
 
-# Store course information separately from semester sections. [SD]
+# Store course information separately from semester sections.
 class Course(models.Model):
-    # Generate a unique internal identifier for each course. [SD]
+
+    # Generate a unique internal identifier for each course.
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
 
-    # Prevent two courses from having the same course code. [SD]
+    # Prevent two courses from having the same course code.
     course_code = models.CharField(max_length=32, unique=True)
 
-    # Store the course's full name. [SD]
+    # Store the course's full name.
     title = models.CharField(max_length=255)
 
-    # Store courses by course codes by default. [SD]
+    # Sort courses by course code by default.
     class Meta:
         ordering = ['course_code']
 
-        # Prevent empty course codes and titles. [SD]
+        # Prevent empty course codes and titles.
         constraints = [
             models.CheckConstraint(condition=~models.Q(course_code=''), name='course_code_not_empty'),
             models.CheckConstraint(condition=~models.Q(title=''), name='course_title_not_empty'),
         ]
 
-    # Use a readable label when displaying a course. [SD]
+    # Use a readable label when displaying a course.
     def __str__(self):
         return f'{self.course_code}: {self.title}'
 
-# Store semester codes and calendar dates. [SD]
+# Store semester codes and calendar dates.
 class Semester(models.Model):
-    # Generate a unique internal identifier for each semester. [SD]
+
+    # Generate a unique internal identifier for each semester.
     semester_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
 
-    # Prevent duplicate semester codes, such as FALL-2026. [SD]
+    # Prevent duplicate semester codes, such as FALL-2026.
     semester_code = models.CharField(max_length=32, unique=True)
 
-    # Store the semester's start and end dates. [SD]
+    # Store the semester's start and end dates.
     starts_on = models.DateField()
     ends_on = models.DateField()
 
-    # Display semester by start date, then code. [SD]
+    # Display semester by start date, then code.
     class Meta:
         ordering = ['starts_on', 'semester_code']
 
         constraints = [
-            # Prevent an empty semester code. [SD]
+
+            # Prevent an empty semester code.
             models.CheckConstraint(condition=~models.Q(semester_code=''), name='semester_code_not_empty'),
 
-            # Prevent the semester from ending before it starts. [SD]
+            # Prevent the semester from ending before it starts.
             models.CheckConstraint(
                 condition=models.Q(ends_on__gte=models.F('starts_on')),
                 name='semester_dates_in_order',
             ),
         ]
-    # Display the semester using its code. [SD]
+
+    # Display the semester using its code.
     def __str__(self):
         return self.semester_code
 
-# Connect a course to a semester and section number. [SD]
+# Connect a course to a semester and section number.
 class CourseSection(models.Model):
     section_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     # Keep courses and semesters that are still used by a section.
     course = models.ForeignKey(Course, on_delete=models.PROTECT, related_name='sections')
     semester = models.ForeignKey(Semester, on_delete=models.PROTECT, related_name='sections')
 
-    # Link the section to its Canvas course when available. [SD]
+    # Link the section to its Canvas course when available.
     canvas_course = models.ForeignKey(
         'integrations.CanvasCourse',
         on_delete=models.PROTECT,
@@ -78,14 +91,14 @@ class CourseSection(models.Model):
         blank=True,
     )
 
-    # Text preserves leading zeros, such as 001. [SD]
+    # Text preserves leading zeros, such as 001.
     section_code = models.CharField(max_length=32)
 
-    # Display sections by course, semester date, and section code. [SD]
+    # Display sections by course, semester date, and section code.
     class Meta:
         ordering = ['course__course_code', 'semester__starts_on', 'section_code']
 
-        # Require a section code and prevent duplicates within the same course and semester. [SD]
+        # Require a section code and prevent duplicates within the same course and semester.
         constraints = [
             models.CheckConstraint(condition=~models.Q(section_code=''), name='section_code_not_empty'),
             models.UniqueConstraint(
@@ -93,6 +106,7 @@ class CourseSection(models.Model):
                 name='unique_course_semester_section',
             ),
         ]
-    # Display the course, semester, and section together. [SD]
+
+    # Display the course, semester, and section together.
     def __str__(self):
         return f'{self.course.course_code} / {self.semester.semester_code} / {self.section_code}'
