@@ -144,3 +144,8 @@ ROSTER_DATA_CONNECTOR = os.environ.get('ROSTER_DATA_CONNECTOR', 'mock')
 
 # mock reads the shared JSON; saved_mock reads a saved fictional snapshot.
 PORTAL_DATA_PROVIDER = os.environ.get('PORTAL_DATA_PROVIDER', 'mock')
+
+# !!! Local historical examples only; future live report storage stays separate. [SD]
+PORTAL_SAMPLE_PDF_DIR = Path(os.environ.get('PORTAL_SAMPLE_PDF_DIR', str(BASE_DIR / 'demo_data' / 'pdf_samples')))
+if not PORTAL_SAMPLE_PDF_DIR.is_absolute():
+    PORTAL_SAMPLE_PDF_DIR = BASE_DIR.parent / PORTAL_SAMPLE_PDF_DIR

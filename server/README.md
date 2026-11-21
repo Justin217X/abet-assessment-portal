@@ -248,3 +248,20 @@ Source JSON and imported assignment versions are unchanged.
 Invalid requests return 400; missing seed data or the wrong provider returns 503.
 The endpoint is disabled outside development. The fixed Faculty demo profile
 is not real authorization. Production login and the peer-review UI are separate.
+## Local historical PDF samples
+
+Copy the supplied historical PDFs into server/demo_data/pdf_samples using the
+filenames listed in server/demo_data/portal_demo.json. Originals remain local
+and are excluded from Git. These are supplied historical examples, not AI-created
+reports for the fictional assessments. Do not rename or regenerate their contents.
+
+Run Django in development mode. GET /api/demo/sample-reports/ lists sample IDs,
+file availability, and preview/download links. Missing local files remain listed
+as unavailable. Open /api/demo/sample-reports/<sample ID>/ to preview a PDF;
+add ?download=1 to download it. Unknown IDs and missing files return 404.
+
+To use another folder, set PORTAL_SAMPLE_PDF_DIR locally. Relative paths start
+at the repository root. Only manifest-listed PDF filenames inside that folder
+are served; arbitrary paths are rejected. Same-origin embedding is allowed.
+All routes are disabled outside development. Production authentication and
+Evaluator release checks are separate work. No sample-library UI is included.
