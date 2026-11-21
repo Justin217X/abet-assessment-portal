@@ -107,3 +107,14 @@ npm ci
 npm run dev
 
 Open the URL shown in the terminal, usually http://localhost:5173/
+
+## Preview a saved assignment rubric
+
+1. Run python server/manage.py import_mock_canvas_assignment from the repository folder.
+2. Copy the saved assignment version ID printed by the command.
+3. Start Django and the frontend. Open Faculty demo, My assessments, report preparation, then Rubric Report preview.
+4. Paste the ID into Saved assignment version ID and select Load saved rubric.
+
+The page requests /api/demo/assignment-versions/<version ID>/rubric/. It shows loading, missing rubric, and failed-request messages. A parent page can also pass assignmentVersionId directly to RubricPreviewPage.
+
+This change does not connect PDF generation or live authentication.
