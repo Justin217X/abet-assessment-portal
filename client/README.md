@@ -118,3 +118,11 @@ Open the URL shown in the terminal, usually http://localhost:5173/
 The page requests /api/demo/assignment-versions/<version ID>/rubric/. It shows loading, missing rubric, and failed-request messages. A parent page can also pass assignmentVersionId directly to RubricPreviewPage.
 
 This change does not connect PDF generation or live authentication.
+
+## Download the saved rubric PDF
+
+After loading a saved rubric, select Generate Rubric Report PDF. The download uses the same saved assignment version ID as the on-screen preview.
+
+The button stays disabled until a rubric loads, and a failed download shows an error. The PDF is saved as rubric-report-<version ID>.pdf. The backend download URL is /api/demo/assignment-versions/<version ID>/rubric/pdf/.
+
+This is a development-only download, not the combined Final Instrument Report or an archive operation.
