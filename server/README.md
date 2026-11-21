@@ -247,5 +247,28 @@ the new schedule. Reload /api/demo/portal/ to see it and its activity entry.
 Earlier saves, review feedback, source JSON, and imported assignment versions
 are preserved. Invalid input returns 400. Missing seed data or the wrong provider
 returns 503. Routes are disabled outside development. The owner is the fixed
-Coordinator demo user, not a signed-in account. Work assignment, schedule edits,
-production authorization, and the Coordinator UI are separate changes.
+Coordinator demo user, not a signed-in account. Schedule edits, production
+authorization, and the Coordinator UI are separate changes.
+
+## Save demo work assignments
+
+The same /api/demo/plans/ endpoint now accepts kind assignment. Use the seeded
+saved_mock provider in development mode, as for schedules. Send these JSON fields:
+
+- kind: assignment
+- title, due_on, semester_id
+- course_id, faculty_id, indicator_id, assignment_version_id
+
+Choose IDs from /api/demo/portal/. The course must belong to the selected semester.
+The user must have the Faculty role. The selected saved assignment and PI must
+match an existing assessment mapping for that course, with its rubric criterion
+and student group available. The due date must be inside the semester.
+
+A successful request returns 201 and a new to_start assessment. Its explanation
+and selected evidence start empty. Fictional evidence choices get separate IDs
+and remain unselected. Shared API reloads include the task, its calculated PI
+results, and its evidence choices. Original assessments, imported versions,
+earlier schedules, and peer-review saves remain unchanged.
+
+This does not send notifications, create real Canvas work, or provide production
+permissions. The Assign work UI and changing an existing task are separate.

@@ -1,5 +1,5 @@
 # File: schedule_views.py
-# Purpose: Saves schedules for the fixed demo Coordinator user.
+# Purpose: Saves schedules and assigned work for the demo Coordinator user.
 # !!! Development only. Production sign-in and permissions remain pending. [SD]
 import json
 

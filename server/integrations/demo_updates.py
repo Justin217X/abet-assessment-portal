@@ -1,5 +1,5 @@
 # File: demo_updates.py
-# Purpose: Saves demo schedules and peer-review feedback without changing source files.
+# Purpose: Saves demo schedules, assigned tasks, and peer-review feedback.
 # !!! Fixed demo user only. Real sign-in and production permissions are pending. [SD]
 
 import copy
@@ -94,12 +94,12 @@ def save_demo_plan(payload):
     data = PortalDataFacade().load()
 
     if not data.get('metadata', {}).get('fictional'):
-        raise ImproperlyConfigured('Demo schedule saving requires fictional records.')
-    # Check the schedule title, semester, and due date before saving.
+        raise ImproperlyConfigured('Demo planning requires fictional records.')
+    # Check the plan title, semester, and due date before saving.
     kind = payload.get('kind')
     title = payload.get('title')
-    if kind != 'schedule' or not isinstance(title, str) or not title.strip() or len(title) > 255:
-        raise ValueError('Provide a schedule name of at most 255 characters.')
+    if kind not in ['schedule', 'assignment'] or not isinstance(title, str) or not title.strip() or len(title) > 255:
+        raise ValueError('Provide a schedule or assignment name of at most 255 characters.')
     semester = next((row for row in data['semesters'] if row['id'] == payload.get('semester_id')), None)
     if semester is None:
         raise ValueError('Choose a valid semester.')
@@ -114,19 +114,44 @@ def save_demo_plan(payload):
     records = copy.deepcopy(latest.payload.get('records', {}) if latest else {})
     record_id = f'demo-{kind}-{uuid.uuid4()}'
 
-    program_id = payload.get('program_id')
-    if not any(row['id'] == program_id for row in data['programs']):
-        raise ValueError('Choose a valid program.')
-    row = {'id': record_id, 'semester_id': semester['id'], 'program_id': program_id,
-           'title': title.strip(), 'owner_id': 'coordinator-1', 'due_on': due.isoformat()}
-    key = 'schedules'
+    if kind == 'schedule':
+        program_id = payload.get('program_id')
+        if not any(row['id'] == program_id for row in data['programs']):
+            raise ValueError('Choose a valid program.')
+        row = {'id': record_id, 'semester_id': semester['id'], 'program_id': program_id,
+               'title': title.strip(), 'owner_id': 'coordinator-1', 'due_on': due.isoformat()}
+        key = 'schedules'
+    else:
+        course = next((row for row in data['courses'] if row['id'] == payload.get('course_id') and row['semester_id'] == semester['id']), None)
+        faculty = next((row for row in data['users'] if row['id'] == payload.get('faculty_id') and 'faculty' in row['roles']), None)
+        indicator = next((row for row in data['indicators'] if row['id'] == payload.get('indicator_id')), None)
+        template = next((row for row in data['assessments'] if course and row['course_id'] == course['id']
+                         and row['assignment_version_id'] == payload.get('assignment_version_id')
+                         and indicator and row['indicator_id'] == indicator['id']), None)
+        if course is None or faculty is None or template is None:
+            raise ValueError('Choose a valid course, saved assignment, faculty member, and mapped PI.')
+        version = next((row for row in data['assignment_versions'] if row['id'] == template['assignment_version_id']), None)
+        criterion = next((row for row in (version['payload'].get('rubric') or []) if row['id'] == template['criterion_id']), None) if version else None
+        group = next((row for row in data['student_groups'] if row['id'] == template['student_group_id'] and row['course_id'] == course['id']), None)
+        if criterion is None or group is None or version['assignment_id'] != template['assignment_id']:
+            raise ValueError('The saved assignment needs its mapped rubric criterion and course student group.')
+        row = {**copy.deepcopy(template), 'id': record_id, 'task_title': title.strip(),
+               'faculty_id': faculty['id'], 'status': 'to_start', 'due_on': due.isoformat(),
+               'faculty_explanation': '', 'evidence_ids': [], 'schedule_id': None}
+        # Keep fictional choices separate from the original assessment and unselected.
+        for item in data['evidence']:
+            if item['assessment_id'] == template['id']:
+                new_item = {**copy.deepcopy(item), 'id': f'{record_id}-{item["band"]}-{item["student_id"]}',
+                            'assessment_id': record_id, 'selected': False}
+                records.setdefault('evidence', {})[new_item['id']] = new_item
+        key = 'assessments'
     records.setdefault(key, {})[record_id] = row
 
     # Record the change for the demo activity list.
     event = {'id': f'activity-{uuid.uuid4()}', 'occurred_at': timezone.now().isoformat(),
-             'actor': next(user.get('activity_label', user['name']) for user in data['users'] if user['id'] == 'coordinator-1'), 'title': 'Schedule saved',
+             'actor': next(user.get('activity_label', user['name']) for user in data['users'] if user['id'] == 'coordinator-1'), 'title': 'Schedule saved' if kind == 'schedule' else 'Work assigned',
              'description': f'{title.strip()} · Due {due.isoformat()} · Saved in local Django database',
-             'roles': ['coordinator', 'admin'],
+             'roles': ['coordinator', 'admin'] + (['faculty'] if row.get('faculty_id') == 'faculty-1' else []),
              'kind': kind, 'source': 'saved_demo', 'entity_id': record_id}
     records.setdefault('activity', {})[event['id']] = event
 
