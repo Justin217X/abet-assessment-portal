@@ -1,4 +1,4 @@
-/* Set the page colors. [SD] */
+/* Set the page colors. */
 :root {
   --background: #f7f7f7;
   --surface: #ffffff;
@@ -9,12 +9,12 @@
   --dark: #303030;
 }
 
-/* Keep padding and borders inside each element's size. [SD] */
+/* Keep padding and borders inside each element's size. */
 * {
   box-sizing: border-box;
 }
 
-/* Set the page font, colors, and line spacing. [SD] */
+/* Set the page font, colors, and line spacing. */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -23,18 +23,18 @@ body {
   line-height: 1.5;
 }
 
-/* Use the same font for buttons and inputs. [SD] */
+/* Use the same font for buttons and inputs. */
 button,
 input {
   font: inherit;
 }
 
-/* Show a hand pointer over buttons. [SD] */
+/* Show a hand pointer over buttons. */
 button {
   cursor: pointer;
 }
 
-/* Show an outline when using the keyboard to select controls. [SD] */
+/* Show an outline when using the keyboard to select controls. */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
@@ -42,7 +42,7 @@ input:focus-visible {
   outline-offset: 3px;
 }
 
-/* Place the portal name and account controls in the top bar. [SD] */
+/* Place the portal name and account controls in the top bar. */
 .topbar {
   min-height: 76px;
   padding: 16px 28px;
@@ -54,7 +54,7 @@ input:focus-visible {
   border-bottom: 1px solid var(--border);
 }
 
-/* Line up the branding and account items. [SD] */
+/* Line up the branding and account items. */
 .brand,
 .account {
   display: flex;
@@ -62,13 +62,13 @@ input:focus-visible {
   gap: 16px;
 }
 
-/* Make the portal name larger and bold. [SD] */
+/* Make the portal name larger and bold. */
 .brand {
   font-size: 22px;
   font-weight: bold;
 }
 
-/* Style the temporary AB symbol. [SD] */
+/* Style the temporary AB symbol. */
 .brand-mark {
   padding: 7px 9px;
   border-radius: 5px;
@@ -77,14 +77,14 @@ input:focus-visible {
   font-size: 17px;
 }
 
-/* Place the sidebar beside the main content. [SD] */
+/* Place the sidebar beside the main content. */
 .layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
   min-height: calc(100vh - 122px);
 }
 
-/* Set the sidebar background and spacing. [SD] */
+/* Set the sidebar background and spacing. */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@ input:focus-visible {
   border-right: 1px solid var(--border);
 }
 
-/* Style the heading above the menu. [SD] */
+/* Style the heading above the menu. */
 .nav-label {
   margin: 0 12px 18px;
   color: var(--muted);
@@ -102,13 +102,13 @@ input:focus-visible {
   letter-spacing: 1px;
 }
 
-/* Add space between menu items. [SD] */
+/* Add space between menu items. */
 .sidebar nav {
   display: grid;
   gap: 8px;
 }
 
-/* Style menu links and buttons. [SD] */
+/* Style menu links and buttons. */
 .nav-item {
   display: block;
   width: 100%;
@@ -122,19 +122,19 @@ input:focus-visible {
   font-size: 15px;
 }
 
-/* Change the menu item's color when hovered over. [SD] */
+/* Change the menu item's color when hovered over. */
 .nav-item:hover {
   background: #e5e5e5;
 }
 
-/* Highlight the current menu item. [SD] */
+/* Highlight the current menu item. */
 .nav-item.active {
   background: #dedede;
   box-shadow: inset 4px 0 var(--dark);
   font-weight: bold;
 }
 
-/* Place account information at the bottom of the sidebar. [SD] */
+/* Place account information at the bottom of the sidebar. */
 .sidebar-footer {
   margin-top: auto;
   padding: 28px 12px 0;
@@ -142,38 +142,38 @@ input:focus-visible {
   font-size: 13px;
 }
 
-/* Add space around the main content. [SD] */
+/* Add space around the main content. */
 main {
   min-width: 0;
   padding: 28px 32px;
 }
 
-/* Style the main heading. [SD] */
+/* Style the main heading. */
 h1 {
   margin: 0 0 6px;
   font-size: 30px;
   line-height: 1.2;
 }
 
-/* Style section headings. [SD] */
+/* Style section headings. */
 h2 {
   margin: 0;
   font-size: 21px;
 }
 
-/* Style smaller headings. [SD] */
+/* Style smaller headings. */
 h3 {
   margin: 0 0 12px;
   font-size: 16px;
 }
 
-/* Style the text below the main heading. [SD] */
+/* Style the text below the main heading. */
 .subtitle {
   margin: 0;
   color: var(--muted);
 }
 
-/* Place the search field and button in a row. [SD] */
+/* Place the search field and button in a row. */
 .search-form {
   display: flex;
   align-items: center;
@@ -181,7 +181,7 @@ h3 {
   margin: 26px 0;
 }
 
-/* Set the search field's size and appearance. [SD] */
+/* Set the search field's size and appearance. */
 .search-form input {
   width: min(100%, 620px);
   padding: 11px 14px;
@@ -191,7 +191,7 @@ h3 {
   color: var(--text);
 }
 
-/* Place the user list beside the user details. [SD] */
+/* Place the user list beside the user details. */
 .user-layout {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -200,7 +200,7 @@ h3 {
   margin-bottom: 28px;
 }
 
-/* Add a background and border to content boxes. [SD] */
+/* Add a background and border to content boxes. */
 .panel {
   min-width: 0;
   overflow: hidden;
@@ -209,7 +209,7 @@ h3 {
   background: var(--surface);
 }
 
-/* Line up each box's heading and controls. [SD] */
+/* Line up each box's heading and controls. */
 .panel-heading {
   display: flex;
   justify-content: space-between;
@@ -218,19 +218,19 @@ h3 {
   padding: 20px 22px;
 }
 
-/* Style the text below the box heading. [SD] */
+/* Style the text below the box heading. */
 .panel-heading p {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 13px;
 }
 
-/* Add space inside content boxes. [SD] */
+/* Add space inside content boxes. */
 .panel-body {
   padding: 0 22px 22px;
 }
 
-/* Style labels above user details. [SD] */
+/* Style labels above user details. */
 .field-label {
   margin: 0 0 8px;
   color: var(--muted);
@@ -238,7 +238,7 @@ h3 {
   font-weight: bold;
 }
 
-/* Show the user's role in a badge. [SD] */
+/* Show the user's role in a badge. */
 .role-badge {
   display: inline-block;
   padding: 7px 12px;
@@ -249,7 +249,7 @@ h3 {
   font-weight: bold;
 }
 
-/* Space out role buttons and let them wrap. [SD] */
+/* Space out role buttons and let them wrap. */
 .role-actions {
   display: flex;
   flex-wrap: wrap;
@@ -257,47 +257,47 @@ h3 {
   margin: 20px 0 24px;
 }
 
-/* Style the permission list. [SD] */
+/* Style the permission list. */
 .permission-list {
   margin: 0 0 20px;
   padding-left: 20px;
   font-size: 14px;
 }
 
-/* Add space between permissions. [SD] */
+/* Add space between permissions. */
 .permission-list li {
   margin-bottom: 8px;
 }
 
-/* Style the note below the permissions. [SD] */
+/* Style the note below the permissions. */
 .permission-note {
   margin: 0 0 20px;
   color: var(--muted);
   font-size: 13px;
 }
 
-/* Let wide tables scroll sideways. [SD] */
+/* Let wide tables scroll sideways. */
 .table-container {
   overflow-x: auto;
 }
 
-/* Make tables fill the available width. [SD] */
+/* Make tables fill the available width. */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Set the user table's minimum width. [SD] */
+/* Set the user table's minimum width. */
 .users-table {
   min-width: 490px;
 }
 
-/* Set the access table's minimum width. [SD] */
+/* Set the access table's minimum width. */
 .access-table {
   min-width: 700px;
 }
 
-/* Set spacing and alignment inside table cells. [SD] */
+/* Set spacing and alignment inside table cells. */
 th,
 td {
   padding: 17px 18px;
@@ -305,7 +305,7 @@ td {
   vertical-align: middle;
 }
 
-/* Style table headings. [SD] */
+/* Style table headings. */
 th {
   background: #efefef;
   color: var(--muted);
@@ -314,29 +314,29 @@ th {
   letter-spacing: 0.4px;
 }
 
-/* Set the table text size. [SD] */
+/* Set the table text size. */
 td {
   font-size: 13px;
 }
 
-/* Add lines between table rows. [SD] */
+/* Add lines between table rows. */
 tbody tr + tr {
   border-top: 1px solid var(--border);
 }
 
-/* Highlight the selected row. [SD] */
+/* Highlight the selected row. */
 tr.selected {
   background: #ededed;
 }
 
-/* Show the record name in bold. [SD] */
+/* Show the record name in bold. */
 .record-name {
   display: block;
   font-size: 15px;
   font-weight: bold;
 }
 
-/* Show extra details below the record name. [SD] */
+/* Show extra details below the record name. */
 .record-detail {
   display: block;
   margin-top: 4px;
@@ -344,7 +344,7 @@ tr.selected {
   font-size: 12px;
 }
 
-/* Set the default button appearance. [SD] */
+/* Set the default button appearance. */
 .button {
   display: inline-block;
   padding: 9px 14px;
@@ -357,24 +357,24 @@ tr.selected {
   white-space: nowrap;
 }
 
-/* Change the button color when hovered over. [SD] */
+/* Change the button color when hovered over. */
 .button:hover {
   background: #ededed;
 }
 
-/* Make the main action button dark. [SD] */
+/* Make the main action button dark. */
 .button.primary {
   border-color: var(--dark);
   background: var(--dark);
   color: white;
 }
 
-/* Change the main button color when hovered over. [SD] */
+/* Change the main button color when hovered over. */
 .button.primary:hover {
   background: #484848;
 }
 
-/* Style the message shown when there are no results. [SD] */
+/* Style the message shown when there are no results. */
 .empty-message {
   padding: 24px;
   color: var(--muted);
@@ -382,12 +382,12 @@ tr.selected {
   font-size: 14px;
 }
 
-/* Hide elements marked as hidden. [SD] */
+/* Hide elements marked as hidden. */
 [hidden] {
   display: none !important;
 }
 
-/* Style the page footer. [SD] */
+/* Style the page footer. */
 footer {
   margin-top: 0;
   padding: 12px 28px;
@@ -397,7 +397,7 @@ footer {
   font-size: 12px;
 }
 
-/* Style the popup explaining a planned feature. [SD] */
+/* Style the popup explaining a planned feature. */
 dialog {
   width: min(480px, calc(100% - 32px));
   padding: 26px;
@@ -405,24 +405,24 @@ dialog {
   border-radius: 6px;
 }
 
-/* Darken the page behind the popup. [SD] */
+/* Darken the page behind the popup. */
 dialog::backdrop {
   background: rgb(0 0 0 / 35%);
 }
 
-/* Add space around the popup text. [SD] */
+/* Add space around the popup text. */
 dialog p {
   margin: 16px 0 24px;
 }
 
-/* Stack the user list and details on narrower screens. [SD] */
+/* Stack the user list and details on narrower screens. */
 @media (max-width: 1200px) {
   .user-layout {
     grid-template-columns: 1fr;
   }
 }
 
-/* Reduce sidebar width and spacing on smaller screens. [SD] */
+/* Reduce sidebar width and spacing on smaller screens. */
 @media (max-width: 1050px) {
   .layout {
     grid-template-columns: 190px minmax(0, 1fr);
@@ -432,15 +432,15 @@ dialog p {
     padding: 24px;
   }
 
-  /* Let box headings and controls wrap onto another line. [SD] */
+  /* Let box headings and controls wrap onto another line. */
   .panel-heading {
     flex-wrap: wrap;
   }
 }
 
-/* Adjust the layout for phone-sized screens. [SD] */
+/* Adjust the layout for phone-sized screens. */
 @media (max-width: 650px) {
-  /* Let top-bar items wrap and reduce spacing. [SD] */
+  /* Let top-bar items wrap and reduce spacing. */
   .topbar {
     padding: 14px 18px;
     flex-wrap: wrap;
@@ -450,7 +450,7 @@ dialog p {
     font-size: 18px;
   }
 
-  /* Place the sidebar above the main content. [SD] */
+  /* Place the sidebar above the main content. */
   .layout {
     display: block;
   }
@@ -461,12 +461,12 @@ dialog p {
     border-bottom: 1px solid var(--border);
   }
 
-  /* Arrange menu items in two columns. [SD] */
+  /* Arrange menu items in two columns. */
   .sidebar nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* Hide extra sidebar text to save space. [SD] */
+  /* Hide extra sidebar text to save space. */
   .nav-label,
   .sidebar-footer {
     display: none;
@@ -480,7 +480,7 @@ dialog p {
     font-size: 26px;
   }
 
-  /* Let search controls wrap onto another line. [SD] */
+  /* Let search controls wrap onto another line. */
   .search-form {
     flex-wrap: wrap;
   }
