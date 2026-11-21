@@ -78,23 +78,19 @@ export function CoordinatorDashboard({
                 >
                 Faculty workspace
             </Button>
-            
-            <Button variant="secondary" className="text-left" onClick={onBackToSignIn}>
-                Sign out
-            </Button>
         </>
     )
     
     if (Component) {
         return (
-            <DashboardLayout role="Coordinator" title={title} navigation={navigation}>
+            <DashboardLayout onSignOut={onBackToSignIn} role="Coordinator" title={title} navigation={navigation}>
                 <Component />
             </DashboardLayout>
         )
     }
     
     return (
-        <DashboardLayout role="Coordinator" title={title} navigation={navigation}>
+        <DashboardLayout onSignOut={onBackToSignIn} role="Coordinator" title={title} navigation={navigation}>
             {/* TODO: Replace the preview banner when the dashboard uses live data. [SD] */}
             <p className="mb-4 text-sm text-slate-600">UI preview · No records loaded</p>
             

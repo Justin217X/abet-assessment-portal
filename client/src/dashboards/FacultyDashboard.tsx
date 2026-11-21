@@ -53,18 +53,11 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
         ))}
 
         {/* Return to sign-in when leaving the Faculty demo. [SD] */}
-        <Button
-            variant="secondary"
-            className="mt-4 text-left"
-            onClick={onBackToSignIn}
-            >
-            Sign out
-        </Button>
         </>
     )
 
   return (
-    <DashboardLayout role="Faculty" title={title} navigation={navigation}>
+    <DashboardLayout onSignOut={onBackToSignIn} role="Faculty" title={title} navigation={navigation}>
         {/* TODO: Remove the preview banner when the dashboard uses live data. [SD] */}
         <p className="mb-4 text-sm text-slate-600">UI preview · No records loaded</p>
         

@@ -1,0 +1,53 @@
+/*
+ * File: CampusBanner.css
+ * Purpose: Styles the shared campus banner, including image placement,
+ * a dark overlay for readable text, and responsive text sizing.
+ *
+ * Uses Tailwind utilities through @apply
+ * The banner image and crop position are configured in "branding.ts".
+ */
+
+ /* @reference makes the shared Tailwind theme available to @apply*/
+@reference "../index.css";
+
+/* Banner container */
+.campus-banner {
+    @apply relative;
+    @apply [min-height:230px];
+    @apply [background:#172b45];
+    @apply overflow-hidden;
+}
+.campus-banner > img {
+    @apply absolute w-full;
+    @apply h-full;
+    @apply object-cover;
+}
+.campus-banner::after {
+    content: "";
+    @apply absolute inset-0;
+    @apply [background:linear-gradient(90deg,_#071a32ed_0%,_#071a32b8_38%,_#071a3220_80%)];
+}
+
+/* clamp() adjusts text size and spacing within min and max values*/
+.campus-banner-content {
+    @apply relative;
+    @apply [z-index:1];
+    @apply [padding:38px_clamp(20px,_3vw,_48px)];
+    @apply text-white;
+    @apply [max-width:700px];
+}
+.campus-banner-content h1 {
+    @apply [font-size:clamp(26px,_3vw,_38px)];
+    @apply font-bold;
+    @apply [letter-spacing:-.025em];
+    @apply [margin:5px_0_8px];
+    @apply [line-height:1.2];
+}
+.campus-banner-content > p:first-child {
+    @apply text-[13px] font-bold;
+    @apply [letter-spacing:.05em];
+}
+.campus-banner-content > p:last-child {
+    @apply [font-size:16px];
+    @apply [max-width:440px];
+}

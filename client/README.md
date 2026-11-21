@@ -107,3 +107,16 @@ npm ci
 npm run dev
 
 Open the URL shown in the terminal, usually http://localhost:5173/
+
+## Shared portal branding and layout
+
+The four role demos now share the top header, campus photo banner, navigation area, content card, help panel, and footer. Sign out stays in the top header and returns to the demo sign-in screen; real session sign-out is still pending.
+
+- Change university and portal names, banner image/crop, and pattern image in src/config/branding.ts.
+- Change shared layout spacing and Tailwind-based styles in src/styles/DashboardStyles.css.
+- CampusBanner and PortalIcon are reusable components.
+- Edit original image/icon assets in public/images and public/icons. Do not edit generated dist copies.
+
+This change updates the shared shell only. It does not add the newer dashboard records, roster, reporting workflow, authentication, or live university connections.
+
+Faculty-specific styles and other feature icons will be added with their dashboard changes. The shared CSS retains faculty-prefixed names so later pages can reuse it.
