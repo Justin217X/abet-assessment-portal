@@ -120,3 +120,13 @@ The four role demos now share the top header, campus photo banner, navigation ar
 This change updates the shared shell only. It does not add the newer dashboard records, roster, reporting workflow, authentication, or live university connections.
 
 Faculty-specific styles and other feature icons will be added with their dashboard changes. The shared CSS retains faculty-prefixed names so later pages can reuse it.
+
+## Faculty overview with shared mock records
+
+Start Django and Vite, then open the Faculty demo. The overview reads /api/demo/portal/ and displays the selected semester's courses, assessment progress, tasks, deadlines, recent report records, assigned peer reviews, and activity.
+
+Course, task, and recent-report search fields filter their lists. Long lists scroll inside panels. Switch semesters to update the overview.
+
+The sample faculty profile is still fixed demo wiring, not real authentication. Report PDF downloads and the newer roster/report workflow are marked pending. The older detailed assessment, review, and archive previews remain until their separate changes are added.
+
+This PR contains the overview and its shared display helpers only. No new API routes, saves, report generators, or detailed workflow pages are included.

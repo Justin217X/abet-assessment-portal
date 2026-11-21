@@ -1,0 +1,320 @@
+/**
+ * File: FacultyDashboard.css
+ * Purpose: Styles Faculty courses, tasks, deadlines, and report lists.
+ *
+ * Notes:
+ * - Change Faculty spacing and scrolling in this file.
+ * - Change shared dashboard styles in DashboardStyles.css.
+ * - Change shared colors and fonts in index.css.
+ * - Change university names and images in branding.ts.
+ *
+ * !!! Later rules override some earlier sizes and layouts.
+ * Check the lower sections before changing a value near the top. [SD]
+ */
+
+@reference "../index.css";
+
+/* Faculty dashboard columns and cards. */
+.faculty-columns {
+    @apply grid;
+    @apply [grid-template-columns:minmax(190px,_.85fr)_minmax(0,_2.35fr)_minmax(220px,_1fr)];
+    @apply gap-5 items-start;
+}
+.faculty-column {
+    @apply grid gap-5 min-w-0;
+}
+.faculty-welcome {
+    @apply [padding:20px_16px];
+    @apply flex items-center gap-3;
+    @apply [background:var(--faculty-tint)];
+}
+.faculty-welcome p {
+    @apply text-xs;
+    @apply [margin-top:5px];
+}
+.faculty-avatar {
+    @apply grid place-items-center shrink-0;
+    @apply [width:42px];
+    @apply [height:42px];
+    @apply rounded-full;
+    @apply [background:var(--faculty-surface)];
+    @apply text-xl font-bold;
+}
+
+/* Course cards. Later rules keep them in one scrolling row. */
+.faculty-course-grid {
+    @apply grid;
+    @apply [grid-template-columns:repeat(4,_minmax(0,_1fr))];
+    @apply p-[18px] gap-2.5;
+}
+.faculty-course {
+    @apply [border:1px_solid_var(--faculty-border)];
+    @apply rounded-[7px] overflow-hidden;
+    @apply [background:var(--faculty-background)];
+}
+.faculty-course-code {
+    @apply [padding:9px_10px];
+    @apply [background:var(--faculty-primary)];
+    @apply text-white text-xs font-bold;
+}
+.faculty-course > div {
+    @apply [padding:12px_10px];
+}
+.faculty-course h3 {
+    @apply [line-height:1.35];
+    @apply [min-height:40px];
+}
+.faculty-course > div > p {
+    @apply [margin-top:10px];
+    @apply text-xs;
+    @apply [color:#52637a];
+}
+
+/* Assessment tasks, due dates, and action buttons. */
+.faculty-task-list {
+    @apply [padding:0_18px];
+}
+.faculty-task {
+    @apply [padding:20px_0];
+    @apply [border-bottom:1px_solid_var(--faculty-border)];
+    @apply grid gap-3.5;
+}
+.faculty-task:last-child {
+    @apply border-b-0;
+}
+.faculty-task-heading {
+    @apply flex flex-wrap gap-2 items-center;
+}
+.faculty-task > div > p:last-child {
+    @apply text-[13px];
+    @apply [margin-top:6px];
+}
+.faculty-status {
+    @apply inline-block;
+    @apply [padding:2px_8px];
+    @apply rounded-[5px] text-[11px] font-bold;
+}
+.faculty-status-ready {
+    @apply [background:#e9f4e9];
+    @apply [color:#245b2a];
+}
+.faculty-status-attention {
+    @apply [background:#fff2d8];
+    @apply [color:#775010];
+}
+.faculty-task-action {
+    @apply flex flex-wrap items-center justify-between gap-2.5;
+}
+.faculty-task-action p {
+    @apply [color:#52637a];
+    @apply text-xs;
+}
+.faculty-task-action time {
+    @apply [color:var(--faculty-text)];
+    @apply font-bold;
+}
+.faculty-action {
+    @apply [padding:9px_14px];
+    @apply [background:var(--faculty-action)];
+    @apply text-white rounded-md text-xs font-bold;
+}
+.faculty-action:hover {
+    @apply [filter:brightness(.9)];
+}
+
+/* Upcoming deadline list. */
+.faculty-deadlines {
+    @apply [padding:0_16px];
+    @apply list-none;
+}
+.faculty-deadlines li {
+    @apply flex gap-3 items-start;
+    @apply [padding:17px_0];
+    @apply [border-bottom:1px_solid_var(--faculty-border)];
+    @apply text-[13px];
+}
+.faculty-deadlines li:last-child {
+    @apply border-0;
+}
+.faculty-deadlines time {
+    @apply shrink-0;
+    @apply [padding:3px_7px];
+    @apply rounded;
+    @apply [background:var(--faculty-tint)];
+    @apply text-xs font-bold;
+}
+.faculty-deadlines small {
+    @apply block;
+    @apply [margin-top:3px];
+    @apply [color:#52637a];
+    @apply text-[11px];
+}
+
+/* Numbered reporting instructions. */
+.faculty-steps {
+    @apply [padding:16px_18px_16px_36px];
+    @apply list-decimal text-[13px];
+}
+.faculty-steps li {
+    @apply [padding:7px_0_7px_4px];
+}
+.faculty-steps li::marker {
+    @apply font-bold;
+    @apply [color:var(--faculty-action)];
+}
+@media (max-width: 1200px) {
+    .faculty-columns {
+        @apply [grid-template-columns:minmax(180px,_.8fr)_minmax(0,_2fr)];
+    }
+    .faculty-columns > aside:last-child {
+        @apply col-span-full;
+        @apply [grid-template-columns:repeat(3,_minmax(0,_1fr))];
+    }
+    .faculty-course-grid {
+        @apply [grid-template-columns:repeat(2,_minmax(0,_1fr))];
+    }
+}
+@media (max-width: 700px) {
+    .faculty-columns {
+        @apply [grid-template-columns:minmax(0,_1fr)];
+    }
+    .faculty-main-column {
+        @apply row-start-1;
+    }
+    .faculty-columns > aside:last-child {
+        @apply [grid-template-columns:minmax(0,_1fr)];
+    }
+}
+.faculty-task h3 {
+    @apply inline-flex items-center gap-2;
+}
+.faculty-status .portal-icon {
+    @apply [width:13px];
+    @apply [height:13px];
+}
+.faculty-course-code,
+.faculty-course > div > p,
+.faculty-action {
+    @apply flex items-center gap-2;
+}
+.faculty-course > div > p {
+    @apply items-start;
+}
+.faculty-course .portal-icon {
+    @apply [margin-top:2px];
+}
+.faculty-course {
+    @apply [min-height:156px];
+}
+.faculty-course-code {
+    @apply [padding-top:12px];
+    @apply [padding-bottom:12px];
+}
+.faculty-course > div {
+    @apply [padding-top:16px];
+    @apply [padding-bottom:16px];
+}
+.faculty-empty-icon {
+    @apply grid place-items-center;
+    @apply [width:38px];
+    @apply [height:38px];
+    @apply rounded-lg;
+    @apply [background:var(--faculty-tint)];
+    @apply [color:var(--faculty-primary)];
+    @apply text-xl;
+}
+.faculty-task-action .faculty-action {
+    @apply whitespace-nowrap;
+}
+@media (min-width: 1350px) {
+    .faculty-task {
+        @apply [grid-template-columns:minmax(0,_1fr)_auto];
+        @apply items-center;
+        @apply gap-5;
+    }
+    .faculty-task-action {
+        @apply grid;
+        @apply justify-items-end;
+        @apply gap-2.5;
+    }
+}
+
+/* Profile initials and recent report list. Keep these styles with real data. */
+.faculty-header-avatar {
+    @apply grid place-items-center;
+    @apply [width:34px];
+    @apply [height:34px];
+    @apply rounded-full;
+    @apply [background:var(--faculty-surface)];
+    @apply [color:var(--faculty-primary)];
+    @apply font-bold;
+}
+.faculty-recent-reports {
+    @apply [padding:0_18px];
+}
+.faculty-recent-report {
+    @apply flex flex-wrap items-center gap-3;
+    @apply [padding:16px_0];
+    @apply [border-bottom:1px_solid_var(--faculty-border)];
+}
+.faculty-recent-report > div {
+    @apply flex-1;
+    @apply [min-width:140px];
+}
+.faculty-sample-download {
+    @apply inline-flex items-center gap-1.5 text-xs;
+    @apply [color:#52637a];
+}
+.faculty-portal .faculty-sample-download:disabled {
+    @apply cursor-not-allowed;
+}
+.faculty-download-note {
+    @apply [padding:12px_0];
+    @apply text-[11px];
+}
+.faculty-columns,
+.faculty-column { @apply gap-3; }
+.faculty-course-grid { @apply gap-2 p-3; }
+.faculty-course { @apply min-h-[130px]; }
+.faculty-course-code { @apply py-2; }
+.faculty-course > div { @apply py-3; }
+.faculty-task { @apply gap-2 py-3; }
+.faculty-recent-report { @apply py-3; }
+.faculty-welcome { @apply px-4 py-3; }
+.faculty-deadlines li { @apply py-3; }
+.faculty-responsive .faculty-columns { @apply grid-cols-[minmax(0,1fr)]; }
+.faculty-responsive .faculty-main-column { @apply row-start-1; }
+.faculty-responsive .faculty-columns > aside:last-child {
+    @apply col-span-1 grid-cols-[minmax(0,1fr)];
+}
+.faculty-responsive .faculty-course-grid { @apply grid-cols-1; }
+.faculty-responsive .faculty-task { @apply grid-cols-1; }
+.faculty-responsive .faculty-task-action { @apply flex flex-wrap items-center justify-between; }
+@container (min-width: 30rem) {
+    .faculty-responsive .faculty-course-grid { @apply grid-cols-2; }
+}
+@container (min-width: 55rem) {
+    .faculty-responsive .faculty-columns { @apply grid-cols-[minmax(12rem,.8fr)_minmax(0,2fr)]; }
+    .faculty-responsive .faculty-main-column { @apply row-auto; }
+    .faculty-responsive .faculty-columns > aside:last-child { @apply col-span-full grid-cols-3; }
+}
+@container (min-width: 78rem) {
+    .faculty-responsive .faculty-columns { @apply grid-cols-[minmax(14rem,.85fr)_minmax(0,2.35fr)_minmax(16rem,1fr)]; }
+    .faculty-responsive .faculty-columns > aside:last-child { @apply col-span-1 grid-cols-1; }
+    .faculty-responsive .faculty-course-grid { @apply grid-cols-4; }
+}
+@container (min-width: 90rem) {
+    .faculty-responsive .faculty-task { @apply grid-cols-[minmax(0,1fr)_auto] items-center; }
+    .faculty-responsive .faculty-task-action { @apply grid justify-items-end; }
+}
+
+/* Scroll inside long lists while keeping search above the list. */
+.faculty-record-scroll {
+    @apply max-h-[clamp(8rem,24dvh,18rem)] overflow-y-auto [scrollbar-gutter:stable] [overscroll-behavior-y:contain];
+}
+.faculty-responsive .faculty-course-grid {
+    @apply flex flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-gutter:stable] [overscroll-behavior-x:contain] snap-x snap-proximity;
+}
+.faculty-responsive .faculty-course-grid > .faculty-course {
+    @apply min-w-[12rem] flex-1 basis-[12rem] shrink-0 snap-start;
+}
