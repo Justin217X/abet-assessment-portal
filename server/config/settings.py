@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Generates assessment reports and handles PDF exports. [JH]
+    'reports.apps.ReportsConfig',
     
 ]
 

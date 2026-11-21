@@ -109,8 +109,13 @@ export function RubricPreviewPage() {
                 </>
             )}
 
-            {/* TODO: Enable PDF generation after the PDF generator is connected. [SD] */}
-            <Button disabled className="cursor-not-allowed opacity-60">
+            {/* Download the Rubric Report from Django. [JH] */}
+            <Button
+                disabled={!preview || !!error}
+                onClick={() => {
+                    window.location.assign("/api/demo/rubric-report/")
+                }}
+            >
                 Generate Rubric Report PDF
             </Button>
         </div>
