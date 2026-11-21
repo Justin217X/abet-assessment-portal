@@ -68,6 +68,7 @@ export type PortalData = {
             rubric: {
                 id: string
                 description: string
+                long_description?: string
                 points: number
                 ratings: { id: string; description: string; points: number }[]
             }[]

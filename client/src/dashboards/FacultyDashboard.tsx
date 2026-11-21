@@ -28,6 +28,7 @@ import { RecentActivity } from "../components/RecentActivity"
 import { DashboardSearch } from "../components/DashboardSearch"
 import { PortalIcon } from "../components/PortalIcon"
 import { CampusBanner } from "../components/CampusBanner"
+import { FacultyReportReviewPage } from "../pages/previews/faculty/FacultyReportReviewPage"
 import { FacultyRosterPage } from "../pages/previews/faculty/FacultyRosterPage"
 import { MyAssessmentsPage } from "../pages/previews/faculty/MyAssessmentsPage"
 import { FacultyPeerReviewsPage } from "../pages/previews/faculty/FacultyPeerReviewsPage"
@@ -56,6 +57,9 @@ type FacultyPage = (typeof facultyMenu)[number]["id"]
 export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
 
     // Remember the open page, loaded records, semester, and selected assessment.
+    const [selectedAssessmentId, setSelectedAssessmentId] = useState("")
+    const [selectedRosterCourseId, setSelectedRosterCourseId] = useState("")
+    const openReport = (id: string) => { setSelectedAssessmentId(id); setActivePage("report") }
     const [activePage, setActivePage] = useState<FacultyPage>("dashboard")
     const [data, setData] = useState<PortalData | null>(null)
     const [loadError, setLoadError] = useState("")
@@ -152,11 +156,10 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                                     activePage === id ? "page" : undefined
                                 }
                                 onClick={() => setActivePage(id)}
-                                disabled={id === "report"}
                                 className="disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 <PortalIcon name={icon} />
-                                {label}{id === "report" ? " (pending)" : ""}
+                                {label}
                             </button>
                         ))}
                     </nav>
@@ -309,12 +312,11 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                                                 <button
                                                     type="button"
                                                     className="faculty-action"
-                                                    disabled
-                                                    title="Report review will be connected in a separate change"
+                                                    onClick={() => openReport(task.id)}
                                                 >
                                                     {task.ready
-                                                        ? "Review assessment (pending)"
-                                                        : "Continue assessment (pending)"}
+                                                        ? "Review assessment"
+                                                        : "Continue assessment"}
                                                 </button>
                                             </div>
                                         </article>
@@ -451,8 +453,11 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                 {activePage !== "dashboard" && (
                     <section className="faculty-detail-page">
                         <h2 className="faculty-page-title">{pageTitle}</h2>
-                        {activePage === "assessments" && <MyAssessmentsPage />}
-                        {activePage === "roster" && <FacultyRosterPage />}
+                        {activePage === "assessments" && <MyAssessmentsPage onReviewAssessment={openReport} />}
+                        {activePage === "report" && data && <FacultyReportReviewPage data={data} assessmentId={selectedAssessmentId}
+                            onChooseAssessment={() => setActivePage("assessments")}
+                            onReviewRoster={(id) => { setSelectedRosterCourseId(id); setActivePage("roster") }} />}
+                        {activePage === "roster" && <FacultyRosterPage key={selectedRosterCourseId} initialCourseId={selectedRosterCourseId} />}
                         {activePage === "reviews" && <FacultyPeerReviewsPage />}
                         {activePage === "archive" && <FacultyArchivePage />}
                     </section>

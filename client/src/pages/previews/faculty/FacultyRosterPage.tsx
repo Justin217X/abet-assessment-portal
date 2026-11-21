@@ -10,12 +10,12 @@ import type { PortalData } from "../../../api/portalData"
 import { CourseFilters } from "../../../components/CourseFilters"
 import { PendingAction } from "../../../components/PendingAction"
 
-export function FacultyRosterPage() {
+export function FacultyRosterPage({ initialCourseId = "" }: { initialCourseId?: string } = {}) {
     const [data, setData] = useState<PortalData | null>(null)
     const [error, setError] = useState("")
     const [campus, setCampus] = useState("")
     const [subject, setSubject] = useState("")
-    const [courseId, setCourseId] = useState("")
+    const [courseId, setCourseId] = useState(initialCourseId)
     const [search, setSearch] = useState("")
 
     useEffect(() => {

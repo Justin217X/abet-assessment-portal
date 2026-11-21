@@ -150,3 +150,11 @@ The selected roster shows campus, course, semester, student label, program, sect
 Changing filters clears the selected class so a roster from another campus cannot remain displayed. Course-campus assignments are fictional; filters use the shared demo records and do not grant permissions.
 
 Uploads, source refresh, and saving confirmation are visibly disabled and marked pending. No roster editing, live LionPath connection, or server saving is added.
+
+## Faculty report review
+
+Open My assessments and select Review report, or use a task action on the overview. The Final Instrument Report tab shows the selected assessment; if nothing is selected, it asks you to choose an assigned assessment.
+
+Four read-only sections show PI results, rubric/student group, faculty explanation, and evidence summaries. The heading identifies the course, semester, saved source revision, and status. Review roster opens the matching course.
+
+Readiness checks describe available inputs only. Editing, evidence/file selection, live refresh, combined PDF actions, submission, and archiving stay disabled and marked pending. No report data is saved by this page.
