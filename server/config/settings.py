@@ -137,3 +137,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Mock source selection. Live connections are not implemented yet.
+CANVAS_DATA_CONNECTOR = os.environ.get('CANVAS_DATA_CONNECTOR', 'mock')
+ROSTER_DATA_CONNECTOR = os.environ.get('ROSTER_DATA_CONNECTOR', 'mock')
