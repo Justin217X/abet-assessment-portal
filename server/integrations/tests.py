@@ -84,9 +84,9 @@ class CanvasCourseTests(TestCase):
 # Check that the fictional Canvas response is ready for import test. [SD]
 class CanvasAssignmentFixturesTests(TestCase):
     def test_fixture_contains_a_grading_rubtic(self):
-        # Find the JSON file next to this test module. [SD]
+        # Find the JSON file in the shared demo data folder. [SD]
         fixture_path = ( 
-            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json' 
+            Path(__file__).resolve().parent.parent / 'demo_data' / 'canvas_assignment_with_rubric.json'
         )
 
         with fixture_path.open(encoding='utf-8') as fixture:
@@ -102,7 +102,7 @@ class CanvasAssignmentFixturesTests(TestCase):
 class AssignmentVersionTest(TestCase):
     def test_saves_first_version_from_canvas_fixture(self):
         fixture_path = (
-            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json'            
+            Path(__file__).resolve().parent.parent / 'demo_data' / 'canvas_assignment_with_rubric.json'
         )
         with fixture_path.open(encoding='utf-8') as fixture:
             payload = json.load(fixture)
@@ -164,7 +164,7 @@ class AssignmentVersionTest(TestCase):
 
     def test_reimport_preserves_assignment_history(self):
         fixture_path = (
-            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json'
+            Path(__file__).resolve().parent.parent / 'demo_data' / 'canvas_assignment_with_rubric.json'
         )
         with fixture_path.open(encoding='utf-8') as fixture:
             payload = json.load(fixture)
@@ -215,7 +215,7 @@ class AssignmentVersionTest(TestCase):
 class RubricPreviewTests(SimpleTestCase):
     def test_preview_includes_ratings_from_saved_canvas_response(self):
         fixture_path = (
-            Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json'
+            Path(__file__).resolve().parent.parent / 'demo_data' / 'canvas_assignment_with_rubric.json'
         )
         with fixture_path.open(encoding='utf-8') as fixture:
             payload = json.load(fixture)

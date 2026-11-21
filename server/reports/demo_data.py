@@ -17,8 +17,7 @@ from reports.pi_calculations import calculate_pi_statistics
 # Path to the fictional assessment data. [JH]
 TEST_DATA_DIR = (
     Path(__file__).resolve().parent.parent
-    / 'integrations'
-    / 'test_data'
+    / 'demo_data'
 )
 
 
