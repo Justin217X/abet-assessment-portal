@@ -5,6 +5,7 @@
  */
 import { useEffect, useId, useRef, useState } from "react"
 import type { PortalData } from "../api/portalData"
+import { EvidencePdfPreviewButton } from "./EvidencePdfPreviewButton"
 import { PendingAction } from "./PendingAction"
 
 type Props = {
@@ -41,7 +42,7 @@ export function MockEvidencePicker({ data, assessmentId, selectedIds, editing, o
 
     return <>
         <div className="max-h-[32dvh] space-y-3 overflow-y-auto p-4">
-            <p className="text-xs text-slate-600">AI-generated fictional examples. Actual graded-file uploads and PDF previews are pending.</p>
+            <p className="text-xs text-slate-600">AI-generated fictional examples. PDF previews show fictional work. Actual graded-file uploads remain pending.</p>
             {(["high", "middle", "low"] as const).map((category) => {
                 const current = selected.find((row) => row.band === category)
                 return <section key={category} aria-label={category + " evidence selection"} className="space-y-2 border-b border-slate-200 pb-3">
@@ -58,7 +59,7 @@ export function MockEvidencePicker({ data, assessmentId, selectedIds, editing, o
                         {!current.eligible && <p className="text-xs text-amber-900">This selection is no longer eligible. Choose a replacement.</p>}
                     </> : <p className="text-sm">No example selected.</p>}
                     <div className="flex flex-wrap gap-2">
-                        {current && <PendingAction label="Preview PDF" />}
+                        {current && <EvidencePdfPreviewButton evidenceId={current.id} label={"Preview selected " + category + " example PDF"} />}
                         {editing && <PendingAction label="Upload graded sample" />}
                     </div>
                 </section>
@@ -84,7 +85,7 @@ export function MockEvidencePicker({ data, assessmentId, selectedIds, editing, o
                             <p className="mt-1 text-xs">Feedback: {row.instructor_feedback || "No feedback supplied."}</p>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            <PendingAction label="Preview PDF" />
+                            <EvidencePdfPreviewButton evidenceId={row.id} label={"Preview " + student(row.student_id) + " " + band + " example PDF"} />
                             <button type="button" aria-label={"Select " + student(row.student_id) + " as " + band + " example"}
                                 onClick={() => { onChange([...selected.filter((item) => item.band !== row.band).map((item) => item.id), row.id]); close() }}
                                 className="rounded-md border border-slate-300 px-3 py-1 text-sm">Select</button>

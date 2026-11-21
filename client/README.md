@@ -179,4 +179,14 @@ Save Draft & Return to Review saves the explanation and selected evidence IDs in
 
 Readiness requires three eligible choices, one per category. No additional different-student rule is assumed without sponsor confirmation.
 
-PDF previews and actual graded-file uploads remain disabled and marked pending.
+Mock PDF previews are connected below; actual graded-file uploads remain disabled and marked pending.
+
+## Faculty evidence PDF preview buttons
+
+Preview PDF opens the exact selected example or picker choice in a new tab.
+Django must run in development mode with the mock evidence PDF endpoint.
+The button shows loading and an error if the request fails, returns a non-PDF,
+or the browser blocks the new tab. Allow pop-ups for the local portal if needed.
+Previewing does not change the selected examples or save a draft.
+These PDFs contain fictional work, not original Canvas attachments.
+Graded-file uploads remain disabled and marked pending.
