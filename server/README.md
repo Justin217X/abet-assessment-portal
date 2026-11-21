@@ -231,3 +231,21 @@ Source JSON and imported assignment versions are unchanged.
 Invalid requests return 400; missing seed data or the wrong provider returns 503.
 The endpoint is disabled outside development. The fixed Faculty demo profile
 is not real authorization. Production login and the peer-review UI are separate.
+
+## Save demo Coordinator schedules
+
+Run migrations and seed_portal_demo, set PORTAL_DATA_PROVIDER=saved_mock,
+and restart Django in development mode. POST JSON to /api/demo/plans/:
+
+{"kind": "schedule", "title": "Assessment review", "semester_id": "<semester ID>", "program_id": "<program ID>", "due_on": "2026-11-30"}
+
+Use program and semester IDs from /api/demo/portal/. The due date must be inside
+that semester. Titles must be nonblank and at most 255 characters. Browser
+requests must include Django's CSRF token. A successful save returns 201 and
+the new schedule. Reload /api/demo/portal/ to see it and its activity entry.
+
+Earlier saves, review feedback, source JSON, and imported assignment versions
+are preserved. Invalid input returns 400. Missing seed data or the wrong provider
+returns 503. Routes are disabled outside development. The owner is the fixed
+Coordinator demo user, not a signed-in account. Work assignment, schedule edits,
+production authorization, and the Coordinator UI are separate changes.
