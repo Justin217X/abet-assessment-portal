@@ -185,3 +185,11 @@ Suggested choices use highest, lowest, and nearest-to-median scores, with stable
 This PR adds the builder and tests only. The picker UI, PDF previews, API connection, and saving selections are separate work.
 
 Run focused tests: python server/manage.py test integrations.test_evidence_candidates
+
+## Evidence choices in the shared API
+
+GET /api/demo/portal/ now includes the prepared choices in its evidence list. Each choice identifies its assessment and includes rubric score/maximum, feedback, eligibility, and suggestion flags.
+
+Existing evidence IDs and selections are preserved. New mock choices are unselected, and file_available remains false because generated text is not an original student attachment.
+
+The source JSON is unchanged. This development-only API still does not provide real user permissions. Picker UI, PDF previews, and saving selections are separate changes.
