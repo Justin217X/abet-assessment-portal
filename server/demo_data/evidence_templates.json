@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "fictional": true,
+    "generated_by_ai": true,
+    "purpose": "Shared fictional text used for additional student evidence previews. Not a Canvas attachment."
+  },
+  "filename_template": "mock-{assignment_id}-{student_id}.txt",
+  "content_template": "Fictional work by {student_label} for {assignment_title}.\nRubric score: {score}/{criterion_max}.\nExample program: validate user input, handle boundary values, and describe the test cases.\nThis generated text represents a submission for UI testing; it is not a Canvas attachment.",
+  "feedback_fallback": "No feedback provided."
+}

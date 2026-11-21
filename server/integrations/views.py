@@ -21,7 +21,7 @@ def demo_rubric_preview(request):
         raise Http404
 
     fixture_path = (
-        Path(__file__).parent / 'test_data' / 'canvas_assignment_with_rubric.json'
+        Path(__file__).resolve().parent.parent / 'demo_data' / 'canvas_assignment_with_rubric.json'
     )
     with fixture_path.open(encoding='utf-8') as fixture:
         payload = json.load(fixture)
