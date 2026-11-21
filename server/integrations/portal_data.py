@@ -35,7 +35,9 @@ class SavedMockPortalProvider:
         ).order_by('-revision_number').first()
         if revision is None:
             raise ImproperlyConfigured('No saved mock dataset is available. Import a demo snapshot first.')
-        return revision.payload
+        # Apply local demo edits only when reading the saved mock source.
+        from .demo_updates import merge_demo_updates
+        return merge_demo_updates(revision.payload)
 
 
 class PortalDataFacade:

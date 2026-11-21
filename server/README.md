@@ -212,3 +212,22 @@ To read the saved snapshot, set PORTAL_DATA_PROVIDER=saved_mock in your local .e
 By default, an inactive account with no usable password owns the import history. You can instead use an existing local account with --username <username>. No real portal access is granted by seeding.
 
 Use this only with development/test databases. It is disabled when DEBUG=False. It does not import live university data, save Faculty drafts, or provide dashboard web endpoints.
+
+## Save demo peer-review feedback
+
+Run migrations and seed_portal_demo, set PORTAL_DATA_PROVIDER=saved_mock,
+and restart Django in development mode. POST JSON to /api/demo/reviews/:
+
+{"review_id": "<assigned review ID>", "feedback": "Review comments", "status": "assigned"}
+
+Use an ID from /api/demo/portal/ assigned to faculty-1. Use status completed
+to finish the review; completed reviews require nonblank feedback. Feedback is
+limited to 10,000 characters. Browser requests must include Django's CSRF token.
+
+The response returns the saved review. Reload /api/demo/portal/ to see its latest
+feedback, status, and activity entry. Each save keeps earlier edit snapshots.
+Source JSON and imported assignment versions are unchanged.
+
+Invalid requests return 400; missing seed data or the wrong provider returns 503.
+The endpoint is disabled outside development. The fixed Faculty demo profile
+is not real authorization. Production login and the peer-review UI are separate.
