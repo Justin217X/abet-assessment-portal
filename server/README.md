@@ -193,3 +193,20 @@ GET /api/demo/portal/ now includes the prepared choices in its evidence list. Ea
 Existing evidence IDs and selections are preserved. New mock choices are unselected, and file_available remains false because generated text is not an original student attachment.
 
 The source JSON is unchanged. This development-only API still does not provide real user permissions. Picker UI, PDF previews, and saving selections are separate changes.
+
+## Mock student-evidence PDF previews
+
+Install the updated requirements, then run Django locally. With development mode
+and the mock data provider enabled, open:
+
+/api/demo/evidence/evidence-1-high/pdf/
+
+For another example, use its evidence ID from /api/demo/portal/ in that URL.
+The PDF shows that example's student label, rubric score, fictional work,
+and instructor feedback. It is generated in memory and is not archived.
+Every PDF is marked as AI-generated mock data, not an original Canvas file.
+Unknown IDs return 404; unavailable data returns 503. The endpoint is disabled
+outside development and rejects datasets that are not marked fictional.
+
+The Faculty picker buttons are connected in a separate change. Real file uploads,
+production access checks, and official report generation remain pending.
