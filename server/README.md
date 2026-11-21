@@ -193,3 +193,22 @@ GET /api/demo/portal/ now includes the prepared choices in its evidence list. Ea
 Existing evidence IDs and selections are preserved. New mock choices are unselected, and file_available remains false because generated text is not an original student attachment.
 
 The source JSON is unchanged. This development-only API still does not provide real user permissions. Picker UI, PDF previews, and saving selections are separate changes.
+## Save the shared demo dataset locally
+
+After setting up the local development database and running migrations, run:
+
+python server/manage.py seed_portal_demo
+
+Expected first-run message:
+Saved demo dataset, courses, sections, and assignment versions.
+
+Run it again with unchanged input:
+Demo data is already saved; no new records or versions created.
+
+The command reads server/demo_data/portal_demo.json. It saves the full fictional snapshot and imports supported courses, sections, semesters, and assignment versions. Changed input creates a new snapshot and keeps earlier versions.
+
+To read the saved snapshot, set PORTAL_DATA_PROVIDER=saved_mock in your local .env and restart Django. PORTAL_DATA_PROVIDER=mock continues reading the JSON file directly.
+
+By default, an inactive account with no usable password owns the import history. You can instead use an existing local account with --username <username>. No real portal access is granted by seeding.
+
+Use this only with development/test databases. It is disabled when DEBUG=False. It does not import live university data, save Faculty drafts, or provide dashboard web endpoints.
