@@ -1,6 +1,14 @@
 /**
- * PennStateSignInPage.tsx
- * Previews the handoff to Penn State sign-in. [SD]
+ * File: PennStateSignInPage.tsx
+ * Purpose: Shows a preview message for Penn State sign-in.
+ *
+ * !!! This page does not sign anyone in yet.
+ * !!! TODO:
+ * - Django: Add the approved Penn State SSO login and return flow.
+ * - SignInPage.tsx: Make "Sign in with Penn State" start that login flow.
+ * - App.tsx: Open the correct dashboard after sign-in.
+ * - Remove this preview page, its import, and the "penn-state" screen
+ *   from App.tsx when the real login flow works. [SD]
  */
 
 import { Button } from "../../Button"
@@ -13,15 +21,11 @@ type PennStateSignInPageProps = {
 export function PennStateSignInPage({ onBack }: PennStateSignInPageProps) {
     return (
         <SignInCard title="Sign in with Penn State">
-            {/* TODO: Once Penn State single sign-on is connected, make the main
-            "Sign in with Penn State" button start that flow. Remove this preview
-            page and its screen entry in App.tsx. [SD]
-            */}
-            
+
             <p className="mt-4 text-sm text-slate-600">
                 In the finished portal, this option will take you to Penn State sign-in.
             </p>
-            
+
             <Button variant="secondary" className="mt-6" onClick={onBack}>
                 Back to sign-in
             </Button>
