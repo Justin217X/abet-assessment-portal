@@ -1,10 +1,15 @@
 /**
- * FacultyPanels.tsx
- * Provides Faculty panels and a shared empty table layout for dashboards. [SD]
+ * File: FacultyPanels.tsx
+ * Purpose: Shows empty tables on preview pages, including Faculty
+ * assessments and peer reviews.
+ *
+ * !!! These tables are not connected to records yet. [SD]
+ * !!! Search is disabled and does not work yet. [SD]
  */
 
 import { useId } from "react"
 
+// Each page provides the title, column names, and message for an empty table.
 type EmptyPanelProps = {
   title: string
   columns: string[]
@@ -13,7 +18,7 @@ type EmptyPanelProps = {
   searchLabel?: string
 }
 
-// The assessment, peer review, and archive tables share this layout. [SD]
+// Use the same empty table layout on different preview pages.
 export function EmptyPanel({
   title,
   columns,
@@ -21,7 +26,8 @@ export function EmptyPanel({
   showSearch,
   searchLabel = "Search assessments",
 }: EmptyPanelProps) {
-  // Give each panel a unique heading ID so its table can refer to it. [SD]
+
+  // Give the heading a unique ID so screen readers can identify this table.
   const headingId = useId()
 
   return (
@@ -33,7 +39,7 @@ export function EmptyPanel({
         {title}
       </h2>
 
-      {/* TODO: Enable search and filter the table rows once records are available. [SD] */}
+      {/* !!! TODO: Connect the table to records and make search work before enabling it. [SD] */}
       {showSearch && (
         <label className="mt-3 block text-sm font-medium">
           {searchLabel}
@@ -46,7 +52,7 @@ export function EmptyPanel({
         </label>
       )}
 
-      {/* Let the table scroll sideways on narrow screens. [SD] */}
+      {/* Let the table scroll sideways on narrow screens. */}
       <div className="mt-4 overflow-x-auto">
         <table aria-labelledby={headingId} className="w-full text-left text-sm">
           <thead className="bg-slate-100">
@@ -60,7 +66,8 @@ export function EmptyPanel({
           </thead>
 
           <tbody>
-            {/* Show one message across all columns while the table is empty. [SD] */}
+
+            {/* Show one message across all columns while the table is empty. */}
             <tr>
               <td colSpan={columns.length} className="px-3 py-4 text-slate-600">
                 {message}
@@ -73,6 +80,7 @@ export function EmptyPanel({
   )
 }
 
+// Show an empty Faculty assessment table.
 export function FacultyAssessmentsPanel() {
   return (
     <EmptyPanel
@@ -84,6 +92,7 @@ export function FacultyAssessmentsPanel() {
   )
 }
 
+// Show an empty Faculty peer-review table.
 export function FacultyPeerReviewsPanel() {
   return (
     <EmptyPanel

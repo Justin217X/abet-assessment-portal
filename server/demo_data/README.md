@@ -2,16 +2,35 @@
 
 This folder centralizes the portal's shared fictional input files. The JSON records were prepared with generative AI for development and testing; they are not live Canvas, LionPath, SSO, or real student records.
 
-| File | Purpose |
-| --- | --- |
-| canvas_assignment_with_rubric.json | Existing fictional assignment 501 and grading rubric. Its data is unchanged by this move. |
-| canvas_assignment_submissions.json | Fictional graded submissions for report-generation demos. |
-| canvas_course.json | Fictional course details for report-generation demos. |
-| report_context.json | Fictional report context, PI mappings, and instructor comments. |
-| portal_demo.json | Linked fictional records for the four dashboard roles, including campuses and course-campus assignments. |
-| evidence_templates.json | Fictional student-work text and filename templates for evidence previews. |
+| File                               | Purpose                                                                                                  |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| canvas_assignment_with_rubric.json | Existing fictional assignment 501 and grading rubric. Its data is unchanged by this move.                |
+| canvas_assignment_submissions.json | Fictional graded submissions for report-generation demos.                                                |
+| canvas_course.json                 | Fictional course details for report-generation demos.                                                    |
+| report_context.json                | Fictional report context, PI mappings, and instructor comments.                                          |
+| portal_demo.json                   | Linked fictional records for the four dashboard roles, including campuses and course-campus assignments. |
+| evidence_templates.json            | Fictional student-work text and filename templates for evidence previews.                                |
 
 Only the existing rubric preview and integration tests are connected to this folder in this PR. The additional datasets support later feature PRs; including a file does not implement its import, PDF generation, dashboard, or authentication workflow.
+
+## Report generation fixtures
+
+The report generation demo uses 30 fictional graded submissions
+associated with assignment 501 and rubric criterion crit1.
+
+The performance distribution is:
+
+- Beginning: 2 students
+- Developing: 4 students
+- Proficient: 9 students
+- Exemplary: 15 students
+
+The `report_context.json` file contains portal-specific assessment
+information, including the academic program, semester, section,
+instructor, performance indicator mappings, and instructor comments.
+
+This information is maintained separately because it does not
+represent a Canvas API response.
 
 ## Campus and provenance
 
@@ -42,6 +61,6 @@ canvas_assignment_with_rubric.json is a fictional Canvas response for one assign
 # Sources:
 
 - Instructure's Get a single assignment endpoint returns an Assignment object. The same page documents the RubricCriteria object and RubricRating object.
-https://developerdocs.instructure.com/services/canvas/resources/assignments#assignment
+  https://developerdocs.instructure.com/services/canvas/resources/assignments#assignment
 
 Our test file combines those documented fields with fictional values.

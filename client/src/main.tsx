@@ -1,3 +1,8 @@
+/**
+ * File: main.tsx
+ * Purpose: Starts the React app inside the main HTML page.
+ */
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

@@ -1,7 +1,5 @@
-"""
-File: models.py
-Purpose: Defines source records, Canvas courses, import runs, assignments, and saved versions.
-"""
+# File: models.py
+# Purpose: Defines source records, Canvas courses, import runs, assignments, and saved versions.
 
 import uuid
 
@@ -11,88 +9,88 @@ from django.utils import timezone
 
 # Create your models here.
 
-# Remember where an imported item originally came from. [SD]
+# Remember where an imported item originally came from.
 class SourceRecord(models.Model):
 
-    # Generate a unique internal identifier. [SD]
+    # Generate a unique internal identifier.
     source_record_id = models.UUIDField(
-        primary_key=True, 
-        default=uuid.uuid4, 
+        primary_key=True,
+        default=uuid.uuid4,
         editable=False,
         )
 
-    # Store the source name, such as canvas or portal. [SD]
+    # Store the source name, such as canvas or portal.
     source_system = models.CharField(max_length=50)
 
-    # Store the item type, such as course or assignment. [SD]
+    # Store the item type, such as course or assignment.
     record_type= models.CharField(max_length=50)
 
-    # Store the original identifier, including its scope when needed.  [SD]
+    # Store the original identifier, including its scope when needed.
     source_id = models.CharField(max_length=255)
 
-    # Prevent duplicates of the same item from the same source. [SD]
+    # Prevent duplicates of the same item from the same source.
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['source_system', 'record_type', 'source_id'], 
+                fields=['source_system', 'record_type', 'source_id'],
                 name='unique_source_record'
                 )
         ]
 
-    # Display the source, item type, and original identifier. [SD]
+    # Display the source, item type, and original identifier.
     def __str__(self):
         return f'{self.source_system} / {self.record_type} / {self.source_id}'
 
 
-# Store a Canvas course separately from the university's course catalog. [SD]
+# Store a Canvas course separately from the university's course catalog.
 class CanvasCourse(models.Model):
 
-    # Generate a unique internal identifier for the Canvas course. [SD]
+    # Generate a unique internal identifier for the Canvas course.
     canvas_course_id = models.UUIDField(
-        primary_key=True, 
-        default=uuid.uuid4, 
+        primary_key=True,
+        default=uuid.uuid4,
         editable=False,
         )
 
-    # Link to one source record and prevent duplicate Canvas course entries. [SD]
+    # Link to one source record and prevent duplicate Canvas course entries
     source_record = models.OneToOneField(
-        SourceRecord, 
+        SourceRecord,
         on_delete=models.PROTECT,
         related_name='canvas_courses',
         )
 
-    # Store the course name shown in Canvas. [SD]
+    # Store the course name shown in Canvas.
     display_name = models.CharField(max_length=255)
 
-    # Display the Canvas course using its original identifier. [SD]
+    # Display the Canvas course using its original identifier.
     def __str__(self):
         return self.display_name
 
-# Keep one assignment record even when its title or instructions change. [SD]
+# Keep one assignment record even when its title or instructions change.
 class Assignment(models.Model):
 
-    # Generate a unique internal identifier for the assignment. [SD]
+    # Generate a unique internal identifier for the assignment.
     assignment_id = models.UUIDField(
-        primary_key=True, 
-        default=uuid.uuid4, 
+        primary_key=True,
+        default=uuid.uuid4,
         editable=False,
         )
 
-    # A Canvas course can contain multiple assignments. [SD]
+    # A Canvas course can contain multiple assignments.
     canvas_course = models.ForeignKey(
-        CanvasCourse, 
+        CanvasCourse,
         on_delete=models.PROTECT,
         related_name='assignments',
         )
 
-    # Give each assignment one unique source record. [SD]
+    # Give each assignment one unique source record.
     source_record = models.OneToOneField(
-        SourceRecord, 
+        SourceRecord,
         on_delete=models.PROTECT,
         related_name='assignments',
         )
 
-# Record who requested and import, when it ran, and how it ended. [SD]
+# Record who requested an import, when it ran, and how it ended.
 class ImportRun(models.Model):
     class Status(models.TextChoices):
         PENDING = 'pending', 'Pending'
@@ -106,9 +104,9 @@ class ImportRun(models.Model):
         editable=False,
     )
 
-    # Keep the requesting user linked to the import history. [SD]
-    requested_by = models.ForeignKey( 
-        settings.AUTH_USER_MODEL, 
+    # Keep the requesting user linked to the import history.
+    requested_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name='import_runs',
     )
@@ -122,9 +120,9 @@ class ImportRun(models.Model):
 
     started_at = models.DateTimeField(default=timezone.now)
     finished_at = models.DateTimeField(null=True, blank=True)
-    validation_summary = models.JSONField(null=True, blank=True)   
+    validation_summary = models.JSONField(null=True, blank=True)
 
-# Keep a snapshot of the Canvas data received during an import. [SD]
+# Keep a snapshot of the Canvas data received during an import.
 class SourceRevision(models.Model):
     source_revision_id = models.UUIDField(
         primary_key=True,
@@ -132,7 +130,7 @@ class SourceRevision(models.Model):
         editable=False,
     )
 
-    # Link each snapshot to the original item and the import that retrieved it. [SD]
+    # Link each snapshot to the original item and the import that retrieved it.
     source_record = models.ForeignKey(
         SourceRecord,
         on_delete=models.PROTECT,
@@ -151,7 +149,8 @@ class SourceRevision(models.Model):
 
     class Meta:
         constraints = [
-            # Start revisions numbers at 1 and prevent duplicates for the same item. [SD]
+
+            # Start revision numbers at 1 and prevent duplicates for the same item.
             models.CheckConstraint(
                 condition=models.Q(revision_number__gte=1),
                 name='source_revision_number_at_least_1'
@@ -163,7 +162,7 @@ class SourceRevision(models.Model):
 
         ]
 
-# Preserve the assignment title and instructions from one source revision. [SD]
+# Preserve the assignment title and instructions from one source revision.
 class AssignmentVersion(models.Model):
     assignment_version_id = models.UUIDField(
         primary_key=True,
@@ -171,14 +170,14 @@ class AssignmentVersion(models.Model):
         editable=False,
     )
 
-    # Link each assignment version to the original assignment and the source revision that created it. [SD]
+    # Link each assignment version to the original assignment and the source revision that created it.
     assignment = models.ForeignKey(
         Assignment,
         on_delete=models.PROTECT,
         related_name='versions',
     )
 
-    # Store at most one assignment version for each source revision. [SD]
+    # Store at most one assignment version for each source revision.
     source_revision = models.OneToOneField(
         SourceRevision,
         on_delete=models.PROTECT,
@@ -187,5 +186,5 @@ class AssignmentVersion(models.Model):
 
     title = models.TextField()
 
-    # Canvas may return no instructions for an assignment. [SD]
-    instructions = models.TextField(null=True, blank=True)    
+    # Canvas may return no instructions for an assignment.
+    instructions = models.TextField(null=True, blank=True)

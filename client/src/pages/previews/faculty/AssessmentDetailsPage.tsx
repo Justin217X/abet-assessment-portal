@@ -1,6 +1,15 @@
 /**
- * AssessmentDetailsPage.tsx
- * Shows the assigned assessment task, instructions, and required evidence. [SD]
+ * File: AssessmentDetailsPage.tsx
+ * Purpose: Shows the assigned assessment task, instructions, and required evidence.
+ *
+ * !!! Earlier preview. Current assessment review uses AssessmentWorkflowPage.tsx. [SD]
+ *
+ * !!! TODO:
+ * - Receive the selected assessment ID from My assessments if this page is retained.
+ * - Load its instructions, due date, outcome, and PI from Django.
+ * - Pass the selected assessment ID when opening report preparation.
+ * - Check the current shared workflow before adding duplicate loading code.
+ * [SD]
  */
 
 import { Button } from "../../../Button"
@@ -19,8 +28,8 @@ export function AssessmentDetailsPage() {
     return (
         <section className="rounded-lg border border-slate-200 bg-white p-4">
             <h2 className="text-lg font-semibold">Assessment details</h2>
-            
-            {/* TODO: Load the assessment task selected in My assessments. [SD] */}
+
+            {/* !!! TODO: Load the assessment task selected in My assessments. [SD] */}
             <dl className="mt-4 grid gap-4 sm:grid-cols-2">
                 {assessmentFields.map((label) => (
                     <div key={label}>
@@ -36,10 +45,10 @@ export function AssessmentDetailsPage() {
             <h3 className="mt-4 text-sm font-semibold">Required evidence</h3>
             <p className="mt-1 text-sm text-slate-600">No evidence requirements loaded.</p>
 
-            {/* TODO: Open Report Preparation for the selected assessment task. [SD] */}
+            {/* !!! TODO: Open Report Preparation for the selected assessment task. [SD] */}
             <Button disabled className="mt-6 cursor-not-allowed opacity-60">
                 Start report
             </Button>
         </section>
-    ) 
+    )
 }

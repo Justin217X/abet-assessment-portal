@@ -1,8 +1,8 @@
-""" 
-File: admin.py
-Purpose: Configures academic records for Django's built-in admin site.
-"""
+# File: admin.py
+# Purpose: Holds the academics app's Django admin setup.
 
 from django.contrib import admin
 
-# Register your models here.
+# !!! Academic models are not registered in Django admin yet. [SD]
+# If needed, import Course, Semester, and CourseSection from .models
+# and register them here.

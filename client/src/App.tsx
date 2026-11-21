@@ -1,6 +1,14 @@
 /**
- * App.tsx
- * Switches between sign-in previews and the four role demos. [SD]
+ * File: App.tsx
+ * Purpose: Opens sign-in previews and the four dashboard demos.
+ *
+ * !!! Real sign-in and session sign-out are not connected yet.
+ *
+ * !!! TODO:
+ * - Open the correct dashboard using the signed-in user's portal roles.
+ * - Make Sign out end the real portal session.
+ * - Remove demo dashboard shortcuts when real sign-in is ready.
+ * [SD]
  */
 
 import { useState } from "react"
@@ -22,8 +30,8 @@ type Screen =
   | "administrator"
 
 function App() {
-  // TODO: Use the signed-in user's assigned access to open a dashboard
-  // and make Sign out end the active portal session. [SD]
+
+  // !!! TODO: Use the signed-in user's assigned access to open a dashboard and make Sign out end the active portal session. [SD]
   const [screen, setScreen] = useState<Screen>("sign-in")
   const backToSignIn = () => setScreen("sign-in")
 

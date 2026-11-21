@@ -1,6 +1,14 @@
 /**
- * SelfStudyMaterialsPage.tsx
- * Lists Self-Study materials available for evaluator review. [SD]
+ * File: SelfStudyMaterialsPage.tsx
+ * Purpose: Lists Self-Study materials available for evaluator review.
+ *
+ * !!! Self-Study integration is outside the current scope, per Professor Martin. [SD]
+ *
+ * !!! TODO:
+ * - Keep this preview out of EvaluatorDashboard.tsx navigation.
+ * - Check remaining imports before removing this unused preview.
+ * - Do not connect Self-Study uploads or viewing unless the scope changes.
+ * [SD]
  */
 
 import { EmptyPanel } from "../../../components/FacultyPanels"
@@ -8,8 +16,7 @@ import { EmptyPanel } from "../../../components/FacultyPanels"
 export function SelfStudyMaterialsPage() {
     return (
         <>
-        {/* TODO: Load materials released to this evaluator and link each row
-          to its read-only document view. [SD] */}
+        {/* !!! Outside current scope. Check imports before removing this older preview. [SD] */}
           <EmptyPanel
             title="Available Self-Study materials"
             columns={["Material", "Program", "Action"]}
