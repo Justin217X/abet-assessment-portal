@@ -190,3 +190,18 @@ or the browser blocks the new tab. Allow pop-ups for the local portal if needed.
 Previewing does not change the selected examples or save a draft.
 These PDFs contain fictional work, not original Canvas attachments.
 Graded-file uploads remain disabled and marked pending.
+
+## Faculty peer reviews
+
+Peer reviews loads assigned records for the fixed Faculty demo profile. Search by
+course, assignment, semester, status, or due date. Choose View review to see the
+linked report version and edit feedback. The list and details scroll internally.
+
+Save feedback and Complete review use /api/demo/reviews/ with Django's CSRF token.
+Run migrations and seed_portal_demo, set PORTAL_DATA_PROVIDER=saved_mock, and
+restart Django in development mode first. Completion requires nonblank feedback.
+Saved status and feedback appear in the list and survive reloading. Failed saves
+keep the text available for retry. Loading, empty, and error states are included.
+
+This does not provide real reviewer authorization or access to report documents.
+Report PDF access, supporting documents, and Feedback on my reports are separate.

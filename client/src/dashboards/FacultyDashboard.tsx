@@ -458,7 +458,7 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                             onChooseAssessment={() => setActivePage("assessments")}
                             onReviewRoster={(id) => { setSelectedRosterCourseId(id); setActivePage("roster") }} />}
                         {activePage === "roster" && <FacultyRosterPage key={selectedRosterCourseId} initialCourseId={selectedRosterCourseId} />}
-                        {activePage === "reviews" && <FacultyPeerReviewsPage />}
+                        {activePage === "reviews" && <FacultyPeerReviewsPage onDataChange={setData} />}
                         {activePage === "archive" && <FacultyArchivePage />}
                     </section>
                 )}
