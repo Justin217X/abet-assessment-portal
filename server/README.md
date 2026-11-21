@@ -125,3 +125,17 @@ Run the academic and integration tests from the repository folder:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py test academics integrations --settings=config.test_settings
+```
+
+## Shared mock data provider
+
+integrations/portal_data.py gives backend code one place to load shared fictional records.
+
+- PORTAL_DATA_PROVIDER=mock reads server/demo_data/portal_demo.json each time.
+- PORTAL_DATA_PROVIDER=saved_mock reads the latest saved mock dataset snapshot from PostgreSQL. If none exists, it reports an error instead of silently using another source.
+- Other provider names are not implemented.
+- Both choices are fictional, not live Canvas or LionPath connections.
+
+PortalDataFacade().load() returns the selected source and adds today's date for current-date checks. The fixed scenario date stays unchanged. No records are saved by this loader.
+
+This PR adds the provider layer only. Database seeding, saved edits, result calculations, evidence preparation, PDF catalogs, web endpoints, and dashboards are separate work.

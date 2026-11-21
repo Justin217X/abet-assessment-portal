@@ -141,3 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Mock source selection. Live connections are not implemented yet.
 CANVAS_DATA_CONNECTOR = os.environ.get('CANVAS_DATA_CONNECTOR', 'mock')
 ROSTER_DATA_CONNECTOR = os.environ.get('ROSTER_DATA_CONNECTOR', 'mock')
+
+# mock reads the shared JSON; saved_mock reads a saved fictional snapshot.
+PORTAL_DATA_PROVIDER = os.environ.get('PORTAL_DATA_PROVIDER', 'mock')
