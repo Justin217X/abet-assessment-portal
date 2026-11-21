@@ -125,3 +125,18 @@ Run the academic and integration tests from the repository folder:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py test academics integrations --settings=config.test_settings
+```
+
+## Mock student-evidence choices
+
+integrations/evidence_candidates.py prepares fictional high, middle, and low example choices from graded submissions for the assessment's selected rubric criterion and student group.
+
+Only active, matched enrollments in the selected group are eligible. Missing, excused, ungraded, or unscored submissions are excluded; zero scores remain eligible.
+
+The builder keeps existing evidence IDs and selections. New choices are not selected automatically and are not real files. Text and filename templates are read from server/demo_data/evidence_templates.json.
+
+Suggested choices use highest, lowest, and nearest-to-median scores, with stable student-ID tie ordering. This is a proposed demo convenience, not a sponsor-approved rule. Actual sample selection, graded-file uploads, and any team/tie rules need separate confirmation.
+
+This PR adds the builder and tests only. The picker UI, PDF previews, API connection, and saving selections are separate work.
+
+Run focused tests: python server/manage.py test integrations.test_evidence_candidates
