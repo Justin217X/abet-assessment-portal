@@ -193,3 +193,21 @@ GET /api/demo/portal/ now includes the prepared choices in its evidence list. Ea
 Existing evidence IDs and selections are preserved. New mock choices are unselected, and file_available remains false because generated text is not an original student attachment.
 
 The source JSON is unchanged. This development-only API still does not provide real user permissions. Picker UI, PDF previews, and saving selections are separate changes.
+
+## Local historical PDF samples
+
+Copy the supplied historical PDFs into server/demo_data/pdf_samples using the
+filenames listed in server/demo_data/portal_demo.json. Originals remain local
+and are excluded from Git. These are supplied historical examples, not AI-created
+reports for the fictional assessments. Do not rename or regenerate their contents.
+
+Run Django in development mode. GET /api/demo/sample-reports/ lists sample IDs,
+file availability, and preview/download links. Missing local files remain listed
+as unavailable. Open /api/demo/sample-reports/<sample ID>/ to preview a PDF;
+add ?download=1 to download it. Unknown IDs and missing files return 404.
+
+To use another folder, set PORTAL_SAMPLE_PDF_DIR locally. Relative paths start
+at the repository root. Only manifest-listed PDF filenames inside that folder
+are served; arbitrary paths are rejected. Same-origin embedding is allowed.
+All routes are disabled outside development. Production authentication and
+Evaluator release checks are separate work. No sample-library UI is included.
