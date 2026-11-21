@@ -63,7 +63,7 @@ Do not commit `.env` or share its contents.
 
 ## Run the backend
 
-Create Django’s database tables and check the setup:
+Create Djangoâ€™s database tables and check the setup:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py migrate
@@ -156,3 +156,32 @@ GET /api/demo/assignment-versions/<saved UUID>/rubric/
 The development endpoint returns the saved assignment title, grading flag, criteria, ratings, and points. An unknown version returns 404; a saved assignment without a rubric returns an empty criteria list.
 
 The existing fixture preview URL still works. React will be connected to the saved-version endpoint in a separate change. This endpoint is disabled outside development; live authentication and record access checks are not implemented here.
+
+## Generate a basic sample Rubric Report PDF
+
+Install the backend requirements first. From the repository folder, open the Django shell:
+
+```powershell
+python server/manage.py shell
+```
+
+Paste these lines into the shell:
+
+```python
+import json
+from pathlib import Path
+from types import SimpleNamespace
+from django.conf import settings
+from integrations.rubric_preview import build_rubric_preview
+from reports.rubric_pdf import generate_rubric_pdf
+payload = json.loads((settings.BASE_DIR / 'demo_data' / 'canvas_assignment_with_rubric.json').read_text(encoding='utf-8'))
+version = SimpleNamespace(title=payload['name'], source_revision=SimpleNamespace(payload=payload))
+preview = build_rubric_preview(version)
+_ = Path('rubric_report_sample.pdf').write_bytes(generate_rubric_pdf(preview))
+```
+
+Open rubric_report_sample.pdf from the repository folder. It should show Demo Programming Assignment, the criterion and description, a maximum of 20 points, and the four ratings worth 20, 15, 10, and 5 points. The sample is fictional. Do not commit the generated PDF.
+
+The generator accepts the same fields as the rubric preview. Download endpoints and the Faculty PDF button are separate changes.
+
+Run the generator tests with: python server/manage.py test reports
