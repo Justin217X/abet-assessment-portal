@@ -130,3 +130,13 @@ Course, task, and recent-report search fields filter their lists. Long lists scr
 The sample faculty profile is still fixed demo wiring, not real authentication. Report PDF downloads and the newer roster/report workflow are marked pending. The older detailed assessment, review, and archive previews remain until their separate changes are added.
 
 This PR contains the overview and its shared display helpers only. No new API routes, saves, report generators, or detailed workflow pages are included.
+
+## My Assessments with shared mock data
+
+Open Faculty demo, then My assessments. The page requests the shared Django demo API and lists assignments for the fixed sample faculty profile across semesters.
+
+Each card shows assignment, course, semester, status, and due date. Search also matches those fields. The progress summary reflects the displayed records, and the assessment list scrolls within its panel.
+
+Loading, failed requests, no assigned work, and no search matches have separate messages. Report review remains pending until its own workflow change is added; this page accepts an optional onReviewAssessment callback for that later connection.
+
+This change does not add report editing, evidence selection, PDF actions, or real user permissions.
