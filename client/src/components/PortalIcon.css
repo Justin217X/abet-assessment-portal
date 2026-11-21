@@ -1,0 +1,19 @@
+/**
+ * File: PortalIcon.css
+ * Purpose: Lets SVG icons use the shared text colors.
+ */
+
+@reference "../index.css";
+
+/* Masks let downloaded icons follow the shared theme's text colors. */
+.portal-icon {
+    @apply inline-block;
+    @apply [width:1.2em];
+    @apply [height:1.2em];
+    @apply shrink-0;
+    @apply align-middle;
+    @apply [background-color:currentColor];
+    @apply mask-no-repeat;
+    @apply mask-center;
+    @apply mask-contain;
+}
