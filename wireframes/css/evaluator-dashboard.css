@@ -1,4 +1,4 @@
-/* Set the page colors. [SD] */
+/* Set the page colors. */
 :root {
   --background: #f7f7f7;
   --surface: #ffffff;
@@ -9,12 +9,12 @@
   --dark: #303030;
 }
 
-/* Keep padding and borders inside each element's size. [SD] */
+/* Keep padding and borders inside each element's size. */
 * {
   box-sizing: border-box;
 }
 
-/* Set the page font, colors, and line spacing. [SD] */
+/* Set the page font, colors, and line spacing. */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -23,20 +23,20 @@ body {
   line-height: 1.5;
 }
 
-/* Use the same font for buttons, inputs, and dropdowns. [SD] */
+/* Use the same font for buttons, inputs, and dropdowns. */
 button,
 input,
 select {
   font: inherit;
 }
 
-/* Show a hand pointer over buttons and dropdowns. [SD] */
+/* Show a hand pointer over buttons and dropdowns. */
 button,
 select {
   cursor: pointer;
 }
 
-/* Show an outline when using the keyboard to select controls. [SD] */
+/* Show an outline when using the keyboard to select controls. */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -45,7 +45,7 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
-/* Place the portal name and account controls in the top bar. [SD] */
+/* Place the portal name and account controls in the top bar. */
 .topbar {
   min-height: 76px;
   padding: 16px 28px;
@@ -57,7 +57,7 @@ select:focus-visible {
   border-bottom: 1px solid var(--border);
 }
 
-/* Line up the branding and account items. [SD] */
+/* Line up the branding and account items. */
 .brand,
 .account {
   display: flex;
@@ -65,13 +65,13 @@ select:focus-visible {
   gap: 16px;
 }
 
-/* Make the portal name larger and bold. [SD] */
+/* Make the portal name larger and bold. */
 .brand {
   font-size: 22px;
   font-weight: bold;
 }
 
-/* Style the temporary AB symbol. [SD] */
+/* Style the temporary AB symbol. */
 .brand-mark {
   padding: 7px 9px;
   border-radius: 5px;
@@ -80,14 +80,14 @@ select:focus-visible {
   font-size: 17px;
 }
 
-/* Place the sidebar beside the main content. [SD] */
+/* Place the sidebar beside the main content. */
 .layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
   min-height: calc(100vh - 122px);
 }
 
-/* Set the sidebar background and spacing. [SD] */
+/* Set the sidebar background and spacing. */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@ select:focus-visible {
   border-right: 1px solid var(--border);
 }
 
-/* Style the heading above the menu. [SD] */
+/* Style the heading above the menu. */
 .nav-label {
   margin: 0 12px 18px;
   color: var(--muted);
@@ -105,13 +105,13 @@ select:focus-visible {
   letter-spacing: 1px;
 }
 
-/* Add space between menu items. [SD] */
+/* Add space between menu items. */
 .sidebar nav {
   display: grid;
   gap: 8px;
 }
 
-/* Style menu links and buttons. [SD] */
+/* Style menu links and buttons. */
 .nav-item {
   display: block;
   width: 100%;
@@ -125,19 +125,19 @@ select:focus-visible {
   font-size: 15px;
 }
 
-/* Change the menu item's color when hovered over. [SD] */
+/* Change the menu item's color when hovered over. */
 .nav-item:hover {
   background: #e5e5e5;
 }
 
-/* Highlight the current menu item. [SD] */
+/* Highlight the current menu item. */
 .nav-item.active {
   background: #dedede;
   box-shadow: inset 4px 0 var(--dark);
   font-weight: bold;
 }
 
-/* Place account information at the bottom of the sidebar. [SD] */
+/* Place account information at the bottom of the sidebar. */
 .sidebar-footer {
   margin-top: auto;
   padding: 28px 12px 0;
@@ -145,13 +145,13 @@ select:focus-visible {
   font-size: 13px;
 }
 
-/* Add space around the main content. [SD] */
+/* Add space around the main content. */
 main {
   min-width: 0;
   padding: 28px 32px;
 }
 
-/* Place the page heading beside its controls or badges. [SD] */
+/* Place the page heading beside its controls or badges. */
 .page-heading {
   display: flex;
   align-items: flex-start;
@@ -160,26 +160,26 @@ main {
   margin-bottom: 26px;
 }
 
-/* Style the main heading. [SD] */
+/* Style the main heading. */
 h1 {
   margin: 0 0 6px;
   font-size: 30px;
   line-height: 1.2;
 }
 
-/* Style section headings. [SD] */
+/* Style section headings. */
 h2 {
   margin: 0;
   font-size: 21px;
 }
 
-/* Style the text below the main heading. [SD] */
+/* Style the text below the main heading. */
 .subtitle {
   margin: 0;
   color: var(--muted);
 }
 
-/* Style the badge showing that access is read-only. [SD] */
+/* Style the badge showing that access is read-only. */
 .read-only {
   display: inline-block;
   padding: 7px 15px;
@@ -191,7 +191,7 @@ h2 {
   white-space: nowrap;
 }
 
-/* Arrange report filters in a row and let them wrap. [SD] */
+/* Arrange report filters in a row and let them wrap. */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -200,13 +200,13 @@ h2 {
   margin-bottom: 28px;
 }
 
-/* Let filter fields share the available space. [SD] */
+/* Let filter fields share the available space. */
 .field {
   flex: 1;
   min-width: 170px;
 }
 
-/* Place labels above their fields. [SD] */
+/* Place labels above their fields. */
 .field label {
   display: block;
   margin-bottom: 6px;
@@ -215,7 +215,7 @@ h2 {
   font-weight: bold;
 }
 
-/* Style dropdowns and text inputs. [SD] */
+/* Style dropdowns and text inputs. */
 select,
 input {
   padding: 10px 12px;
@@ -225,12 +225,12 @@ input {
   color: var(--text);
 }
 
-/* Make dropdowns fill their field's width. [SD] */
+/* Make dropdowns fill their field's width. */
 select {
   width: 100%;
 }
 
-/* Add a background, border, and bottom spacing to content boxes. [SD] */
+/* Add a background, border, and bottom spacing to content boxes. */
 .panel {
   margin-bottom: 28px;
   overflow: hidden;
@@ -239,7 +239,7 @@ select {
   background: var(--surface);
 }
 
-/* Line up each box's heading and controls. [SD] */
+/* Line up each box's heading and controls. */
 .panel-heading {
   display: flex;
   justify-content: space-between;
@@ -248,32 +248,32 @@ select {
   padding: 20px 22px;
 }
 
-/* Style the text below the box heading. [SD] */
+/* Style the text below the box heading. */
 .panel-heading p {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 13px;
 }
 
-/* Set the search field width without exceeding its container. [SD] */
+/* Set the search field width without exceeding its container. */
 .search {
   width: 280px;
   max-width: 100%;
 }
 
-/* Let wide tables scroll sideways. [SD] */
+/* Let wide tables scroll sideways. */
 .table-container {
   overflow-x: auto;
 }
 
-/* Set the table width and join adjacent cell borders. [SD] */
+/* Set the table width and join adjacent cell borders. */
 table {
   width: 100%;
   min-width: 850px;
   border-collapse: collapse;
 }
 
-/* Set spacing and alignment inside table cells. [SD] */
+/* Set spacing and alignment inside table cells. */
 th,
 td {
   padding: 18px 22px;
@@ -281,7 +281,7 @@ td {
   vertical-align: middle;
 }
 
-/* Style table headings. [SD] */
+/* Style table headings. */
 th {
   background: #efefef;
   color: var(--muted);
@@ -290,29 +290,29 @@ th {
   letter-spacing: 0.4px;
 }
 
-/* Set the table text size. [SD] */
+/* Set the table text size. */
 td {
   font-size: 14px;
 }
 
-/* Add lines between table rows. [SD] */
+/* Add lines between table rows. */
 tbody tr + tr {
   border-top: 1px solid var(--border);
 }
 
-/* Highlight the selected row. [SD] */
+/* Highlight the selected row. */
 tr.selected {
   background: #f1f1f1;
 }
 
-/* Show the report name in bold. [SD] */
+/* Show the report name in bold. */
 .report-name {
   display: block;
   font-size: 15px;
   font-weight: bold;
 }
 
-/* Show extra details below the report name. [SD] */
+/* Show extra details below the report name. */
 .report-detail {
   display: block;
   margin-top: 4px;
@@ -320,12 +320,12 @@ tr.selected {
   font-size: 12px;
 }
 
-/* Keep text on one line. [SD] */
+/* Keep text on one line. */
 .nowrap {
   white-space: nowrap;
 }
 
-/* Show available materials in two columns, without list bullets. [SD] */
+/* Show available materials in two columns, without list bullets. */
 .materials {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -336,7 +336,7 @@ tr.selected {
   margin: 0;
 }
 
-/* Place each material's name beside its status. [SD] */
+/* Place each material's name beside its status. */
 .materials li {
   display: flex;
   justify-content: space-between;
@@ -346,14 +346,14 @@ tr.selected {
   font-size: 14px;
 }
 
-/* Line up the material's icon and name. [SD] */
+/* Line up the material's icon and name. */
 .material-name {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Style the availability symbol as a small circle. [SD] */
+/* Style the availability symbol as a small circle. */
 .available-icon {
   display: inline-flex;
   align-items: center;
@@ -366,13 +366,13 @@ tr.selected {
   font-weight: bold;
 }
 
-/* Style the text showing whether a material is available. [SD] */
+/* Style the text showing whether a material is available. */
 .availability {
   color: var(--muted);
   font-size: 12px;
 }
 
-/* Style the note below the materials. [SD] */
+/* Style the note below the materials. */
 .panel-note {
   margin: 0;
   padding: 8px 22px 20px;
@@ -380,7 +380,7 @@ tr.selected {
   font-size: 13px;
 }
 
-/* Set the default button appearance. [SD] */
+/* Set the default button appearance. */
 .button {
   display: inline-block;
   padding: 9px 16px;
@@ -393,36 +393,36 @@ tr.selected {
   white-space: nowrap;
 }
 
-/* Change the button color when hovered over. [SD] */
+/* Change the button color when hovered over. */
 .button:hover {
   background: #ededed;
 }
 
-/* Make the main action button dark. [SD] */
+/* Make the main action button dark. */
 .button.primary {
   border-color: var(--dark);
   background: var(--dark);
   color: white;
 }
 
-/* Change the main button color when hovered over. [SD] */
+/* Change the main button color when hovered over. */
 .button.primary:hover {
   background: #484848;
 }
 
-/* Style the message shown when there are no results. [SD] */
+/* Style the message shown when there are no results. */
 .empty-message {
   padding: 24px;
   color: var(--muted);
   text-align: center;
 }
 
-/* Hide elements marked as hidden. [SD] */
+/* Hide elements marked as hidden. */
 [hidden] {
   display: none !important;
 }
 
-/* Style the page footer. [SD] */
+/* Style the page footer. */
 footer {
   padding: 12px 28px;
   border-top: 1px solid var(--border);
@@ -431,7 +431,7 @@ footer {
   font-size: 12px;
 }
 
-/* Style the popup explaining a planned feature. [SD] */
+/* Style the popup explaining a planned feature. */
 dialog {
   width: min(480px, calc(100% - 32px));
   padding: 26px;
@@ -439,91 +439,91 @@ dialog {
   border-radius: 6px;
 }
 
-/* Darken the page behind the popup. [SD] */
+/* Darken the page behind the popup. */
 dialog::backdrop {
   background: rgb(0 0 0 / 35%);
 }
 
-/* Add space around the popup text. [SD] */
+/* Add space around the popup text. */
 dialog p {
   margin: 16px 0 24px;
 }
 
-/* Adjust the layout for screens up to 1050px wide. [SD] */
+/* Adjust the layout for screens up to 1050px wide. */
 @media (max-width: 1050px) {
-  /* Make the sidebar narrower. [SD] */
+  /* Make the sidebar narrower. */
   .layout {
     grid-template-columns: 190px minmax(0, 1fr);
   }
 
-  /* Reduce space around the main content. [SD] */
+  /* Reduce space around the main content. */
   main {
     padding: 24px;
   }
 
-  /* Let box headings and controls wrap onto another line. [SD] */
+  /* Let box headings and controls wrap onto another line. */
   .panel-heading {
     flex-wrap: wrap;
   }
 
-  /* Show materials in one column. [SD] */
+  /* Show materials in one column. */
   .materials {
     grid-template-columns: 1fr;
   }
 }
 
-/* Adjust the layout for phone-sized screens. [SD] */
+/* Adjust the layout for phone-sized screens. */
 @media (max-width: 650px) {
-  /* Let top-bar items wrap and reduce spacing. [SD] */
+  /* Let top-bar items wrap and reduce spacing. */
   .topbar {
     padding: 14px 18px;
     flex-wrap: wrap;
   }
 
-  /* Make the portal name smaller. [SD] */
+  /* Make the portal name smaller. */
   .brand {
     font-size: 18px;
   }
 
-  /* Place the sidebar above the main content. [SD] */
+  /* Place the sidebar above the main content. */
   .layout {
     display: block;
   }
 
-  /* Move the sidebar border to the bottom. [SD] */
+  /* Move the sidebar border to the bottom. */
   .sidebar {
     padding: 12px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
 
-  /* Arrange menu items in two columns. [SD] */
+  /* Arrange menu items in two columns. */
   .sidebar nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* Hide extra sidebar text to save space. [SD] */
+  /* Hide extra sidebar text to save space. */
   .nav-label,
   .sidebar-footer {
     display: none;
   }
 
-  /* Reduce space around the main content. [SD] */
+  /* Reduce space around the main content. */
   main {
     padding: 22px 16px;
   }
 
-  /* Make the main heading smaller. [SD] */
+  /* Make the main heading smaller. */
   h1 {
     font-size: 26px;
   }
 
-  /* Let the heading and its controls wrap onto another line. [SD] */
+  /* Let the heading and its controls wrap onto another line. */
   .page-heading {
     flex-wrap: wrap;
   }
 
-  /* Allow narrower filter fields. [SD] */
+  /* Allow narrower filter fields. */
   .field {
     min-width: 150px;
   }
