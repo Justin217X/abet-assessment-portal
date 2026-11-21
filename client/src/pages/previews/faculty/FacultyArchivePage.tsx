@@ -1,14 +1,25 @@
 /**
  * File: FacultyArchivePage.tsx
- * Purpose: Lists submitted and archived report records for the demo Faculty user.
+ * Purpose: Separates supplied historical PDFs from the demo Faculty report records.
  * !!! Fixed demo profile. Saved PDF access and production permissions are pending. [SD]
  */
 import { useEffect, useState } from "react"
 import { loadPortalData } from "../../../api/portalData"
 import type { PortalData } from "../../../api/portalData"
+import { SampleReportLibrary } from "../../../components/SampleReportLibrary"
 import { PendingAction } from "../../../components/PendingAction"
 
 export function FacultyArchivePage() {
+    const [view, setView] = useState<"samples" | "records">("samples")
+    return <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">{(["samples", "records"] as const).map((item) => <button type="button" key={item} aria-pressed={view === item} onClick={() => setView(item)} className={"rounded-md border px-3 py-2 text-sm " + (view === item ? "border-blue-800 bg-blue-800 text-white" : "border-slate-300 bg-white")}>
+            {item === "samples" ? "Provided PDF samples" : "Saved mock reports"}
+        </button>)}</div>
+        {view === "samples" ? <SampleReportLibrary /> : <FacultyArchiveRecords />}
+    </div>
+}
+
+function FacultyArchiveRecords() {
     const [data, setData] = useState<PortalData | null>(null)
     const [error, setError] = useState("")
     const [search, setSearch] = useState("")

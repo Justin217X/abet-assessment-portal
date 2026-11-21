@@ -219,3 +219,18 @@ record is not left open. Loading, empty, and failed-request states are included.
 Preview and download buttons remain disabled and marked pending. These are mock
 report records, not available PDF files. Historical PDF samples and real user
 permissions are separate changes. This page does not save or edit records.
+
+## Faculty historical PDF sample library
+
+Report archive now has Provided PDF samples and Saved mock reports views.
+The historical library reads /api/demo/sample-reports/ and searches by course,
+PI, or filename. Choose Preview PDF to use the embedded viewer, Open PDF for
+a separate tab, or Download sample for the original file. The list scrolls inside
+its panel. Filtering removes previews that are outside the current results.
+
+Place the original PDFs in server/demo_data/pdf_samples, or configure
+PORTAL_SAMPLE_PDF_DIR as described in server/README.md. Missing files remain
+listed with disabled preview buttons. Loading and catalog errors are shown.
+If the browser cannot embed a PDF, use Open PDF. The originals remain outside
+Git and separate from AI-generated mock report records. Campus locations are
+not assumed. This does not add production authentication or Evaluator releases.
