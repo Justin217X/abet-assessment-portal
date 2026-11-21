@@ -1,116 +1,54 @@
 /**
- * EvaluatorDashboard.tsx
- * Opens the read-only Evaluator report, Self-Study, and improvement views. [SD]
+ * File: EvaluatorDashboard.tsx
+ * Purpose: Shows the Evaluator menu and its selected read-only page.
+ *
+ * !!! TODO:
+ * - App.tsx and Django: Check the signed-in user's Evaluator access.
+ * - App.tsx: Make Sign out end the real portal session.
+ * - EvaluatorReportArchive.tsx: Show actual released reports and evidence.
+ * - EvaluatorSupportingDocuments.tsx: Load released supporting documents.
+ * - RoleDataPage.tsx: Load released improvement actions and follow-up results.
+ * - Replace the three PendingEvaluatorAction buttons below with working
+ *   preview, download, and follow-up evidence actions.
+ * - Update the preview messages below when these connections work.
+ * [SD]
+ *
+ * !!! Django must check file permissions. Hiding menu options is not enough. [SD]
  */
 
 import { useState } from "react"
-import { Button } from "../Button"
 import { DashboardLayout } from "../components/DashboardLayout"
-import { EmptyPanel } from "../components/FacultyPanels"
-import { EvaluatorReportDetailsPage } from "../pages/previews/evaluator/EvaluatorReportDetailsPage"
-import { ImprovementActionsPage } from "../pages/previews/evaluator/ImprovementActionsPage"
-import { SelfStudyMaterialsPage } from "../pages/previews/evaluator/SelfStudyMaterialsPage"
+import { PortalIcon } from "../components/PortalIcon"
+import { EvaluatorReportArchive } from "../components/EvaluatorReportArchive"
+import { EvaluatorSupportingDocuments } from "../components/EvaluatorSupportingDocuments"
+import { PendingEvaluatorAction } from "../components/PendingEvaluatorAction"
+import { RoleDataPage } from "../components/RoleDataPage"
 
-type EvaluatorDashboardProps = {
-    onBackToSignIn: () => void
-}
+type Props = { onBackToSignIn: () => void }
 
-const evaluatorMenu = [
-    { id: "reports", label: "Reports" },
-    { id: "self-study", label: "Self-Study Materials" },
-    { id: "improvement", label: "Improvement Actions" },
+// Add, remove, or rename Evaluator menu options here.
+const menu = [
+    { id: "reports", label: "Assessment reports & evidence", icon: "file-text" },
+    { id: "documents", label: "Supporting documents", icon: "archive" },
+    { id: "improvement", label: "Improvement actions", icon: "clipboard-list" },
 ] as const
 
-type EvaluatorPage = (typeof evaluatorMenu)[number]["id"] | "report-details"
+// Allow only page IDs listed in the menu.
+type Page = (typeof menu)[number]["id"]
+export function EvaluatorDashboard({ onBackToSignIn }: Props) {
 
-const pageTitles: Record<EvaluatorPage, string> = {
-    reports: "Authorized reports",
-    "report-details": "Report details",
-    "self-study": "Self-Study Materials",
-    improvement: "Improvement Actions",
-}
+    // Remember the open page. Start with Assessment reports & evidence.
+    const [activePage, setActivePage] = useState<Page>("reports")
 
-const reportFilters = ["Program", "Semester", "Student outcome"]
+    // Create a button for each menu option.
+    const navigation = <>
+        {menu.map((item) => <button type="button" key={item.id} aria-current={activePage === item.id ? "page" : undefined} onClick={() => setActivePage(item.id)}><PortalIcon name={item.icon} />{item.label}</button>)}
 
-export function EvaluatorDashboard({ onBackToSignIn }: EvaluatorDashboardProps) {
-    const [activePage, setActivePage] = useState<EvaluatorPage>("reports")
-    const activeMenuItem = activePage === "report-details" ? "reports" : activePage
+    </>
+    return <DashboardLayout role="ABET Evaluator" title={menu.find((item) => item.id === activePage)!.label} navigation={navigation} onSignOut={onBackToSignIn}>
+        <p className="mb-3 rounded-md bg-blue-50 px-3 py-2 text-sm">Evaluator review workspace · Read-only design preview. Live sign-in and document release permissions are pending.</p>
 
-    const navigation = (
-        <>
-            {evaluatorMenu.map(({ id, label }) => (
-                <Button
-                    key={id}
-                    variant="secondary"
-                    aria-current={activeMenuItem === id ? "page" : undefined}
-                    className="text-left aria-[current=page]:bg-blue-50 aria-[current=page]:font-semibold"
-                    onClick={() => setActivePage(id)}
-                    >
-                    {label}
-                </Button>
-            ))}
-        
-            <Button variant="secondary" className="mt-4 text-left" onClick={onBackToSignIn}>
-                Sign out
-            </Button>
-        </>
-  )
-  
-  return (
-        <DashboardLayout
-            role="ABET Evaluator"
-            title={pageTitles[activePage]}
-            navigation={navigation}
-            >
-            <p className="mb-4 text-sm text-slate-600">Read-only preview · No records loaded</p>
-        
-            {activePage === "reports" && (
-                <div className="space-y-4">
-                
-                    {/* TODO: Load filters and search results from reports released to the evaluator. [SD] */}
-                    <fieldset disabled className="flex flex-wrap items-end gap-4">
-                        <legend className="sr-only">Report filters</legend>
-                    
-                        {reportFilters.map((label) => (
-                            <label key={label} className="block text-sm font-medium">
-                                {label}
-                                <select className="mt-1 block rounded-md border border-slate-400 bg-white px-3 py-2">
-                                    <option>No options loaded</option>
-                                </select>
-                            </label>
-                        ))}
-                    
-                        <Button variant="secondary" className="opacity-60">
-                           Clear filters
-                        </Button>
-                    </fieldset>
-                
-                    {/* TODO: Replace this preview button with Open report on each authorized row. [SD] */}
-                    <Button variant="secondary" onClick={() => setActivePage("report-details")}>
-                        Open report details preview
-                    </Button>
-                
-                    <EmptyPanel
-                        title="Available assessment reports"
-                        columns={["Report / Course", "Semester", "Version", "Submitted", "Action"]}
-                        message="No assessment reports loaded."
-                        showSearch
-                        searchLabel="Search available reports"
-                    />
-                </div>
-            )}  
-        
-            {activePage === "report-details" && (
-                <div className="space-y-4">
-                    <Button variant="secondary" onClick={() => setActivePage("reports")}>
-                        Back to reports
-                    </Button>
-                    <EvaluatorReportDetailsPage />
-                </div>
-            )}
-        
-            {activePage === "self-study" && <SelfStudyMaterialsPage />}
-            {activePage === "improvement" && <ImprovementActionsPage />}
-        </DashboardLayout>
-    )
+        {/* Open the report archive, supporting documents, or improvement actions. The improvement actions section below also contains pending buttons. */}
+        {activePage === "reports" ? <EvaluatorReportArchive /> : activePage === "documents" ? <EvaluatorSupportingDocuments /> : <div className="space-y-3"><p className="text-sm">Review findings, improvement decisions, actions taken, and follow-up results. Actions Report generation and archived document links are pending.</p><div className="flex flex-wrap gap-2"><PendingEvaluatorAction label="Preview Actions Report" /><PendingEvaluatorAction label="Download Actions Report" /><PendingEvaluatorAction label="View follow-up evidence" /></div><RoleDataPage key={activePage} role="ABET Evaluator" view={activePage} /></div>}
+    </DashboardLayout>
 }
