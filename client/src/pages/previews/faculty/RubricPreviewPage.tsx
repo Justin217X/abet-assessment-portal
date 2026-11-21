@@ -27,6 +27,8 @@ type RubricPreview = {
 type Props = { assignmentVersionId?: string }
 
 export function RubricPreviewPage({ assignmentVersionId }: Props = {}) {
+    const [downloading, setDownloading] = useState(false)
+    const [downloadError, setDownloadError] = useState<{ versionId: string; message: string } | null>(null)
     const [requestNumber, setRequestNumber] = useState(0)
     const [versionInput, setVersionInput] = useState("")
     const [selectedVersionId, setSelectedVersionId] = useState("")
@@ -61,6 +63,30 @@ export function RubricPreviewPage({ assignmentVersionId }: Props = {}) {
         void loadPreview()
         return () => controller.abort()
     }, [versionId, requestNumber])
+
+    async function downloadPdf() {
+        if (!preview || !versionId || downloading) return
+        setDownloading(true)
+        setDownloadError(null)
+        try {
+            const response = await fetch("/api/demo/assignment-versions/" + encodeURIComponent(versionId) + "/rubric/pdf/")
+            if (!response.ok || !response.headers.get("Content-Type")?.startsWith("application/pdf")) {
+                throw new Error("Could not download this saved rubric PDF. Check Django and try again.")
+            }
+            const url = URL.createObjectURL(await response.blob())
+            const link = document.createElement("a")
+            link.href = url
+            link.download = "rubric-report-" + versionId + ".pdf"
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+            window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+        } catch (reason: unknown) {
+            setDownloadError({ versionId, message: reason instanceof Error ? reason.message : "Could not download the rubric PDF." })
+        } finally {
+            setDownloading(false)
+        }
+    }
 
     return (
         <div className="space-y-6">
@@ -128,10 +154,11 @@ export function RubricPreviewPage({ assignmentVersionId }: Props = {}) {
                 </>
             )}
 
-            {/* TODO: Enable PDF generation after the PDF generator is connected. [SD] */}
-            <Button disabled className="cursor-not-allowed opacity-60">
-                Generate Rubric Report PDF
+            {/* Use the same saved version for the preview and PDF. */}
+            <Button disabled={!preview || downloading} onClick={() => void downloadPdf()} className="disabled:cursor-not-allowed disabled:opacity-60">
+                {downloading ? "Downloading PDF..." : "Generate Rubric Report PDF"}
             </Button>
+            {downloadError?.versionId === versionId && <p role="alert">{downloadError.message}</p>}
         </div>
     )
 }
