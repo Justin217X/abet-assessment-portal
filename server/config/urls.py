@@ -4,6 +4,7 @@ Purpose: Maps incoming URLs to Django views
 
 Reference: https://docs.djangoproject.com/en/5.2/topics/http/urls/
 """
+from integrations.schedule_views import demo_save_plan
 from integrations.evidence_views import demo_evidence_pdf
 from integrations.review_views import demo_save_review
 from integrations.sample_views import demo_sample_catalog, demo_sample_report
@@ -13,6 +14,7 @@ from django.urls import include, path
 from integrations.views import demo_rubric_preview
 
 urlpatterns = [
+    path('api/demo/plans/', demo_save_plan, name='demo-save-plan'),
     path('api/demo/reviews/', demo_save_review, name='demo-save-review'),
     path('api/demo/evidence/<str:evidence_id>/pdf/', demo_evidence_pdf, name='demo-evidence-pdf'),
     path('api/demo/sample-reports/', demo_sample_catalog, name='demo-sample-catalog'),
