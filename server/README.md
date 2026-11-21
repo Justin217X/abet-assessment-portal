@@ -151,3 +151,13 @@ The caller must first choose the correct assignment and student group and remove
 Run the focused tests: python server/manage.py test reports.test_pi_calculations
 
 This change adds calculations only, not PDF reports, web endpoints, or dashboard pages.
+
+## Prepare dashboard data
+
+integrations/dashboard_data.py loads the configured shared mock provider and prepares assignment records and PI statistics for each assessment.
+
+Calculations use that assessment's selected saved version, rubric criterion, and student group. Only active, matched enrollments in that group are counted. Missing selected criteria return no statistics. Group confirmation is a separate workflow step; this function does not confirm a group.
+
+Preparation works on a copy and does not save or change source records. Evidence previews, saved demo edits, PDF catalogs, web endpoints, and dashboard UI are separate changes.
+
+Run the focused tests: python server/manage.py test integrations.test_dashboard_data --settings=config.test_settings
