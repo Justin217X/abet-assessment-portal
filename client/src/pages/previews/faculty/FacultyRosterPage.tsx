@@ -8,6 +8,8 @@ import { useEffect, useState } from "react"
 import { loadPortalData } from "../../../api/portalData"
 import type { PortalData } from "../../../api/portalData"
 import { CourseFilters } from "../../../components/CourseFilters"
+import { groupKey, readGroupConfirmation } from "../../../helpers/rosterConfirmation"
+import { recordDemoActivity } from "../../../api/demoActivity"
 import { PendingAction } from "../../../components/PendingAction"
 
 export function FacultyRosterPage({ initialCourseId = "" }: { initialCourseId?: string } = {}) {
@@ -17,6 +19,8 @@ export function FacultyRosterPage({ initialCourseId = "" }: { initialCourseId?: 
     const [subject, setSubject] = useState("")
     const [courseId, setCourseId] = useState(initialCourseId)
     const [search, setSearch] = useState("")
+    const [confirmed, setConfirmed] = useState<Record<string, boolean>>({})
+    const [confirmationError, setConfirmationError] = useState("")
 
     useEffect(() => {
         const controller = new AbortController()
@@ -90,6 +94,18 @@ export function FacultyRosterPage({ initialCourseId = "" }: { initialCourseId?: 
             <p role="status" className="text-sm">{visibleRoster.length} of {roster.length} roster records shown.</p>
             {!roster.length && <p role="status">No roster records are available for this class.</p>}
             {roster.length > 0 && !visibleRoster.length && <p role="status">No students match your search.</p>}
+            {data.student_groups.filter((group) => group.course_id === selected.id).map((group) => <label key={group.id} className="flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={confirmed[group.id] ?? readGroupConfirmation(data.metadata.dataset_id, group.id, group.confirmed)} onChange={(event) => {
+                    const value = event.target.checked
+                    try {
+                        sessionStorage.setItem(groupKey(data.metadata.dataset_id, group.id), String(value))
+                        setConfirmed({ ...confirmed, [group.id]: value }); setConfirmationError("")
+                        recordDemoActivity({ actor: "Professor Martin", title: "Demo group confirmation saved", description: selected.course_code + " · Browser-tab draft only", roles: ["faculty"], kind: "group", entity_id: group.id })
+                    } catch { setConfirmationError("Could not save confirmation in this browser tab.") }
+                }} />
+                I have verified the {group.program_id} student group (browser-tab demo only).
+            </label>)}
+            {confirmationError && <p role="alert" className="text-sm text-red-800">{confirmationError}</p>}
             <div className="flex flex-wrap gap-2">
                 <PendingAction label="Refresh roster from approved source" />
                 <PendingAction label="Upload CSV/Excel roster" />

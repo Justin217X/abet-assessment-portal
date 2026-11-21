@@ -4,16 +4,22 @@
  * !!! These originals are separate from AI-generated mock report records. [SD]
  */
 import { useEffect, useState } from "react"
+import { CourseFilters } from "./CourseFilters"
 import type { PortalData } from "../api/portalData"
 
 type Sample = PortalData["sample_reports"][number]
 
-export function SampleReportLibrary() {
+type Props = { data?: PortalData; reports?: Sample[]; campuses?: PortalData["campuses"]; evaluator?: boolean }
+
+export function SampleReportLibrary({ data, reports: supplied, campuses: suppliedCampuses, evaluator = false }: Props) {
     const [reports, setReports] = useState<Sample[] | null>(null)
     const [error, setError] = useState("")
     const [search, setSearch] = useState("")
     const [selection, setSelection] = useState("")
+    const [campus, setCampus] = useState("")
+    const [subject, setSubject] = useState("")
     useEffect(() => {
+        if (supplied || data) return
         const controller = new AbortController()
         async function load() {
             const response = await fetch("/api/demo/sample-reports/", { signal: controller.signal })
@@ -26,17 +32,23 @@ export function SampleReportLibrary() {
             if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : "Could not load historical samples.")
         })
         return () => controller.abort()
-    }, [])
+    }, [supplied, data])
     if (error) return <p role="alert">{error}</p>
-    if (!reports) return <p role="status">Loading supplied PDF samples...</p>
-    const visible = reports.filter((row) => [row.course_code, row.pi_code, row.filename].join(" ").toLowerCase().includes(search.trim().toLowerCase()))
+    const rows = supplied ?? data?.sample_reports ?? reports
+    if (!rows) return <p role="status">Loading supplied PDF samples...</p>
+    const campuses = [...(suppliedCampuses ?? data?.campuses ?? [])]
+    if (rows.some((row) => !row.campus_id)) campuses.push({ id: "not-specified", name: "Not specified" })
+    const visible = rows.filter((row) => (!campus || (row.campus_id ?? "not-specified") === campus) &&
+        (!subject || row.course_code.split(" ")[0] === subject) &&
+        [row.course_code, row.pi_code, row.filename].join(" ").toLowerCase().includes(search.trim().toLowerCase()))
     const selected = visible.find((row) => row.id === selection && row.file_available) ?? visible.find((row) => row.file_available)
     return <div className="space-y-3">
-        <p className="rounded-md bg-blue-50 p-3 text-sm">Supplied historical PDF examples. These are original files, not AI-generated reports for the fictional assessments. Campus locations have not been verified.</p>
+        <p className="rounded-md bg-blue-50 p-3 text-sm">Supplied historical PDF examples. These are original files, not AI-generated reports for the fictional assessments. Campus locations have not been verified. {evaluator ? "Only examples released to the demo evaluator are listed." : ""}</p>
+        <CourseFilters campuses={campuses} campus={campus} subject={subject} onCampusChange={setCampus} onSubjectChange={setSubject} onClear={() => { setCampus(""); setSubject(""); setSearch("") }} />
         <label className="grid max-w-lg gap-1 text-sm font-medium">Search PDF samples
             <input type="search" placeholder="Course, PI or filename" value={search} onChange={(event) => setSearch(event.target.value)} className="rounded-md border border-slate-300 bg-white px-3 py-2" />
         </label>
-        <p role="status" className="text-xs">{visible.length} of {reports.length} supplied PDFs</p>
+        <p role="status" className="text-xs">{visible.length} of {rows.length} supplied PDFs</p>
         <div className="grid min-w-0 items-start gap-3 lg:grid-cols-[19rem_minmax(0,1fr)]">
             <div role="region" aria-label="Provided PDF samples" tabIndex={0} className="max-h-[60dvh] overflow-y-auto pr-2">
                 <ul className="space-y-2">{visible.map((row) => <li key={row.id} className={"rounded-lg border p-3 " + (selected?.id === row.id ? "border-blue-700 bg-blue-50" : "border-slate-200 bg-white")}>
@@ -45,7 +57,7 @@ export function SampleReportLibrary() {
                     <p className="mt-1 break-all text-xs text-slate-600">{row.filename}</p>
                     <button type="button" disabled={!row.file_available} aria-pressed={selected?.id === row.id} onClick={() => setSelection(row.id)} className="mt-2 rounded border border-slate-300 bg-white px-3 py-1 text-sm disabled:opacity-50">{row.file_available ? "Preview PDF" : "File not available locally"}</button>
                 </li>)}</ul>
-                {!visible.length && <p className="p-3 text-sm">{reports.length ? "No PDF samples match your search." : "No historical samples are listed."}</p>}
+                {!visible.length && <p className="p-3 text-sm">{rows.length ? "No PDF samples match your search." : "No historical samples are listed."}</p>}
             </div>
             <section aria-label="Historical PDF preview" className="min-w-0 overflow-hidden rounded-lg border border-slate-200 bg-white">
                 {selected ? <>

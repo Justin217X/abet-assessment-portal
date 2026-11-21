@@ -6,6 +6,8 @@
 import { useState } from "react"
 import type { PortalData } from "../../../api/portalData"
 import { MockEvidencePicker } from "../../../components/MockEvidencePicker"
+import { readGroupConfirmation } from "../../../helpers/rosterConfirmation"
+import { recordDemoActivity } from "../../../api/demoActivity"
 import { PendingAction } from "../../../components/PendingAction"
 
 type Props = {
@@ -58,6 +60,7 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
             setEditing(false)
             setSaveError("")
             setSaveMessage("Draft saved in this browser tab. Server saving is pending.")
+            recordDemoActivity({ actor: "Professor Martin", title: "Demo report draft saved", description: course?.course_code ?? assessmentId, roles: ["faculty"], kind: "draft", entity_id: assessmentId })
         } catch {
             setSaveError("Could not save the draft in this browser tab. Your text is still available below; try again.")
         }
@@ -67,6 +70,7 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
         <button type="button" onClick={onChooseAssessment} className="rounded-md border border-slate-300 px-3 py-2 text-sm">Choose assessment</button>
     </div>
 
+    const groupConfirmed = readGroupConfirmation(data.metadata.dataset_id, group.id, group.confirmed)
     const criterion = version.payload.rubric?.find((row) => row.id === assessment.criterion_id)
     const stats = data.statistics[assessment.id]
     const selectedEvidence = data.evidence.filter((row) => row.assessment_id === assessment.id && (editing ? evidenceIds : savedDraft.evidence).includes(row.id))
@@ -74,7 +78,7 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
         ["high", "middle", "low"].every((band) => selectedEvidence.filter((row) => row.band === band && row.eligible).length === 1)
     const checks = [
         { label: "Grading rubric available", ready: Boolean(criterion && version.payload.use_rubric_for_grading) },
-        { label: "Student group confirmed", ready: group.confirmed },
+        { label: "Student group confirmed", ready: groupConfirmed },
         { label: "Assessed results available", ready: Boolean(stats?.total_students) },
         { label: "Three evidence examples selected", ready: evidenceReady },
     ]
@@ -112,7 +116,7 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
                         <ul className="flex flex-wrap gap-2">{criterion.ratings.map((row) => <li key={row.id} className="rounded border border-slate-200 px-2 py-1 text-xs">{row.description}: {row.points}</li>)}</ul>
                     </> : <p role="status">No rubric criterion is available.</p>}
                     <p className="text-sm">{data.programs.find((row) => row.id === group.program_id)?.name ?? group.program_id} · {group.student_ids.length} students</p>
-                    <p className="text-sm">{group.confirmed ? "Group confirmed" : "Group confirmation needed"}</p>
+                    <p className="text-sm">{groupConfirmed ? "Group confirmed" : "Group confirmation needed"}</p>
                     <button type="button" onClick={() => onReviewRoster(course.id)} className="rounded border border-slate-300 px-2 py-1 text-sm">Review roster</button>
                     <h4 className="border-t border-slate-200 pt-2 text-sm font-semibold">Assignment instructions</h4>
                     <p className="text-sm">{version.payload.description?.replace(/<[^>]*>/g, "") || "No instructions supplied."}</p>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import type { PortalData } from "../../../api/portalData"
 import { loadPortalData } from "../../../api/portalData"
 import { savePeerReview } from "../../../api/peerReviews"
+import { PendingAction } from "../../../components/PendingAction"
 import { StatusProgress } from "../../../components/StatusProgress"
 
 type Props = { onDataChange?: (data: PortalData) => void }
@@ -16,6 +17,7 @@ export function FacultyPeerReviewsPage({ onDataChange }: Props) {
     const [error, setError] = useState("")
     const [search, setSearch] = useState("")
     const [selectedId, setSelectedId] = useState("")
+    const [scope, setScope] = useState<"assigned" | "feedback">("assigned")
     useEffect(() => {
         const controller = new AbortController()
         loadPortalData(controller.signal).then(setData).catch((reason: unknown) => {
@@ -27,7 +29,8 @@ export function FacultyPeerReviewsPage({ onDataChange }: Props) {
     if (!data) return <p role="status">Loading assigned peer reviews...</p>
 
     // Display scoping only. Django must use the signed-in reviewer in production.
-    const reviews = data.peer_reviews.filter((row) => row.reviewer_id === "faculty-1")
+    const reviews = data.peer_reviews.filter((row) => scope === "assigned" ? row.reviewer_id === "faculty-1"
+        : data.assessments.some((task) => task.id === row.assessment_id && task.faculty_id === "faculty-1"))
     const assessment = (id: string) => data.assessments.find((row) => row.id === id)
     const title = (id: string) => {
         const row = assessment(id)
@@ -41,6 +44,7 @@ export function FacultyPeerReviewsPage({ onDataChange }: Props) {
     const completed = reviews.filter((row) => row.status === "completed").length
     return <div className="space-y-3">
         <p className="rounded-md bg-blue-50 p-3 text-sm">AI-generated mock records. Reviews assigned to Professor Martin are shown here. Feedback saves to the local demo database.</p>
+        <div className="flex gap-2">{(["assigned", "feedback"] as const).map((item) => <button type="button" key={item} aria-pressed={scope === item} onClick={() => { setScope(item); setSelectedId("") }} className={"rounded-md border px-3 py-2 text-sm " + (scope === item ? "bg-blue-800 text-white" : "bg-white")}>{item === "assigned" ? "Assigned to me" : "Feedback on my reports"}</button>)}</div>
         <StatusProgress label="Peer review progress" complete={completed} completeLabel="reviews completed" segments={[
             { label: "Completed", count: completed, tone: "complete" },
             { label: "Pending", count: reviews.length - completed, tone: "review" },
@@ -58,11 +62,16 @@ export function FacultyPeerReviewsPage({ onDataChange }: Props) {
                     <p className="text-sm">Status: {row.status}</p>
                     <p className="text-sm">Due <time dateTime={row.due_on}>{row.due_on}</time></p>
                     <button type="button" onClick={() => setSelectedId(row.id)} aria-pressed={selectedId === row.id}
-                        className="rounded-md border border-slate-300 bg-white px-3 py-1 text-sm">View review</button>
+                        className="rounded-md border border-slate-300 bg-white px-3 py-1 text-sm">{scope === "assigned" ? "View review" : "View feedback"}</button>
                 </article>)}
                 {!visible.length && <p role="status" className="p-3 text-sm">{reviews.length ? "No reviews match your search." : "No peer reviews are assigned to you."}</p>}
             </div>
-            {selected ? <ReviewFeedback key={selected.id} review={selected} title={title(selected.assessment_id)} course={course(selected.assessment_id)}
+            {selected && scope === "feedback" ? <section aria-label="Feedback on my report" className="space-y-3 rounded-lg border border-slate-200 bg-white p-4">
+                <h3 className="font-semibold">{title(selected.assessment_id)}</h3>
+                <p className="text-sm">Reviewer: {data.users.find((row) => row.id === selected.reviewer_id)?.name} · {selected.status}</p>
+                <p className="whitespace-pre-wrap text-sm">{selected.feedback || "No feedback submitted yet."}</p>
+                <PendingAction label="Create revised report" />
+            </section> : selected ? <ReviewFeedback key={selected.id} review={selected} title={title(selected.assessment_id)} course={course(selected.assessment_id)}
                 report={data.reports.find((row) => row.id === selected.report_id)}
                 onSaved={(review) => {
                     const updated = { ...data, peer_reviews: data.peer_reviews.map((row) => row.id === review.id ? review : row) }

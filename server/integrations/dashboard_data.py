@@ -57,6 +57,8 @@ def prepare_dashboard_data(records):
         statistics[assessment['id']] = calculate_pi_statistics(criterion, submissions)
     data['statistics'] = statistics
     data['evidence'] = build_evidence_candidates(data, roster)
+    from .sample_reports import sample_report_catalog
+    data["sample_reports"] = sample_report_catalog()
     return data
 
 

@@ -37,3 +37,26 @@ def demo_sample_report(request, sample_id):
     response['Cache-Control'] = 'private, no-store'
     response['X-Content-Type-Options'] = 'nosniff'
     return response
+
+
+@require_GET
+def demo_evaluator_sample_catalog(request):
+    if not settings.DEBUG:
+        raise Http404
+    from .sample_reports import evaluator_sample_report_catalog
+    from .portal_data import MockPortalProvider
+    response = JsonResponse({'sample_reports': evaluator_sample_report_catalog(),
+                             'campuses': MockPortalProvider().load().get('campuses', [])})
+    response['Cache-Control'] = 'private, no-store'
+    return response
+
+
+@require_GET
+@xframe_options_sameorigin
+def demo_evaluator_sample_report(request, sample_id):
+    if not settings.DEBUG:
+        raise Http404
+    from .sample_reports import evaluator_sample_report_catalog
+    if not any(row['id'] == sample_id for row in evaluator_sample_report_catalog()):
+        raise Http404
+    return demo_sample_report(request, sample_id)
