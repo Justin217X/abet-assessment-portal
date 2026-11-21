@@ -234,3 +234,18 @@ listed with disabled preview buttons. Loading and catalog errors are shown.
 If the browser cannot embed a PDF, use Open PDF. The originals remain outside
 Git and separate from AI-generated mock report records. Campus locations are
 not assumed. This does not add production authentication or Evaluator releases.
+
+## Coordinator schedule creation
+
+Open the Coordinator demo, then Manage schedule from Overview. The form loads
+program and semester options from the shared API. Enter a title and a due date
+inside the selected semester, then Save schedule. The schedule list updates
+after a successful save and can be searched by title, program, semester, or date.
+
+First run migrations and seed_portal_demo, set PORTAL_DATA_PROVIDER=saved_mock,
+and restart Django in development mode. Requests use /api/demo/plans/ and Django's
+CSRF token. Saved schedules remain after reloading. Failed saves retain form
+values for retry; loading, empty, and error states are included.
+
+This creates new schedules only. Work assignment, editing existing schedules,
+production permissions, and notifications remain separate changes.
