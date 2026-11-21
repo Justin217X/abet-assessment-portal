@@ -167,4 +167,16 @@ Drafts use sessionStorage in the current browser tab. They are kept separate by 
 
 The shared API response and JSON files are unchanged. Failed storage writes show an error and keep the text available for retry. Invalid stored drafts fall back to the shared explanation.
 
-Only the explanation is editable here. Scores, rubric, group information, evidence selection, file uploads, PDF actions, server saving, and submission are separate work.
+The explanation and mock evidence selections are editable here. Scores, rubric, group information, evidence selection, file uploads, PDF actions, server saving, and submission are separate work.
+
+## Faculty mock evidence picker
+
+Choose Edit report details, then Choose mock example for a high, middle, or low category. The dialog lists eligible examples for the selected assessment, with student label, score, feedback, and suggestion flag.
+
+Search by student or score, then select an example. Replacing one category keeps the other two choices. No example is selected automatically, and suggested ordering remains a proposed demo convenience.
+
+Save Draft & Return to Review saves the explanation and selected evidence IDs in the current browser tab. Cancel discards unsaved choices. Earlier explanation-only browser drafts remain readable. This does not save to Django or change the shared JSON.
+
+Readiness requires three eligible choices, one per category. No additional different-student rule is assumed without sponsor confirmation.
+
+PDF previews and actual graded-file uploads remain disabled and marked pending.

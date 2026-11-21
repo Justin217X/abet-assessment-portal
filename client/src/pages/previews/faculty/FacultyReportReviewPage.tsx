@@ -1,10 +1,11 @@
 /**
  * File: FacultyReportReviewPage.tsx
- * Purpose: Reviews a mock assessment and edits a browser-only explanation draft.
+ * Purpose: Reviews a mock assessment and edits its explanation and evidence draft.
  * !!! Drafts save only in this browser tab. Server saving and report actions are pending. [SD]
  */
 import { useState } from "react"
 import type { PortalData } from "../../../api/portalData"
+import { MockEvidencePicker } from "../../../components/MockEvidencePicker"
 import { PendingAction } from "../../../components/PendingAction"
 
 type Props = {
@@ -14,13 +15,17 @@ type Props = {
     onReviewRoster: (courseId: string) => void
 }
 
-function readExplanation(key: string, fallback: string): string {
+type Draft = { explanation: string; evidence: string[] }
+
+function readDraft(key: string, fallback: Draft): Draft {
     try {
         const saved: unknown = JSON.parse(sessionStorage.getItem(key) ?? "null")
         if (saved && typeof saved === "object" && "explanation" in saved && typeof saved.explanation === "string") {
-            return saved.explanation
+            const evidence = "evidence" in saved && Array.isArray(saved.evidence) && saved.evidence.every((id) => typeof id === "string")
+                ? saved.evidence : fallback.evidence
+            return { explanation: saved.explanation, evidence }
         }
-    } catch { /* Use the shared explanation when storage is unavailable or invalid. */ }
+    } catch { /* Use shared values when storage is unavailable or invalid. */ }
     return fallback
 }
 
@@ -37,16 +42,19 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
     const group = data.student_groups.find((row) => row.id === assessment?.student_group_id)
     // Keep drafts separate for each dataset, assessment, and saved source version.
     const storageKey = ["abet-report-draft", data.metadata.dataset_id, assessmentId, assessment?.assignment_version_id ?? ""].join(":")
-    const [savedExplanation, setSavedExplanation] = useState(() => readExplanation(storageKey, assessment?.faculty_explanation ?? ""))
-    const [explanation, setExplanation] = useState(savedExplanation)
+    const [savedDraft, setSavedDraft] = useState(() => readDraft(storageKey, {
+        explanation: assessment?.faculty_explanation ?? "", evidence: assessment?.evidence_ids ?? [],
+    }))
+    const [explanation, setExplanation] = useState(savedDraft.explanation)
+    const [evidenceIds, setEvidenceIds] = useState(savedDraft.evidence)
     const [editing, setEditing] = useState(false)
     const [saveMessage, setSaveMessage] = useState("")
     const [saveError, setSaveError] = useState("")
 
     function saveDraft() {
         try {
-            sessionStorage.setItem(storageKey, JSON.stringify({ explanation }))
-            setSavedExplanation(explanation)
+            sessionStorage.setItem(storageKey, JSON.stringify({ explanation, evidence: evidenceIds }))
+            setSavedDraft({ explanation, evidence: evidenceIds })
             setEditing(false)
             setSaveError("")
             setSaveMessage("Draft saved in this browser tab. Server saving is pending.")
@@ -61,10 +69,9 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
 
     const criterion = version.payload.rubric?.find((row) => row.id === assessment.criterion_id)
     const stats = data.statistics[assessment.id]
-    const selectedEvidence = data.evidence.filter((row) => row.assessment_id === assessment.id && assessment.evidence_ids.includes(row.id))
+    const selectedEvidence = data.evidence.filter((row) => row.assessment_id === assessment.id && (editing ? evidenceIds : savedDraft.evidence).includes(row.id))
     const evidenceReady = selectedEvidence.length === 3 &&
-        new Set(selectedEvidence.map((row) => row.student_id)).size === 3 &&
-        ["high", "middle", "low"].every((band) => selectedEvidence.filter((row) => row.band === band).length === 1)
+        ["high", "middle", "low"].every((band) => selectedEvidence.filter((row) => row.band === band && row.eligible).length === 1)
     const checks = [
         { label: "Grading rubric available", ready: Boolean(criterion && version.payload.use_rubric_for_grading) },
         { label: "Student group confirmed", ready: group.confirmed },
@@ -117,23 +124,13 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
                         <textarea rows={5} maxLength={10000} value={explanation}
                             onChange={(event) => { setExplanation(event.target.value); setSaveError(""); setSaveMessage("") }}
                             className="w-full rounded-md border border-slate-300 bg-white p-3" />
-                    </label> : <p className="whitespace-pre-wrap text-sm">{savedExplanation || "No faculty explanation added."}</p>}
+                    </label> : <p className="whitespace-pre-wrap text-sm">{savedDraft.explanation || "No faculty explanation added."}</p>}
                 </div>
             </section>
             <section className={card} aria-label="Student Evidence"><h3 className={heading}>Student Evidence</h3>
-                <div className="max-h-[30dvh] space-y-3 overflow-y-auto p-4">
-                    {["high", "middle", "low"].map((band) => {
-                        const example = selectedEvidence.find((row) => row.band === band)
-                        return <div key={band} className="border-b border-slate-200 pb-2">
-                            <h4 className="text-sm font-semibold capitalize">{band} example</h4>
-                            {example ? <><p className="text-sm">{data.students.find((row) => row.id === example.student_id)?.display_label ?? example.student_id}</p>
-                                <p className="break-all text-xs">{example.filename}</p>
-                                <p className="text-xs">{example.instructor_feedback || "No grading comments supplied."}</p></> :
-                                <p className="text-sm">No example selected.</p>}
-                        </div>
-                    })}
-                    <p className="text-xs text-slate-600">These are fictional summaries. Original graded-file access and evidence selection remain pending.</p>
-                </div>
+                <MockEvidencePicker data={data} assessmentId={assessment.id}
+                    selectedIds={editing ? evidenceIds : savedDraft.evidence} editing={editing}
+                    onChange={(ids) => { setEvidenceIds(ids); setSaveMessage(""); setSaveError("") }} />
             </section>
         </div>
         <section aria-label="Report readiness and actions" className="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
@@ -142,9 +139,9 @@ function ReportReview({ data, assessmentId, onChooseAssessment, onReviewRoster }
             <div className="flex flex-wrap gap-2">
                 {editing ? <>
                     <button type="button" onClick={saveDraft} className="rounded-md bg-blue-800 px-3 py-2 text-sm text-white">Save Draft &amp; Return to Review</button>
-                    <button type="button" onClick={() => { setExplanation(savedExplanation); setEditing(false); setSaveError(""); setSaveMessage("") }}
+                    <button type="button" onClick={() => { setExplanation(savedDraft.explanation); setEvidenceIds(savedDraft.evidence); setEditing(false); setSaveError(""); setSaveMessage("") }}
                         className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm">Cancel</button>
-                </> : <button type="button" onClick={() => { setExplanation(savedExplanation); setEditing(true); setSaveMessage("") }}
+                </> : <button type="button" onClick={() => { setExplanation(savedDraft.explanation); setEvidenceIds(savedDraft.evidence); setEditing(true); setSaveMessage("") }}
                     className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm">Edit report details</button>}
                 {["Refresh from Canvas", "Preview combined PDF", "Generate Final Instrument Report PDF", "Submit for peer review", "Archive finalized report"].map((label) => <PendingAction key={label} label={label} />)}
             </div>
