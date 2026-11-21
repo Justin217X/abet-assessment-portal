@@ -158,3 +158,13 @@ Open My assessments and select Review report, or use a task action on the overvi
 Four read-only sections show PI results, rubric/student group, faculty explanation, and evidence summaries. The heading identifies the course, semester, saved source revision, and status. Review roster opens the matching course.
 
 Readiness checks describe available inputs only. Editing, evidence/file selection, live refresh, combined PDF actions, submission, and archiving stay disabled and marked pending. No report data is saved by this page.
+
+## Faculty explanation drafts
+
+From a selected report, choose Edit report details, edit Faculty explanation, then Save Draft & Return to Review. Cancel discards unsaved edits.
+
+Drafts use sessionStorage in the current browser tab. They are kept separate by dataset, assessment, and saved assignment version. Reloading the same tab keeps a saved draft; other tabs/devices do not receive it. Browser session restoration can preserve a tab, so this is not an archive or guaranteed permanent storage.
+
+The shared API response and JSON files are unchanged. Failed storage writes show an error and keep the text available for retry. Invalid stored drafts fall back to the shared explanation.
+
+Only the explanation is editable here. Scores, rubric, group information, evidence selection, file uploads, PDF actions, server saving, and submission are separate work.
