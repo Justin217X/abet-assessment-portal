@@ -7,8 +7,14 @@ Reference: https://docs.djangoproject.com/en/5.2/topics/http/urls/
 from django.contrib import admin
 from django.urls import path
 from integrations.views import demo_rubric_preview
+from integrations.saved_rubric import saved_assignment_rubric
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(
+        'api/demo/assignment-versions/<uuid:version_id>/rubric/',
+        saved_assignment_rubric,
+        name='saved-assignment-rubric',
+    ),
         path('api/demo/rubric-preview/', demo_rubric_preview, name='demo-rubric-preview'),
 ]
