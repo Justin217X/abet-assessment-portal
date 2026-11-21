@@ -125,3 +125,24 @@ Run the academic and integration tests from the repository folder:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py test academics integrations --settings=config.test_settings
+```
+
+## Import the fictional Canvas assignment
+
+After setting up the local database and running migrations, run this from the repository folder:
+
+```powershell
+.\.venv\Scripts\python.exe server\manage.py import_mock_canvas_assignment
+```
+
+Expected output:
+
+```
+Saved assignment version ID: <saved UUID>
+```
+
+Run the command again with the same sample data. It prints the same saved version ID instead of creating another assignment version.
+
+The command requests assignment 501 through the mock facade and saves it with the existing assignment importer. It uses the assignment and course JSON files in server/demo_data. Each run has a separate completed import-history entry.
+
+This command works only in development mode. It creates an inactive bookkeeping account with no usable password for import history, not a portal sign-in account.
