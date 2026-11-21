@@ -139,3 +139,23 @@ integrations/portal_data.py gives backend code one place to load shared fictiona
 PortalDataFacade().load() returns the selected source and adds today's date for current-date checks. The fixed scenario date stays unchanged. No records are saved by this loader.
 
 This PR adds the provider layer only. Database seeding, saved edits, result calculations, evidence preparation, PDF catalogs, web endpoints, and dashboards are separate work.
+
+## Save the shared demo dataset locally
+
+After setting up the local development database and running migrations, run:
+
+python server/manage.py seed_portal_demo
+
+Expected first-run message:
+Saved demo dataset, courses, sections, and assignment versions.
+
+Run it again with unchanged input:
+Demo data is already saved; no new records or versions created.
+
+The command reads server/demo_data/portal_demo.json. It saves the full fictional snapshot and imports supported courses, sections, semesters, and assignment versions. Changed input creates a new snapshot and keeps earlier versions.
+
+To read the saved snapshot, set PORTAL_DATA_PROVIDER=saved_mock in your local .env and restart Django. PORTAL_DATA_PROVIDER=mock continues reading the JSON file directly.
+
+By default, an inactive account with no usable password owns the import history. You can instead use an existing local account with --username <username>. No real portal access is granted by seeding.
+
+Use this only with development/test databases. It is disabled when DEBUG=False. It does not import live university data, save Faculty drafts, or provide dashboard web endpoints.
