@@ -49,15 +49,11 @@ export function EvaluatorDashboard({ onBackToSignIn }: EvaluatorDashboardProps) 
                     {label}
                 </Button>
             ))}
-        
-            <Button variant="secondary" className="mt-4 text-left" onClick={onBackToSignIn}>
-                Sign out
-            </Button>
         </>
   )
   
   return (
-        <DashboardLayout
+        <DashboardLayout onSignOut={onBackToSignIn}
             role="ABET Evaluator"
             title={pageTitles[activePage]}
             navigation={navigation}

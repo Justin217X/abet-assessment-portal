@@ -47,15 +47,11 @@ export function AdministratorDashboard({ onBackToSignIn }: AdministratorDashboar
                     {label}
                 </Button>
             ))}
-            
-            <Button variant="secondary" className="mt-4 text-left" onClick={onBackToSignIn}>
-                Sign out
-            </Button>
         </>
     )
     
     return (
-        <DashboardLayout
+        <DashboardLayout onSignOut={onBackToSignIn}
             role="System Administrator"
             title={pageTitles[activePage]}
             navigation={navigation}

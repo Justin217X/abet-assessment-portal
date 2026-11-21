@@ -1,0 +1,265 @@
+/**
+ * File: DashboardStyles.css
+ * Purpose: Styles the shared layout used by all four dashboards.
+ *
+ * Notes:
+ * - Change shared headers, navigation, cards, and footers here.
+ * - Change Faculty-only layouts in FacultyDashboard.css.
+ * - Change shared colors and fonts in index.css.
+ * - Change university names, images, and graphics in branding.ts.
+ * - Uses Tailwind utilities through @apply.
+ *
+ * !!! Changes here can affect all four dashboards. [SD]
+ * !!! Later rules override some earlier sizes and layouts.
+ * Check the lower sections before changing a value near the top. [SD]
+ * !!! TODO: Check all dashboards at different screen sizes after changes. [SD]
+ */
+
+@reference "../index.css";
+
+/* Shared theme colors and page background.*/
+.faculty-portal {
+    --faculty-primary: var(--portal-primary, #1e3a5f);
+    --faculty-action: var(--portal-action, #1d4ed8);
+    --faculty-surface: var(--portal-surface, #fff);
+    --faculty-background: var(--portal-background, #f6f8fb);
+    --faculty-tint: var(--portal-tint, #edf3fa);
+    --faculty-text: var(--portal-text, #172b45);
+    --faculty-border: var(--portal-border, #d5deea);
+    @apply min-h-screen;
+    @apply [background:var(--faculty-background)];
+    @apply [color:var(--faculty-text)];
+    @apply [font-family:var(--portal-font,_Arial,_sans-serif)];
+    @apply text-[15px];
+    @apply [line-height:1.55];
+}
+.faculty-portal button,
+.faculty-portal a {
+    @apply cursor-pointer;
+}
+.faculty-portal :is(button, a, [tabindex]):focus-visible {
+    @apply [outline:3px_solid_var(--faculty-action)];
+    @apply [outline-offset:4px];
+}
+/* Top portal name bar and sign-out area. */
+.faculty-header {
+    @apply flex items-center justify-between gap-5;
+    @apply [padding:16px_clamp(20px,_3vw,_48px)];
+    @apply [background:var(--faculty-primary)];
+    @apply text-white;
+}
+.faculty-brand {
+    @apply flex items-center gap-3.5;
+    @apply [font-size:clamp(17px,_2vw,_24px)];
+    @apply font-bold;
+    @apply no-underline;
+}
+.faculty-header-actions {
+    @apply flex items-center gap-[18px] text-[13px];
+}
+.faculty-header-actions button {
+    @apply [border:1px_solid_#ffffff70];
+    @apply rounded-[5px];
+    @apply [padding:6px_12px];
+}
+.faculty-header :is(button, a):focus-visible {
+    @apply [outline-color:white];
+}
+.faculty-content {
+    @apply [max-width:1600px];
+    @apply m-auto;
+    @apply [padding:0_clamp(16px,_2.5vw,_40px)_32px];
+}
+
+/* Page navigation and demo label. */
+.faculty-toolbar {
+    @apply flex flex-wrap justify-between items-center gap-3;
+    @apply [padding:18px_0];
+}
+.faculty-toolbar nav {
+    @apply flex flex-wrap gap-1.5;
+}
+.faculty-toolbar nav button {
+    @apply [padding:9px_14px];
+    @apply rounded-md text-sm;
+}
+.faculty-toolbar nav button:hover {
+    @apply [background:var(--faculty-tint)];
+}
+.faculty-toolbar nav button[aria-current="page"] {
+    @apply [background:var(--faculty-primary)];
+    @apply text-white;
+}
+.faculty-demo-label {
+    @apply text-xs;
+    @apply [color:#52637a];
+}
+
+/* Shared cards and headings. */
+.faculty-card {
+    @apply [background:var(--faculty-surface)];
+    @apply [border:1px_solid_var(--faculty-border)];
+    @apply rounded-[10px] overflow-hidden;
+    @apply [box-shadow:0_2px_5px_#152c4c04];
+}
+.faculty-card > h2,
+.faculty-card-heading {
+    @apply [padding:16px_18px];
+    @apply [background:var(--faculty-tint)];
+    @apply [border-bottom:1px_solid_var(--faculty-border)];
+}
+.faculty-card h2 {
+    @apply text-[17px] font-bold;
+    @apply [letter-spacing:-.02em];
+}
+.faculty-card h3 {
+    @apply text-[15px] font-bold;
+}
+.faculty-card-heading {
+    @apply flex flex-wrap items-center justify-between gap-2;
+}
+.faculty-card-body {
+    @apply p-[18px] grid gap-3;
+}
+.faculty-muted {
+    @apply [color:#52637a];
+    @apply text-[13px];
+}
+.faculty-card progress {
+    @apply w-full h-3;
+    @apply [accent-color:var(--faculty-action)];
+    @apply border-0;
+    @apply rounded-[10px] overflow-hidden;
+}
+.faculty-card progress::-webkit-progress-bar {
+    @apply [background:var(--faculty-border)];
+    @apply rounded-[10px];
+}
+.faculty-card progress::-webkit-progress-value {
+    @apply [background:var(--faculty-action)];
+    @apply rounded-[10px];
+}
+.faculty-card progress::-moz-progress-bar {
+    @apply [background:var(--faculty-action)];
+}
+.faculty-text-link {
+    @apply [color:var(--faculty-action)];
+    @apply text-[13px] text-left;
+    @apply underline-offset-[3px];
+}
+.faculty-text-link:hover {
+    @apply underline;
+}
+.faculty-detail-page {
+    @apply p-6;
+    @apply [background:var(--faculty-surface)];
+    @apply [border:1px_solid_var(--faculty-border)];
+    @apply rounded-[10px];
+}
+.faculty-page-title {
+    @apply font-bold text-2xl;
+    @apply [margin-bottom:22px];
+}
+
+/* Shared footer. */
+.faculty-footer {
+    @apply [padding:16px_24px];
+    @apply text-center;
+    @apply [border-top:1px_solid_var(--faculty-border)];
+    @apply [color:#52637a];
+    @apply text-xs;
+}
+
+/* Show the Skip to content link when a keyboard user focuses it. */
+.faculty-skip-link {
+    @apply absolute;
+    @apply [left:12px];
+    @apply [top:-100px];
+    @apply [z-index:10];
+    @apply [padding:12px];
+    @apply [background:white];
+    @apply [color:#172b45];
+}
+.faculty-skip-link:focus {
+    @apply [top:12px];
+}
+@media (max-width: 700px) {
+    .faculty-header {
+        @apply [padding:14px_18px];
+    }
+    .faculty-header-actions > span {
+        @apply hidden;
+    }
+        .campus-banner {
+        @apply [min-height:210px];
+    }
+    .faculty-toolbar nav {
+        @apply gap-0.5;
+    }
+    .faculty-toolbar nav button {
+        @apply [padding:8px_10px];
+        @apply text-[13px];
+    }
+    .faculty-detail-page {
+        @apply p-4;
+    }
+}
+.faculty-brand-icon {
+    @apply [font-size:28px];
+}
+.faculty-header-actions button,
+.faculty-toolbar nav button,
+.faculty-card h2,
+.faculty-text-link {
+    @apply inline-flex items-center gap-2;
+}
+.faculty-card > h2 {
+    @apply flex;
+}
+.faculty-header,
+.faculty-card > h2,
+.faculty-card-heading {
+    @apply relative;
+    @apply isolate;
+}
+.faculty-card > h2::before,
+.faculty-card-heading::before {
+    content: "";
+    @apply absolute inset-0;
+    @apply [z-index:-1];
+    @apply pointer-events-none;
+    @apply [border-radius:inherit];
+    @apply [mask-image:var(--portal-pattern)];
+    @apply [mask-size:960px_960px];
+    @apply [mask-repeat:repeat];
+    @apply [background-color:currentColor];
+    @apply [opacity:.07];
+}
+.faculty-header { @apply py-3; }
+.faculty-toolbar { @apply py-3; }
+.faculty-card > h2,
+.faculty-card-heading { @apply px-4 py-3; }
+.faculty-card-body { @apply gap-2 p-4; }
+.faculty-detail-page { @apply p-4; }
+.faculty-page-title { @apply mb-3; }
+
+/* Let dashboard content use the available window width. */
+.faculty-content-full {
+    @apply w-full max-w-none px-4 pb-4 min-[701px]:px-6;
+}
+
+/* Keep the page at least as tall as the window. */
+.faculty-responsive { @apply flex min-h-dvh flex-col; }
+.faculty-responsive > .faculty-content-full {
+    @apply flex-1 [container-type:inline-size];
+}
+.faculty-responsive .faculty-header { @apply flex-wrap; }
+.faculty-responsive .faculty-brand { @apply min-w-0 [overflow-wrap:anywhere]; }
+.faculty-responsive .faculty-card { @apply min-w-0 [overflow-wrap:anywhere]; }
+.faculty-responsive .faculty-text-link { @apply flex-wrap; }
+.faculty-responsive .faculty-toolbar { @apply min-w-0 flex-nowrap; }
+.faculty-responsive .faculty-toolbar nav {
+    @apply min-w-0 flex-1 flex-nowrap overflow-x-auto overflow-y-hidden py-1 [overscroll-behavior-x:contain];
+}
+.faculty-responsive .faculty-toolbar nav button { @apply shrink-0 whitespace-nowrap; }
+.faculty-responsive .faculty-toolbar > .faculty-demo-label { @apply shrink-0 max-[1100px]:hidden; }
