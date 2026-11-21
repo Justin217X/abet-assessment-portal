@@ -125,3 +125,10 @@ Run the academic and integration tests from the repository folder:
 
 ```powershell
 .\.venv\Scripts\python.exe server\manage.py test academics integrations --settings=config.test_settings
+
+## Integrated portal demo workflows
+
+See [the setup and review guide](../docs/PORTAL_DEMO_REVIEW.md) for the complete
+Faculty and Coordinator demo, database seeding, local PDF setup, test commands,
+and features that are still pending. Related backend, UI, input data, and tests
+are reviewed together in the consolidated PR.

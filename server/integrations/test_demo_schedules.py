@@ -109,3 +109,14 @@ class DemoScheduleTests(TestCase):
         with patch('integrations.portal_data.PortalDataFacade.load', return_value={'metadata': {'fictional': False}}):
             self.assertEqual(self.post().status_code, 503)
         self.assertFalse(self.edits().exists())
+
+    def test_local_frontend_origin_can_save_but_other_origins_cannot(self):
+        client = Client(enforce_csrf_checks=True)
+        client.get('/api/demo/portal/')
+        token = client.cookies['csrftoken'].value
+        response = client.post('/api/demo/plans/', self.payload, content_type='application/json',
+                               HTTP_X_CSRFTOKEN=token, HTTP_ORIGIN='http://127.0.0.1:5173')
+        self.assertEqual(response.status_code, 201)
+        response = client.post('/api/demo/plans/', self.payload, content_type='application/json',
+                               HTTP_X_CSRFTOKEN=token, HTTP_ORIGIN='https://untrusted.example')
+        self.assertEqual(response.status_code, 403)

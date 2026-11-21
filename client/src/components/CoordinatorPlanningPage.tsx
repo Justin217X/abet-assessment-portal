@@ -4,9 +4,9 @@
  * and assign reporting tasks to faculty using fictional data.
  *
  * Saves records in the local Django database.
- * 
+ *
  * !!! Production permissions and notifications are not connected yet. [SD]
- * 
+ *
  * !!! TODO: replace demo saving with authenticated production saving. [SD]
  */
 
@@ -29,7 +29,7 @@ export function CoordinatorPlanningPage({ kind }: { kind: "schedule" | "assignme
     const [facultyId, setFacultyId] = useState("faculty-1")
     const [indicatorId, setIndicatorId] = useState("")
     const [due, setDue] = useState("")
-    
+
     // Load shared planning options from Django.
     // Cancel the request of the user leaves this page.
     useEffect(() => {
@@ -47,14 +47,14 @@ export function CoordinatorPlanningPage({ kind }: { kind: "schedule" | "assignme
     const courses = source.courses.filter((course) => course.semester_id === semesterId)
     const selectedCourse = courses.find((course) => course.id === courseId) ?? courses[0]
     const selectedIndicator = source.indicators.find((indicator) => indicator.id === indicatorId) ?? source.indicators[0]
-    
+
     // List each saved assignment version once for the selected course, even when several assessment task reference that version.
     const assignmentOptions = source.assessments.filter((row, index, rows) => row.course_id === selectedCourse?.id && rows.findIndex((item) => item.assignment_version_id === row.assignment_version_id && item.course_id === row.course_id) === index)
     const selectedAssignment = assignmentOptions.find((row) => row.assignment_version_id === assignmentVersionId) ?? assignmentOptions[0]
-    
+
     // Show task created through the demo planning form.
     const saved = source.assessments.filter((row) => row.id.startsWith("demo-assignment-"))
-    
+
     // !!! TODO (production): Replace the development route with authenticated Coordinator APIs. [SD]
     async function save(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -67,7 +67,7 @@ export function CoordinatorPlanningPage({ kind }: { kind: "schedule" | "assignme
         } catch (reason) { setMessage(reason instanceof Error ? reason.message : "Could not save the plan.") }
         finally { setSaving(false) }
     }
-    
+
     // Reuse the same Tailwind styling across form inputs and dropdowns
     const field = "mt-1 w-full min-w-0 rounded-md border border-slate-300 bg-white px-3 py-2"
 

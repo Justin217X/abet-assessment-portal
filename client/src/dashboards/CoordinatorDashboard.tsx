@@ -79,9 +79,6 @@ export function CoordinatorDashboard({
                 Faculty workspace
             </Button>
             
-            <Button variant="secondary" className="text-left" onClick={onBackToSignIn}>
-                Sign out
-            </Button>
         </>
     )
     
