@@ -205,3 +205,17 @@ keep the text available for retry. Loading, empty, and error states are included
 
 This does not provide real reviewer authorization or access to report documents.
 Report PDF access, supporting documents, and Feedback on my reports are separate.
+
+## Faculty report archive records
+
+Report archive loads submitted and archived records linked to the fixed Faculty
+demo user's assessments. Search course, assignment, semester, status, filename,
+or report version. Newer records appear first. The list scrolls inside its panel.
+
+View report details shows the saved report version, source revision, filename,
+status, and generated date. Details follow the current search results so a hidden
+record is not left open. Loading, empty, and failed-request states are included.
+
+Preview and download buttons remain disabled and marked pending. These are mock
+report records, not available PDF files. Historical PDF samples and real user
+permissions are separate changes. This page does not save or edit records.
