@@ -5,6 +5,7 @@
 from copy import deepcopy
 
 from reports.pi_calculations import calculate_pi_statistics
+from .evidence_candidates import build_evidence_candidates
 from .portal_data import PortalDataFacade
 from .source_connectors import canvas_connector, roster_connector
 
@@ -55,6 +56,7 @@ def prepare_dashboard_data(records):
         ]
         statistics[assessment['id']] = calculate_pi_statistics(criterion, submissions)
     data['statistics'] = statistics
+    data['evidence'] = build_evidence_candidates(data, roster)
     return data
 
 
