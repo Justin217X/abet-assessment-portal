@@ -1,13 +1,29 @@
 <!doctype html>
+<!--
+  File: index.html
+  Purpose: Loads the React app for the ABET Assessment Portal
+-->
+
 <html lang="en">
   <head>
+     <!-- Support standard text characters. -->
     <meta charset="UTF-8" />
+
+    <!-- Show the portal icon in the browser tab. -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Adjust the page to the device's screen width. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Set the browser tab title. -->
     <title>ABET Assessment Portal</title>
   </head>
   <body>
+
+    <!-- React displays the portal inside this element. -->
     <div id="root"></div>
+
+    <!-- Load the file that starts the React app. -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
