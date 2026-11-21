@@ -140,3 +140,13 @@ Each card shows assignment, course, semester, status, and due date. Search also 
 Loading, failed requests, no assigned work, and no search matches have separate messages. Report review remains pending until its own workflow change is added; this page accepts an optional onReviewAssessment callback for that later connection.
 
 This change does not add report editing, evidence selection, PDF actions, or real user permissions.
+
+## Faculty roster review
+
+Open Faculty demo, then View roster. Use Campus and Subject (CMPSC/SWENG) to find an assigned mock class, then select View roster on its card.
+
+The selected roster shows campus, course, semester, student label, program, section, enrollment status, and matching status. Search matches the student, program, section, or status. The table scrolls inside its own panel.
+
+Changing filters clears the selected class so a roster from another campus cannot remain displayed. Course-campus assignments are fictional; filters use the shared demo records and do not grant permissions.
+
+Uploads, source refresh, and saving confirmation are visibly disabled and marked pending. No roster editing, live LionPath connection, or server saving is added.

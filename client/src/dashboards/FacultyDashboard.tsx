@@ -28,6 +28,7 @@ import { RecentActivity } from "../components/RecentActivity"
 import { DashboardSearch } from "../components/DashboardSearch"
 import { PortalIcon } from "../components/PortalIcon"
 import { CampusBanner } from "../components/CampusBanner"
+import { FacultyRosterPage } from "../pages/previews/faculty/FacultyRosterPage"
 import { MyAssessmentsPage } from "../pages/previews/faculty/MyAssessmentsPage"
 import { FacultyPeerReviewsPage } from "../pages/previews/faculty/FacultyPeerReviewsPage"
 import { FacultyArchivePage } from "../pages/previews/faculty/FacultyArchivePage"
@@ -151,11 +152,11 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                                     activePage === id ? "page" : undefined
                                 }
                                 onClick={() => setActivePage(id)}
-                                disabled={id === "roster" || id === "report"}
+                                disabled={id === "report"}
                                 className="disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 <PortalIcon name={icon} />
-                                {label}{id === "roster" || id === "report" ? " (pending)" : ""}
+                                {label}{id === "report" ? " (pending)" : ""}
                             </button>
                         ))}
                     </nav>
@@ -451,6 +452,7 @@ export function FacultyDashboard({ onBackToSignIn }: FacultyDashboardProps) {
                     <section className="faculty-detail-page">
                         <h2 className="faculty-page-title">{pageTitle}</h2>
                         {activePage === "assessments" && <MyAssessmentsPage />}
+                        {activePage === "roster" && <FacultyRosterPage />}
                         {activePage === "reviews" && <FacultyPeerReviewsPage />}
                         {activePage === "archive" && <FacultyArchivePage />}
                     </section>
