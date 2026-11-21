@@ -161,3 +161,13 @@ Calculations use that assessment's selected saved version, rubric criterion, and
 Preparation works on a copy and does not save or change source records. Evidence previews, saved demo edits, PDF catalogs, web endpoints, and dashboard UI are separate changes.
 
 Run the focused tests: python server/manage.py test integrations.test_dashboard_data --settings=config.test_settings
+
+## Shared dashboard demo API
+
+GET /api/demo/portal/ returns the prepared fictional dashboard records and PI statistics from the configured mock provider.
+
+The response includes the campus catalog and a current date for release-date checks. It is marked private/no-store and sets the CSRF cookie for later demo-save requests. This endpoint itself only reads data.
+
+The endpoint is disabled when DEBUG=False. Unsupported providers or a missing saved snapshot return a clear 503 error. It is not a production data API: real login, role permissions, and per-user filtering still need implementation.
+
+Dashboard UI, saved edits, evidence previews, and historical PDF file access are separate changes.
